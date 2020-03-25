@@ -1,10 +1,10 @@
-import 'package:FlutterFootball/models/competition_model.dart';
-import 'package:FlutterFootball/models/match_model.dart';
+import 'package:FlutterFootball/models/competition.dart';
+import 'package:FlutterFootball/models/match.dart';
 
 class MatchDayModel {
-  final CompetitionModel competition;
+  final Competition competition;
   final String name;
-  final List<MatchModel> matches;
+  final List<Match> matches;
 
   MatchDayModel({this.competition, this.name, this.matches});
 }

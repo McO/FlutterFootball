@@ -1,14 +1,14 @@
 import 'package:flutter/services.dart';
 import 'package:flutter/material.dart';
-import '../models/match_model.dart';
-import '../models/team_model.dart';
+import '../models/match.dart';
+import '../models/team.dart';
 
 class MatchCard extends StatelessWidget {
-  final MatchModel match;
+  final Match match;
 
   const MatchCard(this.match);
 
-  ImageProvider _buildImage(TeamModel team) {
+  ImageProvider _buildImage(Team team) {
     if (team.logoUrl?.isEmpty ?? true) {
       String path = 'assets/images/teams/' + team.id.toString() + '.png';
       rootBundle.load(path).then((value) {
@@ -21,7 +21,7 @@ class MatchCard extends StatelessWidget {
     return NetworkImage(team.logoUrl);
   }
 
-  Widget _buildMatchRow(TeamModel team, int score) {
+  Widget _buildMatchRow(Team team, int score) {
     return new Row(
       children: <Widget>[
         Container(
