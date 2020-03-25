@@ -8,8 +8,3 @@ class Competition {
 
   Competition({this.id, this.name, this.logoUrl, this.teams});
 }
-
-List<Competition> dummyCompetitions = [
-  new Competition(id: 1, name: "Bundesliga", teams: null),
-  new Competition(id: 2, name: "Premier League", teams: null),
-];
