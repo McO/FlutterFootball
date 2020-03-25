@@ -77,9 +77,6 @@ class MatchesScreenState extends State<MatchesScreen> {
       itemCount: days.length,
       itemBuilder: (context, i) => new Column(
         children: <Widget>[
-          Divider(
-            height: 5.0,
-          ),
           Container(
               child: Text(
             DateFormat('EEEE, MMMM d').format(days[i].date),
@@ -88,30 +85,29 @@ class MatchesScreenState extends State<MatchesScreen> {
           ListView.builder(
             shrinkWrap: true,
             itemCount: days[i].dayCompetitionsMatches.length,
-            itemBuilder: (context, j) => new Column(
-              children: <Widget>[
-                new Divider(
-                  height: 5.0,
-                ),
-                Container(
-                    child: Text(
-                  days[i].dayCompetitionsMatches[j].competition.name,
-                  textAlign: TextAlign.start,
-                  style: new TextStyle(fontWeight: FontWeight.bold, fontSize: 16),
-                )),
-                new ListView.builder(
-                  shrinkWrap: true,
-                  itemCount: days[i].dayCompetitionsMatches[j].matches.length,
-                  itemBuilder: (context, k) => new Column(
-                    children: <Widget>[
-                      new Divider(
-                        height: 5.0,
-                      ),
-                      new MatchCard(days[i].dayCompetitionsMatches[j].matches[k])
-                    ],
+            itemBuilder: (context, j) => Card(
+              child: new Column(
+                children: <Widget>[
+                  Container(
+                      child: Text(
+                    days[i].dayCompetitionsMatches[j].competition.name,
+                    textAlign: TextAlign.start,
+                    style: new TextStyle(fontWeight: FontWeight.bold, fontSize: 16),
+                  )),
+                  new ListView.builder(
+                    shrinkWrap: true,
+                    itemCount: days[i].dayCompetitionsMatches[j].matches.length,
+                    itemBuilder: (context, k) => new Column(
+                      children: <Widget>[
+                        new Divider(
+                          height: 5.0,
+                        ),
+                        new MatchCard(days[i].dayCompetitionsMatches[j].matches[k])
+                      ],
+                    ),
                   ),
-                ),
-              ],
+                ],
+              ),
             ),
           ),
         ],
