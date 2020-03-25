@@ -3,12 +3,12 @@ import 'dart:math';
 import 'package:FlutterFootball/models/competition.dart';
 import 'package:FlutterFootball/models/day_competiition_matches.dart';
 import 'package:FlutterFootball/models/day.dart';
+import 'package:FlutterFootball/widgets/competition_matches_card.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import '../models/score.dart';
 import '../models/team.dart';
 import '../models/match.dart';
-import '../widgets/match_card.dart';
 
 class MatchesScreen extends StatefulWidget {
   @override
@@ -78,52 +78,19 @@ class MatchesScreenState extends State<MatchesScreen> {
       itemBuilder: (context, i) => new Column(
         children: <Widget>[
           Container(
+              padding: const EdgeInsets.symmetric(vertical: 10.0, horizontal: 10.0),
               child: Text(
-            DateFormat('EEEE, MMMM d').format(days[i].date),
-            style: new TextStyle(fontWeight: FontWeight.bold, fontSize: 20),
-          )),
+                DateFormat('EEEE, MMMM d').format(days[i].date),
+                style: new TextStyle(fontWeight: FontWeight.bold, fontSize: 20),
+              )),
           ListView.builder(
             shrinkWrap: true,
             itemCount: days[i].dayCompetitionsMatches.length,
-            itemBuilder: (context, j) => Card(
-              child: new Column(
-                children: <Widget>[
-                  Container(
-                      child: Text(
-                    days[i].dayCompetitionsMatches[j].competition.name,
-                    textAlign: TextAlign.start,
-                    style: new TextStyle(fontWeight: FontWeight.bold, fontSize: 16),
-                  )),
-                  new ListView.builder(
-                    shrinkWrap: true,
-                    itemCount: days[i].dayCompetitionsMatches[j].matches.length,
-                    itemBuilder: (context, k) => new Column(
-                      children: <Widget>[
-                        new Divider(
-                          height: 5.0,
-                        ),
-                        new MatchCard(days[i].dayCompetitionsMatches[j].matches[k])
-                      ],
-                    ),
-                  ),
-                ],
-              ),
-            ),
+            itemBuilder: (context, j) => CompetitionMatchesCard(days[i].dayCompetitionsMatches[j]),
           ),
         ],
       ),
     );
-
-//    return new ListView.builder(
-//      itemCount: matches.length,
-//      itemBuilder: (context, i) => new Column(
-//        children: <Widget>[
-//          new Divider(
-//            height: 5.0,
-//          ),
-//          new MatchCard(matches[i])
-//        ],
-//      ),
-//    );
   }
 }
+

@@ -3,10 +3,10 @@ import 'package:flutter/material.dart';
 import '../models/match.dart';
 import '../models/team.dart';
 
-class MatchCard extends StatelessWidget {
+class MatchCardItem extends StatelessWidget {
   final Match match;
 
-  const MatchCard(this.match);
+  const MatchCardItem(this.match);
 
   ImageProvider _buildImage(Team team) {
     if (team.logoUrl?.isEmpty ?? true) {
