@@ -38,14 +38,14 @@ class MatchCardItem extends StatelessWidget {
             team.name,
             textAlign: TextAlign.start,
             style:
-                new TextStyle(fontWeight: FontWeight.normal, fontSize: 16),
+                new TextStyle(fontWeight: FontWeight.normal, fontSize: 12),
           ),
         ),
         Padding(
           padding: const EdgeInsets.only(right: 8.0),
           child: Text(
             score.toString(),
-            style: new TextStyle(fontWeight: FontWeight.bold),
+            style: new TextStyle(fontWeight: FontWeight.bold, fontSize: 12),
           ),
         ),
       ],

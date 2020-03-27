@@ -57,10 +57,11 @@ class FootballRepository {
   }
 
   List<DayCompetitionMatches> getDayCompetitionMatches(DateTime date) {
+    var random = new Random();
     List<DayCompetitionMatches> dayCompetitionMatches = [];
 
     dayCompetitionMatches.add(new DayCompetitionMatches(
-        date: date, competition: dummyCompetitions[0], matchDayName: "", matches: getMatches(5)));
+        date: date, competition: dummyCompetitions[0], matchDayName: "10. Spieltag", matches: getMatches(1 + random.nextInt(5))));
 
     return dayCompetitionMatches;
   }

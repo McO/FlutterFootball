@@ -74,7 +74,7 @@ class DayList extends StatelessWidget {
               padding: const EdgeInsets.symmetric(vertical: 10.0, horizontal: 10.0),
               child: Text(
                 DateFormat('EEEE, MMMM d').format(days[i].date),
-                style: new TextStyle(fontWeight: FontWeight.bold, fontSize: 20),
+                style: new TextStyle(fontWeight: FontWeight.bold, fontSize: 14),
               )),
           ListView.builder(
             shrinkWrap: true,
