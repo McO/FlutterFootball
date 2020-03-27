@@ -3,10 +3,9 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 import 'football_home.dart';
 
-
 Future<Null> main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  runApp(new MyApp());
+  runApp(MyApp());
 }
 
 class MyApp extends StatelessWidget {

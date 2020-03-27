@@ -1,5 +1,6 @@
 import 'package:flutter/services.dart';
 import 'package:flutter/material.dart';
+import '../Constants.dart' as Constants;
 import '../models/match.dart';
 import '../models/team.dart';
 
@@ -21,7 +22,7 @@ class MatchCardItem extends StatelessWidget {
     return NetworkImage(team.logoUrl);
   }
 
-  Widget _buildMatchRow(Team team, int score) {
+  Widget _buildMatchRow(BuildContext context, Team team, int score) {
     return new Row(
       children: <Widget>[
         Container(
@@ -42,7 +43,7 @@ class MatchCardItem extends StatelessWidget {
           ),
         ),
         Padding(
-          padding: const EdgeInsets.only(right: 8.0),
+          padding: const EdgeInsets.only(right: Constants.defaultPadding),
           child: Text(
             score.toString(),
             style: new TextStyle(fontWeight: FontWeight.bold, fontSize: 12),
@@ -59,8 +60,8 @@ class MatchCardItem extends StatelessWidget {
         Expanded(
           child: Column(
             children: [
-              _buildMatchRow(match.homeTeam, match.score.home),
-              _buildMatchRow(match.awayTeam, match.score.away),
+              _buildMatchRow(context, match.homeTeam, match.score.home),
+              _buildMatchRow(context, match.awayTeam, match.score.away),
             ],
           ),
         ),

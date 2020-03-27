@@ -4,6 +4,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'match_card_item.dart';
 import 'package:flutter/services.dart';
+import '../Constants.dart' as Constants;
 
 class CompetitionMatchesCard extends StatelessWidget {
   final DayCompetitionMatches dayCompetitionMatches;
@@ -29,13 +30,13 @@ class CompetitionMatchesCard extends StatelessWidget {
       child: new Column(
         children: <Widget>[
           Container(
-              padding: const EdgeInsets.only(left: 8, top: 8.0, bottom: 0),
+              padding: const EdgeInsets.only(left: Constants.defaultPadding, top: Constants.defaultPadding, bottom: 0),
               child: Row(
                 children: <Widget>[
                   Column(
                     children: <Widget>[
                       Container(
-                        padding: const EdgeInsets.symmetric(vertical: 3.0, horizontal: 10.0),
+                        padding: const EdgeInsets.symmetric(vertical: 3.0, horizontal: Constants.defaultPadding),
                         child: CircleAvatar(
                           backgroundColor: Colors.grey,
                           backgroundImage: _buildImage(dayCompetitionMatches.competition),
@@ -60,7 +61,7 @@ class CompetitionMatchesCard extends StatelessWidget {
                 ],
               )),
           Padding(
-            padding: const EdgeInsets.only(left: 8, right: 8, bottom: 8),
+            padding: const EdgeInsets.only(left: Constants.defaultPadding, right: Constants.defaultPadding, bottom: Constants.defaultPadding),
             child: new ListView.builder(
               shrinkWrap: true,
               itemCount: dayCompetitionMatches.matches.length,
