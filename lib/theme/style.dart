@@ -7,8 +7,6 @@ ThemeData buildThemeData() {
     fontFamily: "FiraCode",
   );
 
-
-
   return baseTheme.copyWith(
     primaryColor: kPrimaryColor,
     primaryColorDark: kPrimaryDark,
@@ -28,7 +26,7 @@ ThemeData buildThemeData() {
       title: TextStyle(fontSize: 18.0, fontWeight: FontWeight.bold, color: Colors.black),
       subtitle: TextStyle(fontSize: 14.0, fontWeight: FontWeight.normal, color: Colors.black),
       body1: TextStyle(fontSize: 16.0, color: Colors.black),
-      subhead: TextStyle(fontSize: 18.0, color: Colors.white),
+      subhead: TextStyle(fontSize: 14.0, color: Colors.white),
     ),
   );
 }

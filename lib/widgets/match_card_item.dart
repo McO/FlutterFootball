@@ -1,3 +1,4 @@
+import 'package:FlutterFootball/screens/match_screen.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter/material.dart';
 import '../Constants.dart' as Constants;
@@ -54,28 +55,36 @@ class MatchCardItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return new Row(
-      children: [
-        Expanded(
-          child: Column(
-            children: [
-              _buildMatchRow(context, match.homeTeam, match.score.home),
-              _buildMatchRow(context, match.awayTeam, match.score.away),
-            ],
+    return GestureDetector(
+      onTap: () {
+        Navigator.push(
+          context,
+          MaterialPageRoute(builder: (context) => MatchDetail(match)),
+        );
+      },
+      child: new Row(
+        children: [
+          Expanded(
+            child: Column(
+              children: [
+                _buildMatchRow(context, match.homeTeam, match.score.home),
+                _buildMatchRow(context, match.awayTeam, match.score.away),
+              ],
+            ),
           ),
-        ),
-        Container(
-            height: 36,
-            child: VerticalDivider(
-              width: 5,
-            )),
-        Container(
-          width: 80,
-          child: Center(
-            child: Text(match.time),
+          Container(
+              height: 36,
+              child: VerticalDivider(
+                width: 5,
+              )),
+          Container(
+            width: 80,
+            child: Center(
+              child: Text(match.time),
+            ),
           ),
-        ),
-      ],
+        ],
+      ),
     );
   }
 }
