@@ -57,7 +57,6 @@ class MatchesScreenState extends State<MatchesScreen> {
   }
 }
 
-
 class DayList extends StatelessWidget {
   final List<Day> days;
 
@@ -67,17 +66,17 @@ class DayList extends StatelessWidget {
   Widget build(BuildContext context) {
     return new ListView.builder(
       itemCount: days.length,
-      itemBuilder: (context, i) =>
-      new Column(
+      itemBuilder: (context, i) => new Column(
         children: <Widget>[
           Container(
-              padding: const EdgeInsets.symmetric(vertical: 10.0, horizontal: 10.0),
+              padding: const EdgeInsets.all(10.0),
               child: Text(
                 DateFormat('EEEE, MMMM d').format(days[i].date),
                 style: new TextStyle(fontWeight: FontWeight.bold, fontSize: 14),
               )),
           ListView.builder(
             shrinkWrap: true,
+            physics: NeverScrollableScrollPhysics(),
             itemCount: days[i].dayCompetitionsMatches.length,
             itemBuilder: (context, j) => CompetitionMatchesCard(days[i].dayCompetitionsMatches[j]),
           ),
@@ -92,8 +91,7 @@ class Error extends StatelessWidget {
 
   final Function onRetryPressed;
 
-  const Error({Key key, this.errorMessage, this.onRetryPressed})
-      : super(key: key);
+  const Error({Key key, this.errorMessage, this.onRetryPressed}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {

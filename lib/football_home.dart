@@ -32,7 +32,7 @@ class _FootballHomeState extends State<FootballHome>
           controller: _tabController,
           indicatorColor: Colors.white,
           tabs: <Widget>[
-            Tab(text: "MATCHES"),
+            Tab(text: "Matches"),
           ],
         ),
         actions: <Widget>[
