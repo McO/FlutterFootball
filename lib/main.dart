@@ -1,24 +1,21 @@
-import 'dart:async';
-
+import 'package:FlutterFootball/routes.dart';
+import 'package:FlutterFootball/theme/style.dart';
 import 'package:flutter/material.dart';
-import 'football_home.dart';
 
 Future<Null> main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  runApp(MyApp());
+  runApp(FootballApp());
 }
 
-class MyApp extends StatelessWidget {
+class FootballApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return new MaterialApp(
       title: "Football",
-      theme: new ThemeData(
-        primaryColor: new Color(0xff075E54),
-        accentColor: new Color(0xff25D366),
-      ),
+      theme: buildThemeData(),
       debugShowCheckedModeBanner: false,
-      home: new FootballHome(),
+      initialRoute: '/',
+      routes: routes,
     );
   }
 }
