@@ -38,15 +38,14 @@ class MatchCardItem extends StatelessWidget {
           child: Text(
             team.name,
             textAlign: TextAlign.start,
-            style:
-                new TextStyle(fontWeight: FontWeight.normal, fontSize: 12),
+            style: Theme.of(context).textTheme.body1,
           ),
         ),
         Padding(
           padding: const EdgeInsets.only(right: Constants.defaultPadding),
           child: Text(
             score.toString(),
-            style: new TextStyle(fontWeight: FontWeight.bold, fontSize: 12),
+            style: new TextStyle(fontWeight: FontWeight.bold),
           ),
         ),
       ],
@@ -73,10 +72,7 @@ class MatchCardItem extends StatelessWidget {
         Container(
           width: 80,
           child: Center(
-            child: Text(
-              match.time,
-              style: new TextStyle(fontWeight: FontWeight.normal),
-            ),
+            child: Text(match.time),
           ),
         ),
       ],

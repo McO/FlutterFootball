@@ -13,7 +13,7 @@ class CompetitionMatchesCard extends StatelessWidget {
 
   ImageProvider _buildImage(Competition competition) {
     if (competition.logoUrl?.isEmpty ?? true) {
-      String path = 'assets/images/competitions/' +  competition.id.toString() + '.png';
+      String path = 'assets/images/competitions/' + competition.id.toString() + '.png';
       rootBundle.load(path).then((value) {
         return AssetImage(path);
       }).catchError((_) {
@@ -50,18 +50,19 @@ class CompetitionMatchesCard extends StatelessWidget {
                     children: <Widget>[
                       Text(
                         dayCompetitionMatches.competition.name,
-                        style: new TextStyle(fontWeight: FontWeight.bold, fontSize: 12),
+                        style: Theme.of(context).textTheme.title,
                       ),
                       Text(
                         dayCompetitionMatches.matchDayName,
-                        style: new TextStyle(fontWeight: FontWeight.normal, fontSize: 10),
+                        style: Theme.of(context).textTheme.subtitle,
                       )
                     ],
                   )
                 ],
               )),
           Padding(
-            padding: const EdgeInsets.only(left: Constants.defaultPadding, right: Constants.defaultPadding, bottom: Constants.defaultPadding),
+            padding: const EdgeInsets.only(
+                left: Constants.defaultPadding, right: Constants.defaultPadding, bottom: Constants.defaultPadding),
             child: new ListView.builder(
               physics: new NeverScrollableScrollPhysics(),
               shrinkWrap: true,
