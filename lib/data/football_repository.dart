@@ -85,7 +85,7 @@ class FootballRepository {
 
   Future<List<Day>> fetchMatches() async {
 
-    return getDays(3);
+    return getDays(5);
   }
 }
 

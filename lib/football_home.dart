@@ -8,8 +8,7 @@ class FootballHome extends StatefulWidget {
   _FootballHomeState createState() => _FootballHomeState();
 }
 
-class _FootballHomeState extends State<FootballHome>
-    with SingleTickerProviderStateMixin {
+class _FootballHomeState extends State<FootballHome> with SingleTickerProviderStateMixin {
   TabController _tabController;
 
   @override
@@ -32,12 +31,14 @@ class _FootballHomeState extends State<FootballHome>
           controller: _tabController,
           indicatorColor: Colors.white,
           tabs: <Widget>[
-            Tab(text: "Matches"),
+            Tab(child: Text("Matches", style: Theme.of(context).textTheme.subhead)),
           ],
         ),
         actions: <Widget>[
           Icon(Icons.search),
-          Padding(padding: const EdgeInsets.symmetric(horizontal: 5.0),),
+          Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 5.0),
+          ),
           Icon(Icons.more_vert)
         ],
       ),
