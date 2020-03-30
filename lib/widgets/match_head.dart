@@ -33,7 +33,7 @@ class MatchHead extends StatelessWidget {
             child: Column(
               children: [
                 CircleAvatar(
-                  backgroundColor: Colors.grey,
+                  backgroundColor: Colors.transparent,
                   backgroundImage: _buildImage(match.homeTeam),
                   maxRadius: 30,
                 ),
@@ -60,7 +60,7 @@ class MatchHead extends StatelessWidget {
             child: Column(
               children: [
                 CircleAvatar(
-                  backgroundColor: Colors.grey,
+                  backgroundColor: Colors.transparent,
                   backgroundImage: _buildImage(match.awayTeam),
                   maxRadius: 30,
                 ),
