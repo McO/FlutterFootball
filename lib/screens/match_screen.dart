@@ -1,4 +1,8 @@
 import 'package:FlutterFootball/widgets/match_head.dart';
+import 'package:FlutterFootball/widgets/match_lineup.dart';
+import 'package:FlutterFootball/widgets/match_liveticker.dart';
+import 'package:FlutterFootball/widgets/match_overview.dart';
+import 'package:FlutterFootball/widgets/match_stats.dart';
 import 'package:flutter/material.dart';
 import '../models/match.dart';
 
@@ -63,10 +67,10 @@ class _MatchDetailState extends State<MatchDetail> with SingleTickerProviderStat
           },
           body: TabBarView(
             children: [
-              Icon(Icons.directions_car),
-              Icon(Icons.directions_transit),
-              Icon(Icons.directions_bike),
-              Icon(Icons.directions_bus),
+              MatchOverview(match),
+              MatchLiveTicker(match),
+              MatchLineUp(match),
+              MatchStats(match),
             ],
             controller: _tabController,
           ),
