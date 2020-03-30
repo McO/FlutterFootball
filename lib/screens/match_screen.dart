@@ -20,12 +20,13 @@ class _MatchDetailState extends State<MatchDetail> with SingleTickerProviderStat
 
   @override
   void initState() {
-    super.initState();
 
     _tabController = TabController(vsync: this, initialIndex: 0, length: 4);
     _tabController.addListener(() {
       setState(() {});
     });
+
+    super.initState();
   }
 
   @override
@@ -38,31 +39,36 @@ class _MatchDetailState extends State<MatchDetail> with SingleTickerProviderStat
             return <Widget>[
               SliverAppBar(
                 expandedHeight: 150.0,
-                floating: false,
+                floating: true,
                 pinned: true,
                 flexibleSpace: FlexibleSpaceBar(background: MatchHead(match)),
               ),
-              Container(
-//                color: Theme.of(context).primaryColor,
-                child: SliverPersistentHeader(
-                  delegate: _SliverAppBarDelegate(
-                    TabBar(
-                      controller: _tabController,
-                      tabs: <Widget>[
-                        Tab(child: Text("Overview", style: Theme.of(context).textTheme.subhead)),
-                        Tab(child: Text("Live Ticker", style: Theme.of(context).textTheme.subhead)),
-                        Tab(child: Text("Line-up", style: Theme.of(context).textTheme.subhead)),
-                        Tab(child: Text("Stats", style: Theme.of(context).textTheme.subhead)),
-                      ],
-                    ),
+              SliverPersistentHeader(
+                delegate: _SliverAppBarDelegate(
+                  TabBar(
+                    isScrollable: true,
+                    indicatorColor: Colors.black,
+                    controller: _tabController,
+                    tabs: <Widget>[
+                      Tab(child: Text("Overview", style: Theme.of(context).textTheme.subhead)),
+                      Tab(child: Text("Live Ticker", style: Theme.of(context).textTheme.subhead)),
+                      Tab(child: Text("Line-up", style: Theme.of(context).textTheme.subhead)),
+                      Tab(child: Text("Stats", style: Theme.of(context).textTheme.subhead)),
+                    ],
                   ),
-                  pinned: true,
                 ),
+                pinned: true,
               ),
             ];
           },
-          body: Center(
-            child: Text("Sample text"),
+          body: TabBarView(
+            children: [
+              Icon(Icons.directions_car),
+              Icon(Icons.directions_transit),
+              Icon(Icons.directions_bike),
+              Icon(Icons.directions_bus),
+            ],
+            controller: _tabController,
           ),
         ),
       ),
@@ -84,6 +90,7 @@ class _SliverAppBarDelegate extends SliverPersistentHeaderDelegate {
   @override
   Widget build(BuildContext context, double shrinkOffset, bool overlapsContent) {
     return new Container(
+      color: Theme.of(context).primaryColor,
       child: _tabBar,
     );
   }
