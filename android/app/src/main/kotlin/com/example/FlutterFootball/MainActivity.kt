@@ -1,4 +1,4 @@
-package com.example.FlutterFootball
+package com.rasp.FlutterFootball
 
 import androidx.annotation.NonNull;
 import io.flutter.embedding.android.FlutterActivity
