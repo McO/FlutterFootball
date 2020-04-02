@@ -3,6 +3,7 @@ import 'package:flutter_native_admob/flutter_native_admob.dart';
 import 'package:flutter_native_admob/native_admob_controller.dart';
 import 'package:flutter_native_admob/native_admob_options.dart';
 import '../ads.dart';
+import '../constants.dart' as Constants;
 
 class NativeAd extends StatefulWidget {
   @override
@@ -14,19 +15,21 @@ class _NativeAdState extends State<NativeAd> {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      height: 250,
-      child: NativeAdmob(
-        adUnitID: AdsConfiguration.getNativeAdUnitId(),
-        loading: Center(child: CircularProgressIndicator()),
-        error: Text("Failed to load the ad"),
-        controller: _controller,
-        type: NativeAdmobType.full,
-        options: NativeAdmobOptions(
-          ratingColor: Colors.red,
-          // Others ...
+    if (Constants.showAds)
+      return Container(
+        height: 250,
+        child: NativeAdmob(
+          adUnitID: AdsConfiguration.getNativeAdUnitId(),
+          loading: Center(child: CircularProgressIndicator()),
+          error: Text("Failed to load the ad"),
+          controller: _controller,
+          type: NativeAdmobType.full,
+          options: NativeAdmobOptions(
+            ratingColor: Colors.red,
+            // Others ...
+          ),
         ),
-      ),
-    );
+      );
+    return Container();
   }
 }

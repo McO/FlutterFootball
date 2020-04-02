@@ -1,4 +1,4 @@
-import 'package:FlutterFootball/widgets/NativeAd.dart';
+import 'package:FlutterFootball/widgets/native_ad.dart';
 import 'package:flutter/material.dart';
 
 import 'package:FlutterFootball/models/day.dart';

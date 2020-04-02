@@ -14,7 +14,7 @@ class AdsConfiguration {
     if (Platform.isIOS) {
       return "IOS_AD_UNIT_BANNER";
     } else if (Platform.isAndroid) {
-      return "ca-app-pub-4679672544714691/7264916502";
+      return "ca-app-pub-3940256099942544/6300978111";
     }
     return null;
   }
