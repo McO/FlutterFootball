@@ -1,9 +1,8 @@
 import 'package:FlutterFootball/bloc/bloc.dart';
 import 'package:FlutterFootball/models/day.dart';
 import 'package:FlutterFootball/network/response.dart';
-import 'package:FlutterFootball/widgets/competition_matches_card.dart';
+import 'package:FlutterFootball/widgets/day_list.dart';
 import 'package:flutter/material.dart';
-import 'package:intl/intl.dart';
 
 class MatchesScreen extends StatefulWidget {
   @override
@@ -57,35 +56,7 @@ class MatchesScreenState extends State<MatchesScreen> {
   }
 }
 
-class DayList extends StatelessWidget {
-  final List<Day> days;
 
-  const DayList({Key key, this.days}) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    return new ListView.builder(
-      itemCount: days.length,
-      itemBuilder: (context, i) => new Column(
-        children: <Widget>[
-          Container(
-              padding: const EdgeInsets.all(10.0),
-              child: Text(
-                DateFormat('EEEE, MMMM d').format(days[i].date),
-                style: Theme.of(context).textTheme.headline,
-//                style: new TextStyle(fontWeight: FontWeight.bold, fontSize: 14),
-              )),
-          ListView.builder(
-            shrinkWrap: true,
-            physics: NeverScrollableScrollPhysics(),
-            itemCount: days[i].dayCompetitionsMatches.length,
-            itemBuilder: (context, j) => CompetitionMatchesCard(days[i].dayCompetitionsMatches[j]),
-          ),
-        ],
-      ),
-    );
-  }
-}
 
 class Error extends StatelessWidget {
   final String errorMessage;

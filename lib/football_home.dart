@@ -44,9 +44,7 @@ class _FootballHomeState extends State<FootballHome> with SingleTickerProviderSt
       ),
       body: TabBarView(
         controller: _tabController,
-        children: <Widget>[
-          MatchesScreen(),
-        ],
+        children: <Widget>[MatchesScreen()],
       ),
     );
   }
