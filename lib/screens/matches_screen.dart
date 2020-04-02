@@ -56,8 +56,6 @@ class MatchesScreenState extends State<MatchesScreen> {
   }
 }
 
-
-
 class Error extends StatelessWidget {
   final String errorMessage;
 

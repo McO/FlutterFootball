@@ -24,6 +24,7 @@ dependencies:
   intl: ^0.16.1
   json_annotation: ^3.0.1
   firebase_admob: ^0.9.3+1
+  flutter_native_admob: ^2.1.0
 #  ads: ^1.0.0
 
 dev_dependencies:
