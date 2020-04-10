@@ -1,9 +1,9 @@
-import 'package:FlutterFootball/routes.dart';
+import 'package:FlutterFootball/classes/routes.dart';
 import 'package:FlutterFootball/theme/style.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_settings_screens/flutter_settings_screens.dart';
 
-import 'cache_provider.dart';
+import 'classes/cache_provider.dart';
 
 Future<Null> main() async {
   await initSettings();

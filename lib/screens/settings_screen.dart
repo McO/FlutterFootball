@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_settings_screens/flutter_settings_screens.dart' as Preferences;
-import '../constants.dart' as Constants;
+import '../classes/constants.dart' as Constants;
 
 class SettingsScreen extends StatefulWidget {
   @override

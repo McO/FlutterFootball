@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_native_admob/flutter_native_admob.dart';
 import 'package:flutter_native_admob/native_admob_controller.dart';
 import 'package:flutter_native_admob/native_admob_options.dart';
-import '../ads.dart';
-import '../constants.dart' as Constants;
+import '../classes/ads.dart';
+import '../classes/constants.dart' as Constants;
 
 class NativeAd extends StatefulWidget {
   @override

@@ -4,7 +4,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'match_card_item.dart';
 import 'package:flutter/services.dart';
-import '../constants.dart' as Constants;
+import '../classes/constants.dart' as Constants;
 
 class CompetitionMatchesCard extends StatelessWidget {
   final DayCompetitionMatches dayCompetitionMatches;

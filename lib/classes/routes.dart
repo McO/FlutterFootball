@@ -1,7 +1,7 @@
 import 'package:FlutterFootball/screens/settings_screen.dart';
 import 'package:flutter/widgets.dart';
 
-import 'football_home.dart';
+import '../football_home.dart';
 
 final Map<String, WidgetBuilder> routes = <String, WidgetBuilder>{
   "/": (BuildContext context) => FootballHome(),
