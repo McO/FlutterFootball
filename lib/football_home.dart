@@ -1,3 +1,4 @@
+import 'package:FlutterFootball/screens/settings_screen.dart';
 import 'package:flutter/material.dart';
 import 'screens/matches_screen.dart';
 
@@ -31,7 +32,7 @@ class _FootballHomeState extends State<FootballHome> with SingleTickerProviderSt
           controller: _tabController,
           indicatorColor: Colors.white,
           tabs: <Widget>[
-            Tab(child: Text("Matches", style: Theme.of(context).textTheme.subhead)),
+            Tab(child: Text("Matches", style: Theme.of(context).textTheme.display1)),
           ],
         ),
         actions: <Widget>[
@@ -39,7 +40,15 @@ class _FootballHomeState extends State<FootballHome> with SingleTickerProviderSt
           Padding(
             padding: const EdgeInsets.symmetric(horizontal: 5.0),
           ),
-          Icon(Icons.more_vert)
+          IconButton(
+            icon: Icon(Icons.settings_applications),
+            onPressed: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(builder: (context) => SettingsScreen()),
+              );
+            },
+          ),
         ],
       ),
       body: TabBarView(

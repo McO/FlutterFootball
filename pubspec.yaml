@@ -25,7 +25,12 @@ dependencies:
   json_annotation: ^3.0.1
   firebase_admob: ^0.9.3+1
   flutter_native_admob: ^2.1.0
+  shared_preferences: ^0.5.6+3
+#  shared_preferences_settings: ^1.2.0
+  flutter_settings_screens: ^0.2.0
 #  ads: ^1.0.0
+  #library to store the preference/settings using hive library
+  hive_flutter: ^0.2.1
 
 dev_dependencies:
   flutter_test:
