@@ -31,6 +31,8 @@ dependencies:
 #  ads: ^1.0.0
   #library to store the preference/settings using hive library
   hive_flutter: ^0.2.1
+  firebase_remote_config: ^0.3.0+3
+  provider: ^4.0.4
 
 dev_dependencies:
   flutter_test:

@@ -1,9 +1,12 @@
 import 'package:FlutterFootball/screens/settings_screen.dart';
+import 'package:firebase_remote_config/firebase_remote_config.dart';
 import 'package:flutter/material.dart';
 import 'screens/matches_screen.dart';
 
 class FootballHome extends StatefulWidget {
-  FootballHome();
+  FootballHome({this.remoteConfig});
+
+  final RemoteConfig remoteConfig;
 
   @override
   _FootballHomeState createState() => _FootballHomeState();
@@ -24,9 +27,12 @@ class _FootballHomeState extends State<FootballHome> with SingleTickerProviderSt
 
   @override
   Widget build(BuildContext context) {
+    String title = 'Football';
+    title = widget.remoteConfig?.getString('title');
+
     return Scaffold(
       appBar: AppBar(
-        title: Text("Football"),
+        title: Text(title),
         elevation: 0.7,
         bottom: TabBar(
           controller: _tabController,

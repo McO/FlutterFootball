@@ -1,9 +1,10 @@
+import 'package:FlutterFootball/classes/config.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_native_admob/flutter_native_admob.dart';
 import 'package:flutter_native_admob/native_admob_controller.dart';
 import 'package:flutter_native_admob/native_admob_options.dart';
+import 'package:provider/provider.dart';
 import '../classes/ads.dart';
-import '../classes/constants.dart' as Constants;
 
 class NativeAd extends StatefulWidget {
   @override
@@ -15,7 +16,7 @@ class _NativeAdState extends State<NativeAd> {
 
   @override
   Widget build(BuildContext context) {
-    if (Constants.showAds)
+    if (Provider.of<Config>(context, listen: false)?.showAds)
       return Container(
         height: 250,
         child: NativeAdmob(
