@@ -32,10 +32,15 @@ class MatchHead extends StatelessWidget {
             flex: 4,
             child: Column(
               children: [
-                CircleAvatar(
-                  backgroundColor: Colors.transparent,
-                  backgroundImage: _buildImage(match.homeTeam),
-                  maxRadius: 30,
+//                CircleAvatar(
+//                  backgroundColor: Colors.transparent,
+//                  backgroundImage: _buildImage(match.homeTeam),
+//                  maxRadius: 30,
+//                ),
+                Image(
+                  image: _buildImage(match.homeTeam),
+                  height: 50,
+                  width: 80,
                 ),
                 Padding(
                   padding: const EdgeInsets.all(Constants.defaultPadding),
@@ -59,10 +64,15 @@ class MatchHead extends StatelessWidget {
             flex: 4,
             child: Column(
               children: [
-                CircleAvatar(
-                  backgroundColor: Colors.transparent,
-                  backgroundImage: _buildImage(match.awayTeam),
-                  maxRadius: 30,
+//                CircleAvatar(
+//                  backgroundColor: Colors.transparent,
+//                  backgroundImage: _buildImage(match.awayTeam),
+//                  maxRadius: 30,
+//                ),
+                Image(
+                  image: _buildImage(match.awayTeam),
+                  height: 50,
+                  width: 80,
                 ),
                 Padding(
                   padding: const EdgeInsets.all(Constants.defaultPadding),
