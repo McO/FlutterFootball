@@ -1,9 +1,11 @@
-import 'package:FlutterFootball/widgets/native_ad.dart';
 import 'package:flutter/material.dart';
 
-import 'package:FlutterFootball/models/day.dart';
-import 'package:FlutterFootball/widgets/competition_matches_card.dart';
 import 'package:intl/intl.dart';
+
+import 'package:FlutterFootball/models/day.dart';
+
+import 'package:FlutterFootball/widgets/native_ad.dart';
+import 'package:FlutterFootball/widgets/competition_matches_card.dart';
 
 class DayList extends StatefulWidget {
   final List<Day> days;

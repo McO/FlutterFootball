@@ -1,9 +1,8 @@
-import 'package:FlutterFootball/models/competition.dart';
-import 'package:FlutterFootball/models/match.dart';
+import 'package:FlutterFootball/models/models.dart';
 
 class DayCompetitionMatches {
   final DateTime date;
-  final Competition competition;
+  final CompetitionBase competition;
   final String matchDayName;
   final List<Match> matches;
 

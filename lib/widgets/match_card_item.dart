@@ -1,6 +1,7 @@
-import 'package:FlutterFootball/screens/match_screen.dart';
-import 'package:flutter/services.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
+
+import 'package:FlutterFootball/screens/match_screen.dart';
 import '../classes/constants.dart' as Constants;
 import '../models/match.dart';
 import '../models/team.dart';

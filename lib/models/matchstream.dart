@@ -1,4 +1,4 @@
-import 'package:FlutterFootball/models/day.dart';
+import 'package:FlutterFootball/models/models.dart';
 
 class MatchStream {
   final List<Day> days;

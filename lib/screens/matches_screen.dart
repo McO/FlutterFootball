@@ -1,8 +1,10 @@
-import 'package:FlutterFootball/bloc/bloc.dart';
-import 'package:FlutterFootball/models/day.dart';
+import 'package:flutter/material.dart';
+
+import 'package:FlutterFootball/blocs/bloc.dart';
+
+import 'package:FlutterFootball/models/models.dart';
 import 'package:FlutterFootball/network/response.dart';
 import 'package:FlutterFootball/widgets/day_list.dart';
-import 'package:flutter/material.dart';
 
 class MatchesScreen extends StatefulWidget {
   @override

@@ -16,7 +16,7 @@ class _NativeAdState extends State<NativeAd> {
 
   @override
   Widget build(BuildContext context) {
-    if (Provider.of<Config>(context, listen: false)?.showAds)
+    if (Provider.of<Config>(context, listen: false).showAds)
       return Container(
         height: 250,
         child: NativeAdmob(

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+
 import '../models/match.dart';
 
 class MatchLiveTicker extends StatelessWidget {

@@ -1,10 +1,10 @@
-import 'package:FlutterFootball/models/team.dart';
+import 'package:FlutterFootball/models/models.dart';
 
-class Competition {
+class CompetitionBase {
   final int id;
   final String name;
   final String logoUrl;
   final List<Team> teams;
 
-  Competition({this.id, this.name, this.logoUrl, this.teams});
+  const CompetitionBase({this.id, this.name, this.logoUrl, this.teams});
 }

@@ -1,12 +1,11 @@
-import 'package:FlutterFootball/screens/settings_screen.dart';
-import 'package:firebase_remote_config/firebase_remote_config.dart';
 import 'package:flutter/material.dart';
+
+import 'package:FlutterFootball/screens/competitions_screen.dart';
+import 'package:FlutterFootball/screens/settings_screen.dart';
 import 'screens/matches_screen.dart';
 
 class FootballHome extends StatefulWidget {
-  FootballHome({this.remoteConfig});
-
-  final RemoteConfig remoteConfig;
+  FootballHome();
 
   @override
   _FootballHomeState createState() => _FootballHomeState();
@@ -19,7 +18,7 @@ class _FootballHomeState extends State<FootballHome> with SingleTickerProviderSt
   void initState() {
     super.initState();
 
-    _tabController = TabController(vsync: this, initialIndex: 0, length: 1);
+    _tabController = TabController(vsync: this, initialIndex: 0, length: 2);
     _tabController.addListener(() {
       setState(() {});
     });
@@ -28,7 +27,6 @@ class _FootballHomeState extends State<FootballHome> with SingleTickerProviderSt
   @override
   Widget build(BuildContext context) {
     String title = 'Football';
-    title = widget.remoteConfig?.getString('title');
 
     return Scaffold(
       appBar: AppBar(
@@ -38,6 +36,7 @@ class _FootballHomeState extends State<FootballHome> with SingleTickerProviderSt
           controller: _tabController,
           indicatorColor: Colors.white,
           tabs: <Widget>[
+            Tab(child: Text("Competitions", style: Theme.of(context).textTheme.display1)),
             Tab(child: Text("Matches", style: Theme.of(context).textTheme.display1)),
           ],
         ),
@@ -59,7 +58,9 @@ class _FootballHomeState extends State<FootballHome> with SingleTickerProviderSt
       ),
       body: TabBarView(
         controller: _tabController,
-        children: <Widget>[MatchesScreen()],
+        children: [
+          CompetitionsScreen(),
+          MatchesScreen()],
       ),
     );
   }
