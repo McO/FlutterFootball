@@ -71,12 +71,7 @@ class App extends StatelessWidget {
       child: MaterialApp(
         title: title,
         theme: buildThemeData(),
-        home: BlocProvider(
-          create: (context) => CompetitionBloc(
-            footballDataRepository: footballDataRepository,
-          ),
-          child: FootballHome(),
-        ),
+        home: FootballHome(),
       ),
     );
   }

@@ -4,8 +4,6 @@ import 'dart:async';
 import 'package:meta/meta.dart';
 import 'package:http/http.dart' as http;
 
-//import 'package:FlutterFootball/models/models.dart';
-
 import 'package:FlutterFootball/models/api/competition.dart';
 import 'package:FlutterFootball/models/api/competitions_result.dart';
 import 'package:FlutterFootball/models/api/result_error.dart';

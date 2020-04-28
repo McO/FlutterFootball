@@ -1,5 +1,6 @@
 import 'dart:async';
 
+import 'package:FlutterFootball/models/api/competition.dart';
 import 'package:meta/meta.dart';
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
@@ -64,7 +65,9 @@ class CompetitionBloc extends Bloc<CompetitionsEvent, CompetitionsState> {
   Stream<CompetitionsState> mapEventToState(CompetitionsEvent event) async* {
     yield CompetitionsLoading();
     try {
-      final List<CompetitionBase> competitions = await footballDataRepository.competitions();
+      final List<Competition> apiCompetitions = await footballDataRepository.competitions();
+      List<CompetitionBase> competitions = new List<CompetitionBase>();
+      apiCompetitions.forEach((c) => competitions.add(new CompetitionBase(id: c.id,name: c.name,logoUrl: c.area.ensignUrl)));
       if (competitions.length == 0) {
         yield CompetitionsEmpty();
       } else {
@@ -73,39 +76,5 @@ class CompetitionBloc extends Bloc<CompetitionsEvent, CompetitionsState> {
     } catch (_) {
       yield CompetitionsError();
     }
-
-//    if (event is FetchCompetitions) {
-//      yield* _mapFetchCompetitionsToState(event);
-//    } else if (event is RefreshCompetitions) {
-//      yield* _mapRefreshCompetitionsToState(event);
-//    }
   }
-
-//  Stream<CompetitionsState> _mapFetchCompetitionsToState(FetchCompetitions event) async* {
-//    yield CompetitionsLoading();
-//    try {
-//      final List<CompetitionBase> competitions = await footballDataRepository.competitions();
-//      if (competitions.length == 0) {
-//        yield CompetitionsEmpty();
-//      } else {
-//        yield CompetitionsLoaded(competitions: competitions);
-//      }
-//    } catch (_) {
-//      yield CompetitionsError();
-//    }
-//  }
-//
-//  Stream<CompetitionsState> _mapRefreshCompetitionsToState(RefreshCompetitions event) async* {
-//    yield CompetitionsLoading();
-//    try {
-//      final List<CompetitionBase> competitions = await footballDataRepository.competitions();
-//      if (competitions.length == 0) {
-//        yield CompetitionsEmpty();
-//      } else {
-//        yield CompetitionsLoaded(competitions: competitions);
-//      }
-//    } catch (_) {
-//      yield state;
-//    }
-//  }
 }

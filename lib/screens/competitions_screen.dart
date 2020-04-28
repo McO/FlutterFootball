@@ -5,6 +5,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:FlutterFootball/blocs/blocs.dart';
 import 'package:FlutterFootball/models/models.dart';
 import 'package:FlutterFootball/widgets/message.dart';
+import 'package:flutter_svg/svg.dart';
 
 class CompetitionsScreen extends StatefulWidget {
   @override
@@ -51,16 +52,20 @@ class CompetitionsScreenState extends State<CompetitionsScreen> {
           return Container(
             color: Colors.white30,
             child: ListTile(
-//              leading: CircleAvatar(
+              leading: CircleAvatar(
 //                child: Image.network(
-//                  competition.logoUrl,
+//                  competition.logoUrl ?? '',
 //                ),
-//                radius: 30.0,
-//                backgroundColor: Colors.blue[50],
-//              ),
+                child: SvgPicture.network(
+                    competition.logoUrl ?? '',
+                    height: 20,
+                ),
+                radius: 30.0,
+                backgroundColor: Colors.blue[50],
+              ),
               title: Text(
                 competition.name,
-                style: TextStyle(fontSize: 22.0, color: Colors.black),
+//                style: TextStyle(fontSize: 22.0, color: Colors.black),
               ),
 //              subtitle: Text(
 //                "Age: " + competition.age.toString(),
