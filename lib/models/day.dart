@@ -1,4 +1,4 @@
-import 'package:FlutterFootball/models/day_competiition_matches.dart';
+import 'package:FlutterFootball/models/day_competition_matches.dart';
 
 class Day {
   final DateTime date;

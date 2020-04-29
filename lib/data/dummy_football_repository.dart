@@ -3,9 +3,9 @@ import 'dart:math';
 import 'package:FlutterFootball/models/models.dart';
 
 class DummyFootballRepository {
-  List<CompetitionBase> dummyCompetitions = [
-    new CompetitionBase(id: 1, name: "Bundesliga", teams: null),
-    new CompetitionBase(id: 2, name: "Premier League", teams: null),
+  List<Competition> dummyCompetitions = [
+    new Competition(id: 1, name: "Bundesliga", teams: null),
+    new Competition(id: 2, name: "Premier League", teams: null),
   ];
 
   List<Team> dummyTeams = [

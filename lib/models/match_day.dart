@@ -1,7 +1,7 @@
 import 'package:FlutterFootball/models/models.dart';
 
 class MatchDayModel {
-  final CompetitionBase competition;
+  final Competition competition;
   final String name;
   final List<Match> matches;
 

@@ -2,7 +2,7 @@ import 'package:FlutterFootball/models/models.dart';
 
 class DayCompetitionMatches {
   final DateTime date;
-  final CompetitionBase competition;
+  final Competition competition;
   final String matchDayName;
   final List<Match> matches;
 

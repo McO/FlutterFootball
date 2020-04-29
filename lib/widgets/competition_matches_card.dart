@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
 
 import 'package:FlutterFootball/models/models.dart';
-import 'package:FlutterFootball/models/day_competiition_matches.dart';
 import 'match_card_item.dart';
 import 'package:flutter/services.dart';
 import '../classes/constants.dart' as Constants;
@@ -12,7 +11,7 @@ class CompetitionMatchesCard extends StatelessWidget {
 
   const CompetitionMatchesCard(this.dayCompetitionMatches);
 
-  ImageProvider _buildImage(CompetitionBase competition) {
+  ImageProvider _buildImage(Competition competition) {
     if (competition.logoUrl?.isEmpty ?? true) {
       String path = 'assets/images/competitions/' + competition.id.toString() + '.png';
       rootBundle.load(path).then((value) {

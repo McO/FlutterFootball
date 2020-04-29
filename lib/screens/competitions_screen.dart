@@ -44,11 +44,11 @@ class CompetitionsScreenState extends State<CompetitionsScreen> {
     );
   }
 
-  Widget buildCompetitionList(List<CompetitionBase> competitions) {
+  Widget buildCompetitionList(List<Competition> competitions) {
     return Container(
       child: ListView.separated(
         itemBuilder: (BuildContext context, index) {
-          CompetitionBase competition = competitions[index];
+          Competition competition = competitions[index];
           return Container(
             color: Colors.white30,
             child: ListTile(

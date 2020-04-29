@@ -1,10 +1,10 @@
 import 'dart:async';
 
-import 'package:FlutterFootball/models/api/competition.dart';
 import 'package:meta/meta.dart';
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
 
+import 'package:FlutterFootball/models/api/models.dart' as ApiModels;
 import 'package:FlutterFootball/repositories/repositories.dart';
 import 'package:FlutterFootball/models/models.dart';
 
@@ -42,7 +42,7 @@ class CompetitionsEmpty extends CompetitionsState {}
 class CompetitionsLoading extends CompetitionsState {}
 
 class CompetitionsLoaded extends CompetitionsState {
-  final List<CompetitionBase> competitions;
+  final List<Competition> competitions;
 
   const CompetitionsLoaded({@required this.competitions}) : assert(competitions != null);
 
@@ -65,9 +65,9 @@ class CompetitionBloc extends Bloc<CompetitionsEvent, CompetitionsState> {
   Stream<CompetitionsState> mapEventToState(CompetitionsEvent event) async* {
     yield CompetitionsLoading();
     try {
-      final List<Competition> apiCompetitions = await footballDataRepository.competitions();
-      List<CompetitionBase> competitions = new List<CompetitionBase>();
-      apiCompetitions.forEach((c) => competitions.add(new CompetitionBase(id: c.id,name: c.name,logoUrl: c.area.ensignUrl)));
+      final List<ApiModels.Competition> apiCompetitions = await footballDataRepository.competitions();
+      List<Competition> competitions = new List<Competition>();
+      apiCompetitions.forEach((c) => competitions.add(new Competition(id: c.id,name: c.name,logoUrl: c.area.ensignUrl)));
       if (competitions.length == 0) {
         yield CompetitionsEmpty();
       } else {

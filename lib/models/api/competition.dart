@@ -1,11 +1,13 @@
-import 'package:FlutterFootball/models/api/area.dart';
-import 'package:FlutterFootball/models/models.dart';
+import 'package:FlutterFootball/models/api/models.dart';
 
-class Competition extends CompetitionBase {
+class Competition {
+  final int id;
+  final String name;
+  final String logoUrl;
+  final List<Team> teams;
   final Area area;
 
-  const Competition({id, name, logoUrl, this.area})
-      : super(id: id, name: name, logoUrl: null);
+  const Competition({this.id, this.name, this.logoUrl, this.teams, this.area});
 
   static Competition fromJson(dynamic json) {
     return Competition(
