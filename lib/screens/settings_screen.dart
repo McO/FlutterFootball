@@ -1,7 +1,9 @@
-import 'package:FlutterFootball/classes/config.dart';
 import 'package:flutter/material.dart';
+
+import 'package:flutter_bloc/flutter_bloc.dart';
+
+import 'package:FlutterFootball/blocs/blocs.dart';
 import 'package:flutter_settings_screens/flutter_settings_screens.dart' as Preferences;
-import 'package:provider/provider.dart';
 import '../classes/constants.dart' as Constants;
 
 class SettingsScreen extends StatefulWidget {
@@ -15,20 +17,25 @@ class _SettingsScreenState extends State<SettingsScreen> {
     super.initState();
   }
 
-
   @override
   Widget build(BuildContext context) {
     return Container(
       child: Preferences.SettingsScreen(title: "Application Settings", children: [
-        Preferences.SwitchSettingsTile(
-          settingKey: Constants.SETTINGS_SHOW_ADS_KEY,
-          title: 'Show Ads',
-          defaultValue: Provider.of<Config>(context, listen: false)?.showAds,
-          onChange: (value) {
-            debugPrint(Constants.SETTINGS_SHOW_ADS_KEY + ':' + value.toString());
-            Provider.of<Config>(context, listen: false)?.showAds = value;
-          },
-        ),
+        BlocBuilder<SettingsBloc, SettingsState>(
+            builder: (context, state) {
+              return Preferences.SwitchSettingsTile(
+                settingKey: Constants.SETTINGS_SHOW_ADS_KEY,
+                title: 'Show Ads',
+                defaultValue: state.showAds,
+                onChange: (value) {
+                  debugPrint(Constants.SETTINGS_SHOW_ADS_KEY + ':' + value.toString());
+                  BlocProvider
+                      .of<SettingsBloc>(context)
+                      .add(ShowAdsToggled());
+                  },
+              );
+            }
+        )
       ]),
     );
   }

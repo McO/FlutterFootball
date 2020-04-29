@@ -6,35 +6,31 @@ import 'package:equatable/equatable.dart';
 
 abstract class SettingsEvent extends Equatable {}
 
-class TemperatureUnitsToggled extends SettingsEvent {
+class ShowAdsToggled extends SettingsEvent {
   @override
   List<Object> get props => [];
 }
 
-enum TemperatureUnits { fahrenheit, celsius }
-
 class SettingsState extends Equatable {
-  final TemperatureUnits temperatureUnits;
+  final bool showAds;
 
-  const SettingsState({@required this.temperatureUnits})
-      : assert(temperatureUnits != null);
+  const SettingsState({@required this.showAds})
+      : assert(showAds != null);
 
   @override
-  List<Object> get props => [temperatureUnits];
+  List<Object> get props => [showAds];
 }
 
 class SettingsBloc extends Bloc<SettingsEvent, SettingsState> {
   @override
   SettingsState get initialState =>
-      SettingsState(temperatureUnits: TemperatureUnits.celsius);
+      SettingsState(showAds: true);
 
   @override
   Stream<SettingsState> mapEventToState(SettingsEvent event) async* {
-    if (event is TemperatureUnitsToggled) {
+    if (event is ShowAdsToggled) {
       yield SettingsState(
-        temperatureUnits: state.temperatureUnits == TemperatureUnits.celsius
-            ? TemperatureUnits.fahrenheit
-            : TemperatureUnits.celsius,
+        showAds: !state.showAds,
       );
     }
   }
