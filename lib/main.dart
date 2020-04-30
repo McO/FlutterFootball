@@ -24,11 +24,13 @@ Future<Null> main() async {
 
   final RemoteConfig remoteConfig = await RemoteConfig.instance;
 
-  String authToken = remoteConfig?.getString('football_data_api_token');
+  final String authToken = remoteConfig?.getString('football_data_api_token');
 
   final FootballDataRepository footballDataRepository = FootballDataRepository(
     footballDataClient: FootballDataClient(httpClient: http.Client(), authToken: authToken),
   );
+
+//  final teams = footballDataRepository.teams();
 
   BlocSupervisor.delegate = SimpleBlocDelegate();
   runApp(

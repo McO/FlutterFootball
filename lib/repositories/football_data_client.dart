@@ -16,9 +16,9 @@ class FootballDataClient {
   FootballDataClient({@required this.httpClient, @required this.authToken}) : assert(httpClient != null);
 
   Future<Competition> competition(int competitionId) async {
-    final competitionUrl = '$baseUrl/competitions/$competitionId';
+    final url = '$baseUrl/competitions/$competitionId';
     final response = await httpClient.get(
-      competitionUrl,
+      url,
       headers: {'X-Auth-Token': authToken},
     );
 
@@ -31,9 +31,9 @@ class FootballDataClient {
   }
 
   Future<List<Competition>> competitions() async {
-    final competitionsUrl = '$baseUrl/competitions';
+    final url = '$baseUrl/competitions';
     final response = await httpClient.get(
-      competitionsUrl,
+      url,
       headers: {'X-Auth-Token': authToken},
     );
     final results = json.decode(response.body);
@@ -46,7 +46,7 @@ class FootballDataClient {
   }
 
   Future<List<Match>> matches(DateTime fromDate, DateTime toDate) async {
-    final competitionsUrl = '$baseUrl/matches';
+    final url = '$baseUrl/matches';
 
     URLQueryParams queryParams = new URLQueryParams();
 
@@ -54,13 +54,49 @@ class FootballDataClient {
     queryParams.append('dateTo', new DateFormat("yyyy-MM-dd").format(toDate));
 
     final response = await httpClient.get(
-      '$competitionsUrl?$queryParams',
+      '$url?$queryParams',
       headers: {'X-Auth-Token': authToken},
     );
     final results = json.decode(response.body);
 
     if (response.statusCode >= 200 && response.statusCode < 300) {
       return MatchesResult.fromJson(results).matches;
+    } else {
+      throw ResultError.fromJson(results).message;
+    }
+  }
+
+  Future<List<Team>> teams(List<int> areaIds) async {
+    final url = '$baseUrl/teams';
+
+    URLQueryParams queryParams = new URLQueryParams();
+
+    queryParams.append('areas', areaIds.map((i) => i.toString()).join(","));
+
+    final response = await httpClient.get(
+      '$url?$queryParams',
+      headers: {'X-Auth-Token': authToken},
+    );
+    final results = json.decode(response.body);
+
+    if (response.statusCode >= 200 && response.statusCode < 300) {
+      return TeamsResult.fromJson(results).teams;
+    } else {
+      throw ResultError.fromJson(results).message;
+    }
+  }
+
+  Future<List<Area>> areas() async {
+    final url = '$baseUrl/areas';
+
+    final response = await httpClient.get(
+      '$url',
+      headers: {'X-Auth-Token': authToken},
+    );
+    final results = json.decode(response.body);
+
+    if (response.statusCode >= 200 && response.statusCode < 300) {
+      return AreasResult.fromJson(results).areas;
     } else {
       throw ResultError.fromJson(results).message;
     }

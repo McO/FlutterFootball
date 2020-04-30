@@ -21,4 +21,14 @@ class FootballDataRepository {
     final resultAPI = await footballDataClient.matches(fromDate, toDate);
     return resultAPI;
   }
+
+  Future<List<Team>> teams(List<int> areaIds) async {
+    final resultAPI = await footballDataClient.teams(areaIds);
+    return resultAPI;
+  }
+
+  Future<List<Area>> areas() async {
+    final resultAPI = await footballDataClient.areas();
+    return resultAPI;
+  }
 }

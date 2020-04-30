@@ -5,8 +5,8 @@ class Match {
   final MatchCompetition competition;
   final DateTime utcDate;
   final Score score;
-  final Team homeTeam;
-  final Team awayTeam;
+  final MatchTeam homeTeam;
+  final MatchTeam awayTeam;
 
   const Match({this.id, this.competition, this.utcDate, this.score, this.homeTeam, this.awayTeam});
 
@@ -16,8 +16,8 @@ class Match {
         competition: MatchCompetition.fromJson(json['competition']),
         utcDate: DateTime.parse(json['utcDate'] as String),
         score: Score.fromJson(json['score']),
-        homeTeam: Team.fromJson(json['homeTeam']),
-        awayTeam: Team.fromJson(json['awayTeam']));
+        homeTeam: MatchTeam.fromJson(json['homeTeam']),
+        awayTeam: MatchTeam.fromJson(json['awayTeam']));
   }
 }
 

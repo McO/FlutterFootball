@@ -70,7 +70,7 @@ class CompetitionsScreenState extends State<CompetitionsScreen> {
 //                ),
                   child: SvgPicture.network(
                     competition.logoUrl ?? '',
-                    height: 20,
+                    height: 30,
                   ),
                   radius: 30.0,
                   backgroundColor: Colors.blue[50],

@@ -65,9 +65,12 @@ class MatchBloc extends Bloc<MatchesEvent, MatchesState> {
   Stream<MatchesState> mapEventToState(MatchesEvent event) async* {
     yield MatchesLoading();
     try {
+      //todo: parametrize date range (maximum 10 days)
       final List<ApiModels.Match> apiMatches = await footballDataRepository.matches(DateTime.now().subtract(Duration(days: 60)), DateTime.now().subtract(Duration(days: 55)));
-      //TODO: map api matches to domain model
-      List<Day> days = new List<Day>();
+
+      final List<ApiModels.Area> apiAreas = await footballDataRepository.areas();
+      var days = new List<Day>();
+      var areaIds = new List<int>();
 //      apiMatches.forEach((element) => print('Date: ${element.utcDate.toLocal().toString()}'));
 
       //adding match days
@@ -76,6 +79,12 @@ class MatchBloc extends Bloc<MatchesEvent, MatchesState> {
         DateTime matchDate = new DateTime(matchDateTime.year, matchDateTime.month, matchDateTime.day);
         if (days.where((d) => d.date == matchDate).length == 0) {
           days.add(new Day(date: matchDate, dayCompetitionsMatches: new List<DayCompetitionMatches>()));
+        }
+
+        var countryCode = m.competition.area.countryCode;
+        var areaId = apiAreas.firstWhere((a) => a.countryCode == countryCode).id;
+        if (!areaIds.contains(areaId)) {
+          areaIds.add(areaId);
         }
       });
 
@@ -90,29 +99,36 @@ class MatchBloc extends Bloc<MatchesEvent, MatchesState> {
         });
       });
 
+      final List<ApiModels.Team> apiTeams = await footballDataRepository.teams(areaIds);
+
       //adding matches
       apiMatches.forEach((ApiModels.Match m) {
         DateTime matchDateTime = m.utcDate.toLocal();
         DateTime matchDate = new DateTime(matchDateTime.year, matchDateTime.month, matchDateTime.day);
 
-        Team homeTeam = new Team(id: m.homeTeam.id, name: m.homeTeam.name);
-        Team awayTeam = new Team(id: m.awayTeam.id, name: m.awayTeam.name);
+        Team homeTeam = new Team(id: m.homeTeam.id, name: m.homeTeam.name, logoUrl: getLogoUrl(apiTeams, m.homeTeam.id));
+        Team awayTeam = new Team(id: m.awayTeam.id, name: m.awayTeam.name, logoUrl: getLogoUrl(apiTeams, m.awayTeam.id));
         Score score = new Score(home: m.score.fullTime.homeTeam, away: m.score.fullTime.awayTeam);
         Match match = new Match(homeTeam: homeTeam, awayTeam: awayTeam, score: score, time: DateFormat('HH:mm').format(matchDateTime));
         days.where((d) => d.date == matchDate).toList()[0].dayCompetitionsMatches.where((c) => c.competition.id == m.competition.id).toList()[0].matches.add(match);
       });
 
-//      var matches = new List<Match>();
-//      apiMatches.forEach((c) => matches.add(new Match(id: c.id,name: c.name,logoUrl: c.area.ensignUrl)));
-
 //      days = await dummyFootballRepository.fetchMatches();
+
       if (days.length == 0) {
         yield MatchesEmpty();
       } else {
         yield MatchesLoaded(days: days);
       }
-    } catch (_) {
+    } catch (e) {
+      print('Exception: ' + e);
       yield MatchesError();
     }
+  }
+
+  String getLogoUrl(List<ApiModels.Team> apiTeams, int teamId) {
+    final apiTeam = apiTeams.firstWhere((t) => t.id == teamId);
+    if (apiTeam != null) return apiTeam.crestUrl;
+    return '';
   }
 }
