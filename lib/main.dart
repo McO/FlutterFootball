@@ -16,7 +16,7 @@ import 'blocs/blocs.dart';
 import 'classes/cache_provider.dart';
 import 'classes/config.dart';
 import 'package:FlutterFootball/repositories/repositories.dart';
-import 'package:FlutterFootball/data/dummy_football_repository.dart';
+import 'package:FlutterFootball/repositories/dummy_football_repository.dart';
 
 Future<Null> main() async {
   await initSettings();

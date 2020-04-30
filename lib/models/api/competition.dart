@@ -3,17 +3,15 @@ import 'package:FlutterFootball/models/api/models.dart';
 class Competition {
   final int id;
   final String name;
-  final String logoUrl;
-  final List<Team> teams;
-  final Area area;
+  final CompetitionArea area;
 
-  const Competition({this.id, this.name, this.logoUrl, this.teams, this.area});
+  const Competition({this.id, this.name, this.area});
 
   static Competition fromJson(dynamic json) {
     return Competition(
         id: json['id'] as int,
         name: json['name'] as String,
-        area: Area.fromJson(json['area'])
+        area: CompetitionArea.fromJson(json['area'])
     );
   }
 }

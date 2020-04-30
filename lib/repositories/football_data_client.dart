@@ -1,10 +1,12 @@
 import 'dart:convert';
 import 'dart:async';
 
+import 'package:intl/intl.dart';
 import 'package:meta/meta.dart';
 import 'package:http/http.dart' as http;
 
 import 'package:FlutterFootball/models/api/models.dart';
+import 'package:query_params/query_params.dart';
 
 class FootballDataClient {
   static const baseUrl = "https://api.football-data.org/v2/";
@@ -12,7 +14,6 @@ class FootballDataClient {
   final String authToken;
 
   FootballDataClient({@required this.httpClient, @required this.authToken}) : assert(httpClient != null);
-
 
   Future<Competition> competition(int competitionId) async {
     final competitionUrl = '$baseUrl/competitions/$competitionId';
@@ -46,8 +47,14 @@ class FootballDataClient {
 
   Future<List<Match>> matches(DateTime fromDate, DateTime toDate) async {
     final competitionsUrl = '$baseUrl/matches';
+
+    URLQueryParams queryParams = new URLQueryParams();
+
+    queryParams.append('dateFrom', new DateFormat("yyyy-MM-dd").format(fromDate));
+    queryParams.append('dateTo', new DateFormat("yyyy-MM-dd").format(toDate));
+
     final response = await httpClient.get(
-      competitionsUrl,
+      '$competitionsUrl?$queryParams',
       headers: {'X-Auth-Token': authToken},
     );
     final results = json.decode(response.body);
