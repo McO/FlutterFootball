@@ -94,7 +94,8 @@ class MatchBloc extends Bloc<MatchesEvent, MatchesState> {
 
         matcherPerDay.forEach((m) {
           if (d.dayCompetitionsMatches.where((d) => d.competition.id == m.competition.id).length == 0) {
-            d.dayCompetitionsMatches.add(DayCompetitionMatches(date: d.date, competition: Competition(id: m.competition.id, name: m.competition.name), matchDayName: '', matches: List<Match>()));
+            d.dayCompetitionsMatches.add(DayCompetitionMatches(
+                date: d.date, competition: Competition(id: m.competition.id, name: m.competition.name, logoUrl: m.competition.area.ensignUrl), matchDayName: getMatchDay(m), matches: List<Match>()));
           }
         });
       });
@@ -134,6 +135,13 @@ class MatchBloc extends Bloc<MatchesEvent, MatchesState> {
   String getLogoUrl(List<ApiModels.Team> apiTeams, int teamId) {
     final apiTeam = apiTeams.firstWhere((t) => t.id == teamId, orElse: () => null);
     if (apiTeam != null) return apiTeam.crestUrl;
+    return '';
+  }
+
+  String getMatchDay(ApiModels.Match match) {
+    if (match.stage == "REGULAR_SEASON") {
+      return 'Matchweek ${match.matchDay}';
+    }
     return '';
   }
 }

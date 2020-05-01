@@ -11,7 +11,8 @@ class MatchCompetition {
     return MatchCompetition(
         id: json['id'] as int,
         name: json['name'] as String,
-        area: MatchArea.fromJson(json['area'])
+        area: MatchArea.fromJson(json['area']
+        )
     );
   }
 }

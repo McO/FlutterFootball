@@ -3,26 +3,13 @@ import 'package:flutter/cupertino.dart';
 
 import 'package:FlutterFootball/models/models.dart';
 import 'match_card_item.dart';
-import 'package:flutter/services.dart';
+import 'package:FlutterFootball/widgets/logo_icon.dart';
 import '../classes/constants.dart' as Constants;
 
 class CompetitionMatchesCard extends StatelessWidget {
   final DayCompetitionMatches dayCompetitionMatches;
 
   const CompetitionMatchesCard(this.dayCompetitionMatches);
-
-  ImageProvider _buildImage(Competition competition) {
-    if (competition.logoUrl?.isEmpty ?? true) {
-      String path = 'assets/images/competitions/' + competition.id.toString() + '.png';
-      rootBundle.load(path).then((value) {
-        return AssetImage(path);
-      }).catchError((_) {
-        return null;
-      });
-      return AssetImage(path);
-    }
-    return NetworkImage(competition.logoUrl);
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -37,11 +24,7 @@ class CompetitionMatchesCard extends StatelessWidget {
                     children: <Widget>[
                       Container(
                         padding: const EdgeInsets.symmetric(vertical: 3.0, horizontal: Constants.defaultPadding),
-                        child: CircleAvatar(
-                          backgroundColor: Colors.grey,
-                          backgroundImage: _buildImage(dayCompetitionMatches.competition),
-                          maxRadius: 12,
-                        ),
+                        child: LogoIcon(dayCompetitionMatches.competition.logoUrl, 25)
                       ),
                     ],
                   ),
