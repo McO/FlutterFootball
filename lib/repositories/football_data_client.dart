@@ -16,7 +16,7 @@ class FootballDataClient {
   FootballDataClient({@required this.httpClient, @required this.authToken}) : assert(httpClient != null);
 
   Future<Competition> competition(int competitionId) async {
-    final url = '$baseUrl/competitions/$competitionId';
+    final url = '${baseUrl}competitions/$competitionId';
     final response = await httpClient.get(
       url,
       headers: {'X-Auth-Token': authToken},
@@ -31,7 +31,7 @@ class FootballDataClient {
   }
 
   Future<List<Competition>> competitions() async {
-    final url = '$baseUrl/competitions';
+    final url = '${baseUrl}competitions';
     final response = await httpClient.get(
       url,
       headers: {'X-Auth-Token': authToken},
@@ -46,15 +46,15 @@ class FootballDataClient {
   }
 
   Future<List<Match>> matches(DateTime fromDate, DateTime toDate) async {
-    final url = '$baseUrl/matches';
-
     URLQueryParams queryParams = new URLQueryParams();
 
     queryParams.append('dateFrom', new DateFormat("yyyy-MM-dd").format(fromDate));
     queryParams.append('dateTo', new DateFormat("yyyy-MM-dd").format(toDate));
 
+    final url = '${baseUrl}matches?$queryParams';
+    print('matches: $url');
     final response = await httpClient.get(
-      '$url?$queryParams',
+      url,
       headers: {'X-Auth-Token': authToken},
     );
     final results = json.decode(response.body);
@@ -67,14 +67,13 @@ class FootballDataClient {
   }
 
   Future<List<Team>> teams(List<int> areaIds) async {
-    final url = '$baseUrl/teams';
-
     URLQueryParams queryParams = new URLQueryParams();
-
     queryParams.append('areas', areaIds.map((i) => i.toString()).join(","));
 
+    final url = '${baseUrl}teams?$queryParams';
+    print('teams: $url');
     final response = await httpClient.get(
-      '$url?$queryParams',
+      url,
       headers: {'X-Auth-Token': authToken},
     );
     final results = json.decode(response.body);
@@ -87,10 +86,10 @@ class FootballDataClient {
   }
 
   Future<List<Area>> areas() async {
-    final url = '$baseUrl/areas';
-
+    final url = '${baseUrl}areas';
+    print('areas: $url');
     final response = await httpClient.get(
-      '$url',
+      url,
       headers: {'X-Auth-Token': authToken},
     );
     final results = json.decode(response.body);

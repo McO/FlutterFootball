@@ -10,7 +10,7 @@ class Team {
     return Team(
       id: json['id'] as int,
       name: json['name'] as String,
-      shortName: json['shortname'] as String,
+      shortName: json['shortName'] as String,
       crestUrl: json['crestUrl'] as String,
     );
   }

@@ -103,14 +103,19 @@ class MatchBloc extends Bloc<MatchesEvent, MatchesState> {
 
       //adding matches
       apiMatches.forEach((ApiModels.Match m) {
-        DateTime matchDateTime = m.utcDate.toLocal();
-        DateTime matchDate = new DateTime(matchDateTime.year, matchDateTime.month, matchDateTime.day);
+        var matchDateTime = m.utcDate.toLocal();
+        var matchDate = DateTime(matchDateTime.year, matchDateTime.month, matchDateTime.day);
 
-        Team homeTeam = new Team(id: m.homeTeam.id, name: m.homeTeam.name, logoUrl: getLogoUrl(apiTeams, m.homeTeam.id));
-        Team awayTeam = new Team(id: m.awayTeam.id, name: m.awayTeam.name, logoUrl: getLogoUrl(apiTeams, m.awayTeam.id));
-        Score score = new Score(home: m.score.fullTime.homeTeam, away: m.score.fullTime.awayTeam);
-        Match match = new Match(homeTeam: homeTeam, awayTeam: awayTeam, score: score, time: DateFormat('HH:mm').format(matchDateTime));
-        days.where((d) => d.date == matchDate).toList()[0].dayCompetitionsMatches.where((c) => c.competition.id == m.competition.id).toList()[0].matches.add(match);
+        var homeTeam = Team(id: m.homeTeam.id, name: m.homeTeam.name, logoUrl: getLogoUrl(apiTeams, m.homeTeam.id));
+        var awayTeam = Team(id: m.awayTeam.id, name: m.awayTeam.name, logoUrl: getLogoUrl(apiTeams, m.awayTeam.id));
+        try {
+          Score score = Score(home: m.score.fullTime.homeTeam, away: m.score.fullTime.awayTeam);
+          Match match = Match(homeTeam: homeTeam, awayTeam: awayTeam, score: score, time: DateFormat('HH:mm').format(matchDateTime));
+          days.where((d) => d.date == matchDate).toList()[0].dayCompetitionsMatches.where((c) => c.competition.id == m.competition.id).toList()[0].matches.add(match);
+        } catch (e) {
+          print(e);
+          print('Match: ${m.id}');
+        }
       });
 
 //      days = await dummyFootballRepository.fetchMatches();
@@ -127,7 +132,7 @@ class MatchBloc extends Bloc<MatchesEvent, MatchesState> {
   }
 
   String getLogoUrl(List<ApiModels.Team> apiTeams, int teamId) {
-    final apiTeam = apiTeams.firstWhere((t) => t.id == teamId);
+    final apiTeam = apiTeams.firstWhere((t) => t.id == teamId, orElse: () => null);
     if (apiTeam != null) return apiTeam.crestUrl;
     return '';
   }
