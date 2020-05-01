@@ -19,6 +19,7 @@ class _NativeAdState extends State<NativeAd> {
   @override
   Widget build(BuildContext context) {
     return BlocBuilder<SettingsBloc, SettingsState>(builder: (context, state) {
+      print('NativeAd showAds=${state.showAds}');
       if (state.showAds)
         return Container(
           height: 250,

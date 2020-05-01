@@ -1,28 +1,27 @@
 import 'package:flutter/material.dart';
 
 import 'package:http/http.dart' as http;
-import 'package:bloc/bloc.dart';
+import 'package:provider/provider.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_settings_screens/flutter_settings_screens.dart';
+import 'package:firebase_remote_config/firebase_remote_config.dart';
 
 import 'package:FlutterFootball/simple_bloc_delegate.dart';
 import 'package:FlutterFootball/classes/config.dart';
 //import 'package:FlutterFootball/classes/routes.dart';
 import 'package:FlutterFootball/football_home.dart';
 import 'package:FlutterFootball/theme/style.dart';
-import 'package:flutter_settings_screens/flutter_settings_screens.dart';
-import 'package:firebase_remote_config/firebase_remote_config.dart';
-import 'package:provider/provider.dart';
-import 'blocs/blocs.dart';
-import 'classes/cache_provider.dart';
-import 'classes/config.dart';
+import 'package:FlutterFootball/blocs/blocs.dart';
+import 'package:FlutterFootball/classes/cache_provider.dart';
 import 'package:FlutterFootball/repositories/repositories.dart';
-import 'package:FlutterFootball/repositories/dummy_football_repository.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 Future<Null> main() async {
   await initSettings();
   WidgetsFlutterBinding.ensureInitialized();
 
   final RemoteConfig remoteConfig = await RemoteConfig.instance;
+  final SharedPreferences preferences = await SharedPreferences.getInstance();
 
   final String authToken = remoteConfig?.getString('football_data_api_token');
 
@@ -37,13 +36,13 @@ Future<Null> main() async {
     MultiBlocProvider(
       providers: [
         BlocProvider<SettingsBloc>(
-          create: (context) => SettingsBloc(),
+          create: (context) => SettingsBloc(preferences: preferences),
         ),
         BlocProvider<CompetitionBloc>(
           create: (context) => CompetitionBloc(footballDataRepository: footballDataRepository),
         ),
         BlocProvider<MatchBloc>(
-          create: (context) => MatchBloc(footballDataRepository: footballDataRepository, dummyFootballRepository: new DummyFootballRepository()),
+          create: (context) => MatchBloc(footballDataRepository: footballDataRepository, dummyFootballRepository: DummyFootballRepository()),
         ),
       ],
       child: App(footballDataRepository: footballDataRepository),

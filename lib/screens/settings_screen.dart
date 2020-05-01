@@ -12,6 +12,7 @@ class SettingsScreen extends StatefulWidget {
 }
 
 class _SettingsScreenState extends State<SettingsScreen> {
+
   @override
   void initState() {
     super.initState();
@@ -21,22 +22,20 @@ class _SettingsScreenState extends State<SettingsScreen> {
   Widget build(BuildContext context) {
     return Container(
       child: Preferences.SettingsScreen(title: "Application Settings", children: [
-        BlocBuilder<SettingsBloc, SettingsState>(
-            builder: (context, state) {
-              return Preferences.SwitchSettingsTile(
-                settingKey: Constants.SETTINGS_SHOW_ADS_KEY,
-                title: 'Show Ads',
-                defaultValue: state.showAds,
-                onChange: (value) {
-                  debugPrint(Constants.SETTINGS_SHOW_ADS_KEY + ':' + value.toString());
-                  BlocProvider
-                      .of<SettingsBloc>(context)
-                      .add(ShowAdsToggled());
-                  },
-              );
-            }
-        )
+        BlocBuilder<SettingsBloc, SettingsState>(builder: (context, state) {
+          return Preferences.SwitchSettingsTile(
+            settingKey: Constants.SETTINGS_SHOW_ADS_KEY,
+            title: 'Show Ads',
+            defaultValue: state.showAds,
+            onChange: (value) {
+              debugPrint(Constants.SETTINGS_SHOW_ADS_KEY + ':' + value.toString());
+              BlocProvider.of<SettingsBloc>(context).add(ShowAdsToggled());
+            },
+          );
+        })
       ]),
     );
   }
+
+
 }
