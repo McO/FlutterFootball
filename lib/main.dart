@@ -8,13 +8,17 @@ import 'package:firebase_remote_config/firebase_remote_config.dart';
 
 import 'package:FlutterFootball/simple_bloc_delegate.dart';
 import 'package:FlutterFootball/classes/config.dart';
+
 //import 'package:FlutterFootball/classes/routes.dart';
 import 'package:FlutterFootball/football_home.dart';
 import 'package:FlutterFootball/theme/style.dart';
 import 'package:FlutterFootball/blocs/blocs.dart';
 import 'package:FlutterFootball/classes/cache_provider.dart';
 import 'package:FlutterFootball/repositories/repositories.dart';
+
 import 'package:shared_preferences/shared_preferences.dart';
+
+import 'data/api_dao.dart';
 
 Future<Null> main() async {
   await initSettings();
@@ -25,8 +29,10 @@ Future<Null> main() async {
 
   final String authToken = remoteConfig?.getString('football_data_api_token');
 
+  final ApiDao apiDao = ApiDao();
+
   final FootballDataRepository footballDataRepository = FootballDataRepository(
-    footballDataClient: FootballDataClient(httpClient: http.Client(), authToken: authToken),
+    footballDataClient: FootballDataClient(httpClient: http.Client(), authToken: authToken, apiDao: apiDao),
   );
 
 //  final teams = footballDataRepository.teams();

@@ -1,6 +1,7 @@
 import 'dart:convert';
 import 'dart:async';
 
+import 'package:FlutterFootball/data/api_dao.dart';
 import 'package:intl/intl.dart';
 import 'package:meta/meta.dart';
 import 'package:http/http.dart' as http;
@@ -12,8 +13,9 @@ class FootballDataClient {
   static const baseUrl = "https://api.football-data.org/v2/";
   final http.Client httpClient;
   final String authToken;
+  final ApiDao apiDao;
 
-  FootballDataClient({@required this.httpClient, @required this.authToken}) : assert(httpClient != null);
+  FootballDataClient({@required this.httpClient, @required this.authToken, @required this.apiDao}) : assert(httpClient != null);
 
   Future<Competition> competition(int competitionId) async {
     final url = '${baseUrl}competitions/$competitionId';
@@ -72,6 +74,13 @@ class FootballDataClient {
 
     final url = '${baseUrl}teams?$queryParams';
     print('teams: $url');
+
+    var jsonString = await apiDao.get(url);
+    if (jsonString.toString().isNotEmpty) {
+      print('teams from cache');
+      return TeamsResult.fromJson(json.decode(jsonString.toString())).teams;
+    }
+
     final response = await httpClient.get(
       url,
       headers: {'X-Auth-Token': authToken},
@@ -79,6 +88,7 @@ class FootballDataClient {
     final results = json.decode(response.body);
 
     if (response.statusCode >= 200 && response.statusCode < 300) {
+      await apiDao.insert(url, response.body);
       return TeamsResult.fromJson(results).teams;
     } else {
       throw ResultError.fromJson(results).message;
@@ -88,6 +98,13 @@ class FootballDataClient {
   Future<List<Area>> areas() async {
     final url = '${baseUrl}areas';
     print('areas: $url');
+
+    var jsonString = await apiDao.get(url);
+    if (jsonString.isNotEmpty) {
+      print('areas from cache');
+      return AreasResult.fromJson(json.decode(jsonString)).areas;
+    }
+
     final response = await httpClient.get(
       url,
       headers: {'X-Auth-Token': authToken},
@@ -95,6 +112,7 @@ class FootballDataClient {
     final results = json.decode(response.body);
 
     if (response.statusCode >= 200 && response.statusCode < 300) {
+      await apiDao.insert(url, response.body);
       return AreasResult.fromJson(results).areas;
     } else {
       throw ResultError.fromJson(results).message;
