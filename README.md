@@ -18,3 +18,9 @@ samples, guidance on mobile development, and a full API reference.
 ## How to use?
 
 Add your own google-services.json file with your own admob settings.
+
+Set up [Firebase](https://firebase.google.com/) for remote configuration.
+
+Get a key from [https://www.football-data.org/](https://www.football-data.org/) and add it to Remote Config of Firebase (key: football_data_api_token).
+
+
