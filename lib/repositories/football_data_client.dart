@@ -76,7 +76,7 @@ class FootballDataClient {
     print('teams: $url');
 
     var jsonString = await apiDao.get(url);
-    if (jsonString.toString().isNotEmpty) {
+    if (jsonString != null && jsonString.toString().isNotEmpty) {
       print('teams from cache');
       return TeamsResult.fromJson(json.decode(jsonString.toString())).teams;
     }
@@ -100,7 +100,7 @@ class FootballDataClient {
     print('areas: $url');
 
     var jsonString = await apiDao.get(url);
-    if (jsonString.isNotEmpty) {
+    if (jsonString != null && jsonString.isNotEmpty) {
       print('areas from cache');
       return AreasResult.fromJson(json.decode(jsonString)).areas;
     }

@@ -28,6 +28,7 @@ ThemeData buildThemeData() {
       body1: TextStyle(fontSize: 16.0, color: Colors.black),
       subhead: TextStyle(fontSize: 16.0, color: Colors.black),
       display1: TextStyle(fontSize: 16.0, color: Colors.white),
+      display2: TextStyle(fontSize: 14.0, color: Colors.white),
     ),
   );
 }

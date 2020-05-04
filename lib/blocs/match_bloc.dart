@@ -66,7 +66,7 @@ class MatchBloc extends Bloc<MatchesEvent, MatchesState> {
     yield MatchesLoading();
     try {
       //todo: parametrize date range (maximum 10 days)
-      final List<ApiModels.Match> apiMatches = await footballDataRepository.matches(DateTime.now().subtract(Duration(days: 60)), DateTime.now().subtract(Duration(days: 55)));
+      final List<ApiModels.Match> apiMatches = await footballDataRepository.matches(DateTime.now().subtract(Duration(days: 0)), DateTime.now().add(Duration(days: 7)));
 
       final List<ApiModels.Area> apiAreas = await footballDataRepository.areas();
       var days = new List<Day>();
@@ -104,14 +104,21 @@ class MatchBloc extends Bloc<MatchesEvent, MatchesState> {
 
       //adding matches
       apiMatches.forEach((ApiModels.Match m) {
-        var matchDateTime = m.utcDate.toLocal();
-        var matchDate = DateTime(matchDateTime.year, matchDateTime.month, matchDateTime.day);
-
-        var homeTeam = Team(id: m.homeTeam.id, name: m.homeTeam.name, logoUrl: getLogoUrl(apiTeams, m.homeTeam.id));
-        var awayTeam = Team(id: m.awayTeam.id, name: m.awayTeam.name, logoUrl: getLogoUrl(apiTeams, m.awayTeam.id));
         try {
+          var matchDateTime = m.utcDate.toLocal();
+          var matchDate = DateTime(matchDateTime.year, matchDateTime.month, matchDateTime.day);
+
+          var homeTeam = Team(id: m.homeTeam.id, name: m.homeTeam.name, logoUrl: getLogoUrl(apiTeams, m.homeTeam.id));
+          var awayTeam = Team(id: m.awayTeam.id, name: m.awayTeam.name, logoUrl: getLogoUrl(apiTeams, m.awayTeam.id));
+
           Score score = Score(home: m.score.fullTime.homeTeam, away: m.score.fullTime.awayTeam);
-          Match match = Match(homeTeam: homeTeam, awayTeam: awayTeam, score: score, time: DateFormat('HH:mm').format(matchDateTime));
+          Match match = Match(
+            homeTeam: homeTeam,
+            awayTeam: awayTeam,
+            score: score,
+            time: DateFormat('HH:mm').format(matchDateTime),
+            status: MatchStatus.values.firstWhere((e) => e.toString().toUpperCase() == 'MATCHSTATUS.' + m.status),
+          );
           days.where((d) => d.date == matchDate).toList()[0].dayCompetitionsMatches.where((c) => c.competition.id == m.competition.id).toList()[0].matches.add(match);
         } catch (e) {
           print(e);
@@ -139,8 +146,12 @@ class MatchBloc extends Bloc<MatchesEvent, MatchesState> {
   }
 
   String getMatchDay(ApiModels.Match match) {
-    if (match.stage == "REGULAR_SEASON") {
-      return 'Matchweek ${match.matchDay}';
+    try {
+      if (match.stage == "REGULAR_SEASON") {
+        return 'Matchweek ${match.matchDay}';
+      }
+    } catch (e) {
+      print('getMatchDay: $e');
     }
     return '';
   }

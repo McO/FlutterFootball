@@ -24,7 +24,7 @@ class CompetitionMatchesCard extends StatelessWidget {
                     children: <Widget>[
                       Container(
                         padding: const EdgeInsets.symmetric(vertical: 3.0, horizontal: Constants.defaultPadding),
-                        child: LogoIcon(dayCompetitionMatches.competition.logoUrl, 25)
+                        child: LogoIcon(dayCompetitionMatches.competition.logoUrl, 20, true)
                       ),
                     ],
                   ),

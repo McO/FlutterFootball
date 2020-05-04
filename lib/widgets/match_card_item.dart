@@ -1,22 +1,24 @@
-import 'package:FlutterFootball/widgets/logo_icon.dart';
 import 'package:flutter/material.dart';
+
+import 'package:FlutterFootball/widgets/logo_icon.dart';
+import 'package:FlutterFootball/widgets/match_status.dart';
 
 import 'package:FlutterFootball/screens/match_screen.dart';
 import '../classes/constants.dart' as Constants;
-import 'package:FlutterFootball/models/models.dart';
+import 'package:FlutterFootball/models/models.dart' as Models;
 
 class MatchCardItem extends StatelessWidget {
-  final Match match;
+  final Models.Match match;
 
   const MatchCardItem(this.match);
 
-  Widget _buildMatchRow(BuildContext context, Team team, int score) {
+  Widget _buildMatchRow(BuildContext context, Models.Team team, int score) {
     return new Row(
       children: <Widget>[
         Container(
             padding: const EdgeInsets.symmetric(vertical: 3.0, horizontal: 10.0),
             width: 35,
-            child: LogoIcon(team.logoUrl, 30)
+            child: LogoIcon(team.logoUrl, 30, false)
         ),
         Expanded(
           child: Text(
@@ -28,7 +30,7 @@ class MatchCardItem extends StatelessWidget {
         Padding(
           padding: const EdgeInsets.only(right: Constants.defaultPadding),
           child: Text(
-            score.toString(),
+            score == null ? '' : score.toString(),
             style: new TextStyle(fontWeight: FontWeight.bold),
           ),
         ),
@@ -63,7 +65,7 @@ class MatchCardItem extends StatelessWidget {
           Container(
             width: 80,
             child: Center(
-              child: Text(match.time),
+              child: MatchStatus(match),
             ),
           ),
         ],

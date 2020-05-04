@@ -1,3 +1,4 @@
+import 'package:FlutterFootball/widgets/match_detail_status.dart';
 import 'package:flutter/material.dart';
 
 import 'package:FlutterFootball/widgets/logo_icon.dart';
@@ -19,25 +20,19 @@ class MatchHead extends StatelessWidget {
             flex: 4,
             child: Column(
               children: [
-                LogoIcon(match.homeTeam.logoUrl, 50),
+                LogoIcon(match.homeTeam.logoUrl, 50, true),
                 Padding(
-                  padding: const EdgeInsets.all(Constants.defaultPadding),
-                  child: Text(match.homeTeam.name, style: TextStyle(fontSize: 12.0, color: Colors.white)),
+                  padding: const EdgeInsets.symmetric(vertical: Constants.defaultPadding, horizontal: 30),
+                  child: Text(
+                    match.homeTeam.name,
+                    style: TextStyle(fontSize: 12.0, color: Colors.white),
+                    textAlign: TextAlign.center,
+                  ),
                 )
               ],
             ),
           ),
-          Column(
-            mainAxisAlignment: MainAxisAlignment.start,
-            crossAxisAlignment: CrossAxisAlignment.center,
-            children: [
-              Padding(
-                padding: const EdgeInsets.only(top: 10),
-                child: Text(match.score.home.toString() + " : " + match.score.away.toString(),
-                    style: TextStyle(fontSize: 30.0, fontWeight: FontWeight.bold, color: Colors.white)),
-              ),
-            ],
-          ),
+          MatchDetailStatus(match),
           Expanded(
             flex: 4,
             child: Column(
@@ -47,10 +42,14 @@ class MatchHead extends StatelessWidget {
 //                  height: 50,
 //                  width: 80,
 //                ),
-                LogoIcon(match.awayTeam.logoUrl, 50),
+                LogoIcon(match.awayTeam.logoUrl, 50, true),
                 Padding(
-                  padding: const EdgeInsets.all(Constants.defaultPadding),
-                  child: Text(match.awayTeam.name, style: TextStyle(fontSize: 12.0, color: Colors.white)),
+                  padding: const EdgeInsets.symmetric(vertical: Constants.defaultPadding, horizontal: 30),
+                  child: Text(
+                    match.awayTeam.name,
+                    style: TextStyle(fontSize: 12.0, color: Colors.white),
+                    textAlign: TextAlign.center,
+                  ),
                 )
               ],
             ),

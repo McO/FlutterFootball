@@ -52,13 +52,13 @@ class _MatchDetailState extends State<MatchDetail> with SingleTickerProviderStat
                 delegate: _SliverAppBarDelegate(
                   TabBar(
                     isScrollable: true,
-                    indicatorColor: Colors.black,
+                    indicatorColor: Colors.white,
                     controller: _tabController,
                     tabs: <Widget>[
-                      Tab(child: Text("Overview", style: Theme.of(context).textTheme.subhead)),
-                      Tab(child: Text("Live Ticker", style: Theme.of(context).textTheme.subhead)),
-                      Tab(child: Text("Line-up", style: Theme.of(context).textTheme.subhead)),
-                      Tab(child: Text("Stats", style: Theme.of(context).textTheme.subhead)),
+                      Tab(child: Text("Overview", style: Theme.of(context).textTheme.display2)),
+                      Tab(child: Text("Live Ticker", style: Theme.of(context).textTheme.display2)),
+                      Tab(child: Text("Line-up", style: Theme.of(context).textTheme.display2)),
+                      Tab(child: Text("Stats", style: Theme.of(context).textTheme.display2)),
                     ],
                   ),
                 ),
