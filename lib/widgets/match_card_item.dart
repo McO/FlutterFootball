@@ -47,7 +47,7 @@ class MatchCardItem extends StatelessWidget {
           MaterialPageRoute(builder: (context) => MatchDetail(match)),
         );
       },
-      child: new Row(
+      child: Row(
         children: [
           Expanded(
             child: Column(
