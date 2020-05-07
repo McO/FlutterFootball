@@ -5,6 +5,7 @@ import 'package:FlutterFootball/widgets/team_news.dart';
 import 'package:FlutterFootball/widgets/team_season.dart';
 import 'package:FlutterFootball/widgets/team_squad.dart';
 import '../models/models.dart';
+import '../classes/constants.dart' as Constants;
 
 class TeamDetail extends StatefulWidget {
   final Team team;
@@ -17,6 +18,7 @@ class TeamDetail extends StatefulWidget {
 
 class _TeamDetailState extends State<TeamDetail> with SingleTickerProviderStateMixin {
   final Team team;
+  List<Widget> tabs;
 
   _TeamDetailState(this.team);
 
@@ -24,7 +26,6 @@ class _TeamDetailState extends State<TeamDetail> with SingleTickerProviderStateM
 
   @override
   void initState() {
-
     _tabController = TabController(vsync: this, initialIndex: 0, length: 3);
     _tabController.addListener(() {
       setState(() {});
@@ -35,6 +36,12 @@ class _TeamDetailState extends State<TeamDetail> with SingleTickerProviderStateM
 
   @override
   Widget build(BuildContext context) {
+    tabs = [
+      Tab(child: Text("News", style: Theme.of(context).textTheme.display2)),
+      Tab(child: Text("Season", style: Theme.of(context).textTheme.display2)),
+      Tab(child: Text("Squad", style: Theme.of(context).textTheme.display2)),
+    ];
+
     return Scaffold(
       body: DefaultTabController(
         length: 3,
@@ -42,23 +49,26 @@ class _TeamDetailState extends State<TeamDetail> with SingleTickerProviderStateM
           headerSliverBuilder: (BuildContext context, bool innerBoxIsScrolled) {
             return <Widget>[
               SliverAppBar(
-                expandedHeight: 150.0,
+                expandedHeight: 120.0,
                 floating: true,
                 pinned: true,
-                flexibleSpace: FlexibleSpaceBar(background: TeamHead(team)),
+//                backgroundColor: Colors.amberAccent,
+                flexibleSpace: FlexibleSpaceBar(
+                    centerTitle: true,
+//                    titlePadding:  EdgeInsets.symmetric(horizontal: 0, vertical: 0),
+                    title: Text(
+                      team.name,
+                      style: TextStyle(fontSize: 16.0, fontWeight: FontWeight.normal, color: Colors.white),
+                    ),
+                    background: TeamHead(team)),
               ),
               SliverPersistentHeader(
                 delegate: _SliverAppBarDelegate(
                   TabBar(
-                    isScrollable: true,
-                    indicatorColor: Colors.white,
-                    controller: _tabController,
-                    tabs: <Widget>[
-                      Tab(child: Text("News", style: Theme.of(context).textTheme.display2)),
-                      Tab(child: Text("Season", style: Theme.of(context).textTheme.display2)),
-                      Tab(child: Text("Squad", style: Theme.of(context).textTheme.display2)),
-                    ],
-                  ),
+                      isScrollable: true,
+                      indicatorColor: Colors.white,
+                      controller: _tabController,
+                    tabs: tabs),
                 ),
                 pinned: true,
               ),

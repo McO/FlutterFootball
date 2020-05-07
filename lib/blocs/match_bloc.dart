@@ -108,8 +108,18 @@ class MatchBloc extends Bloc<MatchesEvent, MatchesState> {
           var matchDateTime = m.utcDate.toLocal();
           var matchDate = DateTime(matchDateTime.year, matchDateTime.month, matchDateTime.day);
 
-          var homeTeam = Team(id: m.homeTeam.id, name: m.homeTeam.name, logoUrl: getLogoUrl(apiTeams, m.homeTeam.id));
-          var awayTeam = Team(id: m.awayTeam.id, name: m.awayTeam.name, logoUrl: getLogoUrl(apiTeams, m.awayTeam.id));
+          var homeTeam = Team(
+              id: m.homeTeam.id, 
+              name: m.homeTeam.name, 
+              shortName: apiTeams.firstWhere((t) => t.id == m.homeTeam.id).shortName,
+              logoUrl: getLogoUrl(apiTeams, m.homeTeam.id)
+          );
+          var awayTeam = Team(
+              id: m.awayTeam.id, 
+              name: m.awayTeam.name, 
+              shortName: apiTeams.firstWhere((t) => t.id == m.awayTeam.id).shortName,
+              logoUrl: getLogoUrl(apiTeams, m.awayTeam.id)
+          );
 
           Score score = Score(home: m.score.fullTime.homeTeam, away: m.score.fullTime.awayTeam);
           Match match = Match(

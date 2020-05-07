@@ -41,7 +41,7 @@ class MatchHead extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      padding: const EdgeInsets.only(top: 70, left: Constants.defaultPadding, right: Constants.defaultPadding),
+      padding: const EdgeInsets.only(top: 40, left: Constants.defaultPadding, right: Constants.defaultPadding),
       child: Row(
         children: [
           buildTeam(context, match.homeTeam),
