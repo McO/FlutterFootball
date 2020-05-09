@@ -72,7 +72,7 @@ class _MatchDetailState extends State<MatchDetail>
           headerSliverBuilder: (BuildContext context, bool innerBoxIsScrolled) {
             return <Widget>[
               SliverAppBar(
-                expandedHeight: 140.0,
+                expandedHeight: 110.0,
                 floating: true,
                 pinned: true,
                 flexibleSpace: FlexibleSpaceBar(
@@ -91,16 +91,16 @@ class _MatchDetailState extends State<MatchDetail>
                     tabs: <Widget>[
                       Tab(
                           child: Text("Overview",
-                              style: Theme.of(context).textTheme.display2)),
+                              style: Theme.of(context).textTheme.headline3)),
                       Tab(
                           child: Text("Live Ticker",
-                              style: Theme.of(context).textTheme.display2)),
+                              style: Theme.of(context).textTheme.headline3)),
                       Tab(
                           child: Text("Line-up",
-                              style: Theme.of(context).textTheme.display2)),
+                              style: Theme.of(context).textTheme.headline3)),
                       Tab(
                           child: Text("Stats",
-                              style: Theme.of(context).textTheme.display2)),
+                              style: Theme.of(context).textTheme.headline3)),
                     ],
                   ),
                 ),

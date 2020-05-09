@@ -36,8 +36,8 @@ class _FootballHomeState extends State<FootballHome> with SingleTickerProviderSt
           controller: _tabController,
           indicatorColor: Colors.white,
           tabs: <Widget>[
-            Tab(child: Text("Competitions", style: Theme.of(context).textTheme.display1)),
-            Tab(child: Text("Matches", style: Theme.of(context).textTheme.display1)),
+            Tab(child: Text("Competitions", style: Theme.of(context).textTheme.headline4)),
+            Tab(child: Text("Matches", style: Theme.of(context).textTheme.headline4)),
           ],
         ),
         actions: <Widget>[

@@ -47,7 +47,7 @@ class DayListState extends State<DayList> {
               padding: const EdgeInsets.all(10.0),
               child: Text(
                 DateFormat('EEEE, MMMM d').format(widget.days[i].date),
-                style: Theme.of(context).textTheme.headline,
+                style: Theme.of(context).textTheme.headline5,
 //                style: new TextStyle(fontWeight: FontWeight.bold, fontSize: 14),
               )),
           ListView.builder(

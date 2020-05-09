@@ -5,7 +5,7 @@ import 'package:meta/meta.dart';
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
 
-import 'package:FlutterFootball/models/api/models.dart' as ApiModels;
+import 'package:FlutterFootball/models/football_data/models.dart' as ApiModels;
 import 'package:FlutterFootball/repositories/repositories.dart';
 import 'package:FlutterFootball/repositories/dummy_football_repository.dart';
 import 'package:FlutterFootball/models/models.dart';

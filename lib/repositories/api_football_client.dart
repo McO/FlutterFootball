@@ -6,58 +6,79 @@ import 'package:intl/intl.dart';
 import 'package:meta/meta.dart';
 import 'package:http/http.dart' as http;
 
-import 'package:FlutterFootball/models/football_data/models.dart';
+import 'package:FlutterFootball/models/api_football/models.dart';
 import 'package:query_params/query_params.dart';
 
-class FootballDataClient {
-  static const baseUrl = "https://api.football-data.org/v2/";
+class ApiFootballClient {
+  static const baseUrl = "https://api-football-beta.p.rapidapi.com/";
   final http.Client httpClient;
   final String authToken;
   final ApiDao apiDao;
 
-  FootballDataClient({@required this.httpClient, @required this.authToken, @required this.apiDao}) : assert(httpClient != null);
+  ApiFootballClient(
+      {@required this.httpClient,
+      @required this.authToken,
+      @required this.apiDao})
+      : assert(httpClient != null),assert(authToken.isNotEmpty);
 
-  Future<Competition> competition(int competitionId) async {
-    final url = '${baseUrl}competitions/$competitionId';
+  Future<League> league(int leagueId) async {
+    final url = '${baseUrl}leagues/$leagueId';
     final response = await httpClient.get(
       url,
-      headers: {'X-Auth-Token': authToken},
+      headers: {'x-rapidapi-key': authToken},
     );
 
     if (response.statusCode >= 200 && response.statusCode < 300) {
-      final competitionJson = jsonDecode(response.body);
-      return Competition.fromJson(competitionJson);
+      final leagueJson = jsonDecode(response.body);
+      return League.fromJson(leagueJson);
     } else {
       throw ResultError.fromJson(response).message;
     }
   }
 
-  Future<List<Competition>> competitions() async {
-    final url = '${baseUrl}competitions';
+  Future<List<League>> leagues(String countryCode) async {
+    URLQueryParams queryParams = new URLQueryParams();
+
+    queryParams.append('country', countryCode);
+    // queryParams.append('dateTo', new DateFormat("yyyy-MM-dd").format(toDate));
+
+    final url = '${baseUrl}leagues';
+    print('leagues: $url');
+
+    var jsonString = await apiDao.get(url);
+    if (jsonString != null && jsonString.isNotEmpty) {
+      print('leagues from cache');
+      return LeaguesResponse.fromJson(json.decode(jsonString)).leagues;
+    }
+
     final response = await httpClient.get(
       url,
-      headers: {'X-Auth-Token': authToken},
+      headers: {'x-rapidapi-key': authToken},
     );
-    final results = json.decode(response.body);
+
+    final responseBody = json.decode(response.body);
 
     if (response.statusCode >= 200 && response.statusCode < 300) {
-      return CompetitionsResult.fromJson(results).competitions;
+      await apiDao.insert(url, response.body);
+      return LeaguesResponse.fromJson(responseBody).leagues;
     } else {
-      throw ResultError.fromJson(results).message;
+      throw ResultError.fromJson(responseBody).message;
     }
   }
 
   Future<List<Match>> matches(DateTime fromDate, DateTime toDate) async {
     URLQueryParams queryParams = new URLQueryParams();
 
-    queryParams.append('dateFrom', new DateFormat("yyyy-MM-dd").format(fromDate));
+    queryParams.append(
+        'dateFrom', new DateFormat("yyyy-MM-dd").format(fromDate));
     queryParams.append('dateTo', new DateFormat("yyyy-MM-dd").format(toDate));
 
     final url = '${baseUrl}matches?$queryParams';
     print('matches: $url');
+
     final response = await httpClient.get(
       url,
-      headers: {'X-Auth-Token': authToken},
+      headers: {'x-rapidapi-key': authToken},
     );
     final results = json.decode(response.body);
 
@@ -83,7 +104,7 @@ class FootballDataClient {
 
     final response = await httpClient.get(
       url,
-      headers: {'X-Auth-Token': authToken},
+      headers: {'x-rapidapi-key': authToken},
     );
     final results = json.decode(response.body);
 
@@ -95,25 +116,25 @@ class FootballDataClient {
     }
   }
 
-  Future<List<Area>> areas() async {
-    final url = '${baseUrl}areas';
-    print('areas: $url');
+  Future<List<Country>> countries() async {
+    final url = '${baseUrl}countries';
+    print('countries: $url');
 
     var jsonString = await apiDao.get(url);
     if (jsonString != null && jsonString.isNotEmpty) {
-      print('areas from cache');
-      return AreasResult.fromJson(json.decode(jsonString)).areas;
+      print('countries from cache');
+      return CountriesResult.fromJson(json.decode(jsonString)).countries;
     }
 
     final response = await httpClient.get(
       url,
-      headers: {'X-Auth-Token': authToken},
+      headers: {'x-rapidapi-key': authToken},
     );
     final results = json.decode(response.body);
 
     if (response.statusCode >= 200 && response.statusCode < 300) {
       await apiDao.insert(url, response.body);
-      return AreasResult.fromJson(results).areas;
+      return CountriesResult.fromJson(results).countries;
     } else {
       throw ResultError.fromJson(results).message;
     }

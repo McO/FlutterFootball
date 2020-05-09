@@ -1,4 +1,4 @@
-import 'package:FlutterFootball/models/api/models.dart';
+import 'package:FlutterFootball/models/football_data/models.dart';
 
 class Match {
   final int id;

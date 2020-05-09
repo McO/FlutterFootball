@@ -37,9 +37,9 @@ class _TeamDetailState extends State<TeamDetail> with SingleTickerProviderStateM
   @override
   Widget build(BuildContext context) {
     tabs = [
-      Tab(child: Text("News", style: Theme.of(context).textTheme.display2)),
-      Tab(child: Text("Season", style: Theme.of(context).textTheme.display2)),
-      Tab(child: Text("Squad", style: Theme.of(context).textTheme.display2)),
+      Tab(child: Text("News", style: Theme.of(context).textTheme.headline3)),
+      Tab(child: Text("Season", style: Theme.of(context).textTheme.headline3)),
+      Tab(child: Text("Squad", style: Theme.of(context).textTheme.headline3)),
     ];
 
     return Scaffold(

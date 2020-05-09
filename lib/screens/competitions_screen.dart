@@ -1,5 +1,6 @@
 import 'dart:async';
 
+import 'package:FlutterFootball/widgets/logo_icon.dart';
 import 'package:flutter/material.dart';
 
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -68,10 +69,8 @@ class CompetitionsScreenState extends State<CompetitionsScreen> {
 //                child: Image.network(
 //                  competition.logoUrl ?? '',
 //                ),
-                  child: SvgPicture.network(
-                    competition.logoUrl ?? '',
-                    height: 30,
-                  ),
+                  child: LogoIcon(competition.logoUrl ?? '', 30, false),
+
                   radius: 30.0,
                   backgroundColor: Colors.blue[50],
                 ),

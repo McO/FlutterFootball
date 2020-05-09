@@ -22,13 +22,13 @@ ThemeData buildThemeData() {
     ),
 
     textTheme: TextTheme(
-      headline: TextStyle(fontSize: 20.0, fontWeight: FontWeight.bold, color: Colors.black),
-      title: TextStyle(fontSize: 18.0, fontWeight: FontWeight.bold, color: Colors.black),
-      subtitle: TextStyle(fontSize: 14.0, fontWeight: FontWeight.normal, color: Colors.black),
-      body1: TextStyle(fontSize: 16.0, color: Colors.black),
-      subhead: TextStyle(fontSize: 16.0, color: Colors.black),
-      display1: TextStyle(fontSize: 16.0, color: Colors.white),
-      display2: TextStyle(fontSize: 14.0, color: Colors.white),
+      headline5: TextStyle(fontSize: 20.0, fontWeight: FontWeight.bold, color: Colors.black),
+      headline6: TextStyle(fontSize: 18.0, fontWeight: FontWeight.bold, color: Colors.black),
+      subtitle2: TextStyle(fontSize: 14.0, fontWeight: FontWeight.normal, color: Colors.black),
+      bodyText2: TextStyle(fontSize: 16.0, color: Colors.black),
+      subtitle1: TextStyle(fontSize: 16.0, color: Colors.black),
+      headline4: TextStyle(fontSize: 16.0, color: Colors.white),
+      headline3: TextStyle(fontSize: 14.0, color: Colors.white),
     ),
   );
 }

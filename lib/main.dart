@@ -25,14 +25,28 @@ Future<Null> main() async {
   WidgetsFlutterBinding.ensureInitialized();
 
   final RemoteConfig remoteConfig = await RemoteConfig.instance;
+  await remoteConfig.fetch(expiration: const Duration(hours: 5));
+  await remoteConfig.activateFetched();
   final SharedPreferences preferences = await SharedPreferences.getInstance();
 
-  final String authToken = remoteConfig?.getString('football_data_api_token');
+  final String authTokenFootballDat =
+      remoteConfig?.getString('football_data_api_token');
+  final String authTokenApiFootball =
+      remoteConfig?.getString('api_football_api_token');
 
   final ApiDao apiDao = ApiDao();
 
   final FootballDataRepository footballDataRepository = FootballDataRepository(
-    footballDataClient: FootballDataClient(httpClient: http.Client(), authToken: authToken, apiDao: apiDao),
+    footballDataClient: FootballDataClient(
+        httpClient: http.Client(),
+        authToken: authTokenFootballDat,
+        apiDao: apiDao),
+  );
+  final ApiFootballRepository apiFootballRepository = ApiFootballRepository(
+    apiFootballClient: ApiFootballClient(
+        httpClient: http.Client(),
+        authToken: authTokenApiFootball,
+        apiDao: apiDao),
   );
 
 //  final teams = footballDataRepository.teams();
@@ -45,13 +59,17 @@ Future<Null> main() async {
           create: (context) => SettingsBloc(preferences: preferences),
         ),
         BlocProvider<CompetitionBloc>(
-          create: (context) => CompetitionBloc(footballDataRepository: footballDataRepository),
+          create: (context) => CompetitionBloc(
+              footballDataRepository: footballDataRepository,
+              apiFootballRepository: apiFootballRepository),
         ),
         BlocProvider<MatchBloc>(
-          create: (context) => MatchBloc(footballDataRepository: footballDataRepository, dummyFootballRepository: DummyFootballRepository()),
+          create: (context) => MatchBloc(
+              footballDataRepository: footballDataRepository,
+              dummyFootballRepository: DummyFootballRepository()),
         ),
       ],
-      child: App(footballDataRepository: footballDataRepository),
+      child: App(),
     ),
   );
 }
@@ -65,11 +83,7 @@ Future<void> initSettings() async {
 bool _isUsingHive = true;
 
 class App extends StatelessWidget {
-  final FootballDataRepository footballDataRepository;
-
-  App({Key key, @required this.footballDataRepository})
-      : assert(footballDataRepository != null),
-        super(key: key);
+  App({Key key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {

@@ -33,11 +33,11 @@ class CompetitionMatchesCard extends StatelessWidget {
                     children: <Widget>[
                       Text(
                         dayCompetitionMatches.competition.name,
-                        style: Theme.of(context).textTheme.title,
+                        style: Theme.of(context).textTheme.headline6,
                       ),
                       Text(
                         dayCompetitionMatches.matchDayName,
-                        style: Theme.of(context).textTheme.subtitle,
+                        style: Theme.of(context).textTheme.subtitle2,
                       )
                     ],
                   )
