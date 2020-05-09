@@ -1,14 +1,13 @@
-import 'dart:async';
-
-import 'package:FlutterFootball/widgets/logo_icon.dart';
 import 'package:flutter/material.dart';
+
+import 'dart:async';
 
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import 'package:FlutterFootball/blocs/blocs.dart';
 import 'package:FlutterFootball/models/models.dart';
 import 'package:FlutterFootball/widgets/message.dart';
-import 'package:flutter_svg/svg.dart';
+import 'package:FlutterFootball/widgets/logo_icon.dart';
 
 class CompetitionsScreen extends StatefulWidget {
   @override
@@ -66,22 +65,13 @@ class CompetitionsScreenState extends State<CompetitionsScreen> {
               color: Colors.white30,
               child: ListTile(
                 leading: CircleAvatar(
-//                child: Image.network(
-//                  competition.logoUrl ?? '',
-//                ),
                   child: LogoIcon(competition.logoUrl ?? '', 30, false),
-
                   radius: 30.0,
                   backgroundColor: Colors.blue[50],
                 ),
                 title: Text(
                   competition.name,
-//                style: TextStyle(fontSize: 22.0, color: Colors.black),
                 ),
-//              subtitle: Text(
-//                "Age: " + competition.age.toString(),
-//                style: TextStyle(fontSize: 16.0, color: Colors.black87),
-//              ),
               ),
             );
           },
