@@ -1,34 +1,30 @@
 class Score {
-  final String winner;
-  final String duration;
-  final ScoreDetail fullTime;
-  final ScoreDetail halfTime;
-  final ScoreDetail extraTime;
-  final ScoreDetail penalties;
+  final ScoreDetail fulltime;
+  final ScoreDetail halftime;
+  final ScoreDetail extratime;
+  final ScoreDetail penalty;
 
-  const Score({this.winner, this.duration, this.fullTime, this.halfTime, this.extraTime, this.penalties});
+  const Score({this.fulltime, this.halftime, this.extratime, this.penalty});
 
   static Score fromJson(dynamic json) {
     return Score(
-        winner: json['winner'] as String,
-        duration: json['duration'] as String,
-        fullTime: ScoreDetail.fromJson(json['fullTime']),
-        halfTime: ScoreDetail.fromJson(json['halfTime']),
-        extraTime: ScoreDetail.fromJson(json['extraTime']),
-        penalties: ScoreDetail.fromJson(json['penalties']));
+        fulltime: ScoreDetail.fromJson(json['fulltime']),
+        halftime: ScoreDetail.fromJson(json['halftime']),
+        extratime: ScoreDetail.fromJson(json['extratime']),
+        penalty: ScoreDetail.fromJson(json['penalty']));
   }
 }
 
 class ScoreDetail {
-  final int homeTeam;
-  final int awayTeam;
+  final int home;
+  final int away;
 
-  const ScoreDetail({this.homeTeam, this.awayTeam});
+  const ScoreDetail({this.home, this.away});
 
   static ScoreDetail fromJson(dynamic json) {
     return ScoreDetail(
-        homeTeam: json['homeTeam'] as int,
-        awayTeam: json['awayTeam'] as int);
+        home: json['home'] as int,
+        away: json['away'] as int);
     }
 }
 

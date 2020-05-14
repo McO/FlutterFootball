@@ -15,34 +15,49 @@ class ApiFootballClient {
   final String authToken;
   final ApiDao apiDao;
 
-  ApiFootballClient(
-      {@required this.httpClient,
-      @required this.authToken,
-      @required this.apiDao})
-      : assert(httpClient != null),assert(authToken.isNotEmpty);
+  ApiFootballClient({@required this.httpClient, @required this.authToken, @required this.apiDao})
+      : assert(httpClient != null),
+        assert(authToken.isNotEmpty);
+
+  Map<String, String> getHeaders() {
+    var headers = Map<String, String>();
+    headers['x-rapidapi-key'] = authToken;
+    return headers;
+  }
 
   Future<League> league(int leagueId) async {
-    final url = '${baseUrl}leagues/$leagueId';
+    URLQueryParams queryParams = new URLQueryParams();
+    queryParams.append('id', leagueId);
+
+    final url = '${baseUrl}leagues?$queryParams';
+    print('league: $url');
+
+    var jsonString = await apiDao.get(url);
+    if (jsonString != null && jsonString.isNotEmpty) {
+      print('leagues from cache');
+      return LeaguesResponse.fromJson(json.decode(jsonString)).leagues[0];
+    }
+
     final response = await httpClient.get(
       url,
-      headers: {'x-rapidapi-key': authToken},
+      headers: getHeaders(),
     );
 
+    final responseBody = json.decode(response.body);
+
     if (response.statusCode >= 200 && response.statusCode < 300) {
-      final leagueJson = jsonDecode(response.body);
-      return League.fromJson(leagueJson);
+      await apiDao.insert(url, response.body);
+      return LeaguesResponse.fromJson(responseBody).leagues[0];
     } else {
-      throw ResultError.fromJson(response).message;
+      throw ResultError.fromJson(responseBody).message;
     }
   }
 
   Future<List<League>> leagues(String countryCode) async {
     URLQueryParams queryParams = new URLQueryParams();
+    queryParams.append('code', countryCode);
 
-    queryParams.append('country', countryCode);
-    // queryParams.append('dateTo', new DateFormat("yyyy-MM-dd").format(toDate));
-
-    final url = '${baseUrl}leagues';
+    final url = '${baseUrl}leagues?$queryParams';
     print('leagues: $url');
 
     var jsonString = await apiDao.get(url);
@@ -53,7 +68,7 @@ class ApiFootballClient {
 
     final response = await httpClient.get(
       url,
-      headers: {'x-rapidapi-key': authToken},
+      headers: getHeaders(),
     );
 
     final responseBody = json.decode(response.body);
@@ -66,24 +81,31 @@ class ApiFootballClient {
     }
   }
 
-  Future<List<Match>> matches(DateTime fromDate, DateTime toDate) async {
+  Future<List<Fixture>> fixtures(DateTime date, DateTime fromDate, DateTime toDate) async {
     URLQueryParams queryParams = new URLQueryParams();
 
-    queryParams.append(
-        'dateFrom', new DateFormat("yyyy-MM-dd").format(fromDate));
-    queryParams.append('dateTo', new DateFormat("yyyy-MM-dd").format(toDate));
+    // queryParams.append('to', new DateFormat("yyyy-MM-dd").format(toDate));
+    // queryParams.append('from', new DateFormat("yyyy-MM-dd").format(fromDate));
+    queryParams.append('date', new DateFormat("yyyy-MM-dd").format(fromDate));
 
-    final url = '${baseUrl}matches?$queryParams';
-    print('matches: $url');
+    final url = '${baseUrl}fixtures?$queryParams';
+    print('fixtures: $url');
+
+    var jsonString = await apiDao.get(url);
+    if (jsonString != null && jsonString.isNotEmpty) {
+      print('fixtures from cache');
+      return FixturesResult.fromJson(json.decode(jsonString)).fixtures;
+    }
 
     final response = await httpClient.get(
       url,
-      headers: {'x-rapidapi-key': authToken},
+      headers: getHeaders(),
     );
     final results = json.decode(response.body);
 
     if (response.statusCode >= 200 && response.statusCode < 300) {
-      return MatchesResult.fromJson(results).matches;
+      await apiDao.insert(url, response.body);
+      return FixturesResult.fromJson(results).fixtures;
     } else {
       throw ResultError.fromJson(results).message;
     }
@@ -104,7 +126,7 @@ class ApiFootballClient {
 
     final response = await httpClient.get(
       url,
-      headers: {'x-rapidapi-key': authToken},
+      headers: getHeaders(),
     );
     final results = json.decode(response.body);
 
@@ -128,7 +150,7 @@ class ApiFootballClient {
 
     final response = await httpClient.get(
       url,
-      headers: {'x-rapidapi-key': authToken},
+      headers: getHeaders(),
     );
     final results = json.decode(response.body);
 

@@ -1,17 +1,15 @@
 class Team {
   final int id;
   final String name;
-  final String shortName;
-  final String crestUrl;
+  final String logo;
 
-  const Team({this.id, this.name, this.shortName, this.crestUrl});
+  const Team({this.id, this.name, this.logo});
 
   static Team fromJson(dynamic json) {
     return Team(
       id: json['id'] as int,
       name: json['name'] as String,
-      shortName: json['shortName'] as String,
-      crestUrl: json['crestUrl'] as String,
+      logo: json['logo'] as String,
     );
   }
 }

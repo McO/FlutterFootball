@@ -4,8 +4,10 @@ import 'package:meta/meta.dart';
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
 
-import 'package:FlutterFootball/models/football_data/models.dart' as FootballDataModels;
-import 'package:FlutterFootball/models/api_football/models.dart' as ApiFootballModels;
+import 'package:FlutterFootball/models/football_data/models.dart'
+    as FootballDataModels;
+import 'package:FlutterFootball/models/api_football/models.dart'
+    as ApiFootballModels;
 import 'package:FlutterFootball/repositories/repositories.dart';
 import 'package:FlutterFootball/models/models.dart';
 
@@ -68,15 +70,20 @@ class CompetitionBloc extends Bloc<CompetitionsEvent, CompetitionsState> {
   Stream<CompetitionsState> mapEventToState(CompetitionsEvent event) async* {
     yield CompetitionsLoading();
     try {
-      // final List<FootballDataModels.Competition> apiCompetitions =
-      //     await footballDataRepository.competitions();
-      final List<ApiFootballModels.League> apiLeagues =
-          await apiFootballRepository.leagues('DE');
       var competitions = new List<Competition>();
-      // apiCompetitions.forEach((c) => competitions.add(
-      //     Competition(id: c.id, name: c.name, logoUrl: c.area.ensignUrl)));
-       apiLeagues.forEach((c) => competitions.add(
-          Competition(id: c.league.id, name: c.league.name, logoUrl: c.league.logo)));
+      var useApiFootball = true;
+      if (useApiFootball) {
+        final List<ApiFootballModels.League> apiLeagues =
+            await apiFootballRepository.leagues('DE');
+        apiLeagues.forEach((c) => competitions.add(Competition(
+            id: c.league.id, name: c.league.name, logoUrl: c.league.logo)));
+      } else {
+        final List<FootballDataModels.Competition> apiCompetitions =
+            await footballDataRepository.competitions();
+
+        apiCompetitions.forEach((c) => competitions.add(
+            Competition(id: c.id, name: c.name, logoUrl: c.area.ensignUrl)));
+      }
       if (competitions.length == 0) {
         yield CompetitionsEmpty();
       } else {

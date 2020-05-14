@@ -12,6 +12,7 @@ class Match {
 }
 
 enum MatchStatus {
+  Unknown,
   Scheduled,
   Postponed,
   Cancelled,
