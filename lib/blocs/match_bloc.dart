@@ -176,7 +176,12 @@ class MatchBloc extends Bloc<MatchesEvent, MatchesState> {
 
   Future handleApiFootball(List<Day> days) async {
     final List<ApiFootballModels.Fixture> apiFixtures = await apiFootballRepository.fixtures(
-        DateTime.now(), DateTime.now().subtract(Duration(days: 0)), DateTime.now().add(Duration(days: 7)));
+        DateTime.now().add(Duration(days: 0)),
+        DateTime.now().subtract(Duration(days: 0)),
+        DateTime.now().add(Duration(days: 7)),
+        null,
+        null
+        );
 
     print(apiFixtures.length);
 
@@ -187,12 +192,6 @@ class MatchBloc extends Bloc<MatchesEvent, MatchesState> {
       if (days.where((d) => d.date == matchDate).length == 0) {
         days.add(Day(date: matchDate, dayCompetitionsMatches: List<DayCompetitionMatches>()));
       }
-
-      // var countryCode = m.competition.area.countryCode;
-      // var areaId = apiAreas.firstWhere((a) => a.countryCode == countryCode).id;
-      // if (!areaIds.contains(areaId)) {
-      //   areaIds.add(areaId);
-      // }
     });
 
     //adding competitions to match days
@@ -222,7 +221,7 @@ class MatchBloc extends Bloc<MatchesEvent, MatchesState> {
         var awayTeam = Team(
             id: f.teams.away.id, name: f.teams.away.name, shortName: f.teams.away.name, logoUrl: f.teams.away.logo);
 
-        var score = Score(home: f.score.fulltime.home, away: f.score.fulltime.away);
+        var score = Score(home: f.goals.home, away: f.goals.away);
         var match = Match(
           homeTeam: homeTeam,
           awayTeam: awayTeam,
@@ -282,6 +281,9 @@ class MatchBloc extends Bloc<MatchesEvent, MatchesState> {
       case 'ET':
       case 'P':
         status = MatchStatus.In_Play;
+        break;
+      case 'NS':
+        status = MatchStatus.Scheduled;
         break;
     }
 

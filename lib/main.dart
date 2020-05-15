@@ -58,8 +58,8 @@ Future<Null> main() async {
         BlocProvider<SettingsBloc>(
           create: (context) => SettingsBloc(preferences: preferences),
         ),
-        BlocProvider<CompetitionBloc>(
-          create: (context) => CompetitionBloc(
+        BlocProvider<CompetitionsBloc>(
+          create: (context) => CompetitionsBloc(
               footballDataRepository: footballDataRepository,
               apiFootballRepository: apiFootballRepository),
         ),

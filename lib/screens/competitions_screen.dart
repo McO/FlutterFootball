@@ -8,6 +8,7 @@ import 'package:FlutterFootball/blocs/blocs.dart';
 import 'package:FlutterFootball/models/models.dart';
 import 'package:FlutterFootball/widgets/message.dart';
 import 'package:FlutterFootball/widgets/logo_icon.dart';
+import 'package:FlutterFootball/screens/competition_screen.dart';
 
 class CompetitionsScreen extends StatefulWidget {
   @override
@@ -22,11 +23,11 @@ class CompetitionsScreenState extends State<CompetitionsScreen> {
     super.initState();
 
     _refreshCompleter = Completer<void>();
-    BlocProvider.of<CompetitionBloc>(context).add(FetchCompetitions());
+    BlocProvider.of<CompetitionsBloc>(context).add(FetchCompetitions());
   }
 
   Widget build(BuildContext context) {
-    return BlocConsumer<CompetitionBloc, CompetitionsState>(
+    return BlocConsumer<CompetitionsBloc, CompetitionsState>(
       listener: (context, state) {
         if (state is CompetitionsLoaded) {
           _refreshCompleter?.complete();
@@ -37,7 +38,7 @@ class CompetitionsScreenState extends State<CompetitionsScreen> {
         if (state is CompetitionsUninitialized) {
           return Message(message: "Unintialised State");
         } else if (state is CompetitionsEmpty) {
-          return Message(message: "No Players found");
+          return Message(message: "No Competitions found");
         } else if (state is CompetitionsError) {
           return Message(message: "Something went wrong");
         } else if (state is CompetitionsLoading) {
@@ -54,23 +55,30 @@ class CompetitionsScreenState extends State<CompetitionsScreen> {
   Widget buildCompetitionList(List<Competition> competitions) {
     return RefreshIndicator(
       onRefresh: () {
-        BlocProvider.of<CompetitionBloc>(context).add(FetchCompetitions());
+        BlocProvider.of<CompetitionsBloc>(context).add(FetchCompetitions());
         return _refreshCompleter.future;
       },
       child: Container(
         child: ListView.separated(
           itemBuilder: (BuildContext context, index) {
             Competition competition = competitions[index];
-            return Container(
-              color: Colors.white30,
-              child: ListTile(
-                leading: CircleAvatar(
-                  child: LogoIcon(competition.logoUrl ?? '', 30, false),
-                  radius: 30.0,
-                  backgroundColor: Colors.blue[50],
-                ),
-                title: Text(
-                  competition.name,
+            return new GestureDetector(
+              //You need to make my child interactive
+              onTap: () => Navigator.push(
+                context,
+                MaterialPageRoute(builder: (context) => CompetitionDetail(competition)),
+              ),
+              child: Container(
+                color: Colors.white30,
+                child: ListTile(
+                  leading: CircleAvatar(
+                    child: LogoIcon(competition.logoUrl ?? '', 30, false),
+                    radius: 30.0,
+                    backgroundColor: Colors.blue[50],
+                  ),
+                  title: Text(
+                    competition.name,
+                  ),
                 ),
               ),
             );

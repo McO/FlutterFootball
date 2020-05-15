@@ -17,8 +17,8 @@ class ApiFootballRepository {
     return resultAPI;
   }
 
-  Future<List<Fixture>> fixtures(DateTime date, DateTime fromDate, DateTime toDate) async {
-    final resultAPI = await apiFootballClient.fixtures(date, fromDate, toDate);
+  Future<List<Fixture>> fixtures(DateTime date, DateTime fromDate, DateTime toDate, int leagueId, String season) async {
+    final resultAPI = await apiFootballClient.fixtures(date, fromDate, toDate, leagueId, season);
     return resultAPI;
   }
 

@@ -31,6 +31,7 @@ class MatchDetailStatus extends StatelessWidget {
         break;
 
       case Models.MatchStatus.Finished:
+      case Models.MatchStatus.In_Play:
         {
           return Column(
             mainAxisAlignment: MainAxisAlignment.start,

@@ -54,11 +54,11 @@ class CompetitionsLoaded extends CompetitionsState {
 
 class CompetitionsError extends CompetitionsState {}
 
-class CompetitionBloc extends Bloc<CompetitionsEvent, CompetitionsState> {
+class CompetitionsBloc extends Bloc<CompetitionsEvent, CompetitionsState> {
   final FootballDataRepository footballDataRepository;
   final ApiFootballRepository apiFootballRepository;
 
-  CompetitionBloc(
+  CompetitionsBloc(
       {@required this.footballDataRepository,
       @required this.apiFootballRepository})
       : assert(footballDataRepository != null, apiFootballRepository != null);

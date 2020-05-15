@@ -80,14 +80,14 @@ class Fixture {
   final FixtureDetails details;
   final LeagueDetails league;
   final FixtureTeams teams;
-  // final Goals goals;
+  final ScoreDetail goals;
   final Score score;
 
   const Fixture({
     this.details,
     this.league,
     this.teams,
-    // this.goals,
+    this.goals,
     this.score
   });
 
@@ -96,7 +96,7 @@ class Fixture {
       details: FixtureDetails.fromJson(json['fixture']),
       league: LeagueDetails.fromJson(json['league']),
       teams: FixtureTeams.fromJson(json['teams']),
-      // goals: Goals.fromJson(json['goals']),
+      goals: ScoreDetail.fromJson(json['goals']),
       score: Score.fromJson(json['score'])
     );
   }
