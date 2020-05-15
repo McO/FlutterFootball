@@ -180,14 +180,13 @@ class MatchBloc extends Bloc<MatchesEvent, MatchesState> {
         DateTime.now().subtract(Duration(days: 0)),
         DateTime.now().add(Duration(days: 7)),
         null,
-        null
-        );
+        null);
 
     print(apiFixtures.length);
 
     //adding match days
     apiFixtures.forEach((ApiFootballModels.Fixture f) {
-      var matchDateTime = f.details.date;
+      var matchDateTime = f.details.date.toLocal();
       var matchDate = DateTime(matchDateTime.year, matchDateTime.month, matchDateTime.day);
       if (days.where((d) => d.date == matchDate).length == 0) {
         days.add(Day(date: matchDate, dayCompetitionsMatches: List<DayCompetitionMatches>()));
@@ -195,14 +194,16 @@ class MatchBloc extends Bloc<MatchesEvent, MatchesState> {
     });
 
     //adding competitions to match days
-    days.forEach((Day d) {
-      var matcherPerDay = apiFixtures
-          .where((f) => f.details.date.isAfter(d.date) && f.details.date.isBefore(d.date.add(Duration(days: 1))));
+    days.forEach((Day day) {
+      var matchesPerDay = apiFixtures.where((f) =>
+          f.details.date.difference(day.date).inSeconds == 0 ||
+          (f.details.date.isAfter(day.date) &&
+              f.details.date.isBefore(day.date.add(Duration(days: 1)).subtract(Duration(seconds: 1)))));
 
-      matcherPerDay.forEach((m) {
-        if (d.dayCompetitionsMatches.where((d) => d.competition.id == m.league.id).length == 0) {
-          d.dayCompetitionsMatches.add(DayCompetitionMatches(
-              date: d.date,
+      matchesPerDay.forEach((m) {
+        if (day.dayCompetitionsMatches.where((d) => d.competition.id == m.league.id).length == 0) {
+          day.dayCompetitionsMatches.add(DayCompetitionMatches(
+              date: day.date,
               competition: Competition(id: m.league.id, name: m.league.name, logoUrl: m.league.logo),
               matchDayName: '', //getMatchDay(m),
               matches: List<Match>()));
@@ -216,25 +217,11 @@ class MatchBloc extends Bloc<MatchesEvent, MatchesState> {
         var matchDateTime = f.details.date.toLocal();
         var matchDate = DateTime(matchDateTime.year, matchDateTime.month, matchDateTime.day);
 
-        var homeTeam = Team(
-            id: f.teams.home.id, name: f.teams.home.name, shortName: f.teams.home.name, logoUrl: f.teams.home.logo);
-        var awayTeam = Team(
-            id: f.teams.away.id, name: f.teams.away.name, shortName: f.teams.away.name, logoUrl: f.teams.away.logo);
-
-        var score = Score(home: f.goals.home, away: f.goals.away);
-        var match = Match(
-          homeTeam: homeTeam,
-          awayTeam: awayTeam,
-          score: score,
-          time: DateFormat('HH:mm').format(matchDateTime),
-          status: getMatchStatus(f),
-        );
+        var match = getMatch(f, matchDateTime);
         days
-            .where((d) => d.date == matchDate)
-            .toList()[0]
+            .firstWhere((d) => d.date == matchDate)
             .dayCompetitionsMatches
-            .where((c) => c.competition.id == f.league.id)
-            .toList()[0]
+            .firstWhere((c) => c.competition.id == f.league.id)
             .matches
             .add(match);
       } catch (e) {
@@ -242,6 +229,23 @@ class MatchBloc extends Bloc<MatchesEvent, MatchesState> {
         print('Fixture: ${f.details.id}');
       }
     });
+  }
+
+  Match getMatch(ApiFootballModels.Fixture f, DateTime matchDateTime) {
+    var homeTeam =
+        Team(id: f.teams.home.id, name: f.teams.home.name, shortName: f.teams.home.name, logoUrl: f.teams.home.logo);
+    var awayTeam =
+        Team(id: f.teams.away.id, name: f.teams.away.name, shortName: f.teams.away.name, logoUrl: f.teams.away.logo);
+
+    var score = Score(home: f.goals.home, away: f.goals.away);
+    var match = Match(
+      homeTeam: homeTeam,
+      awayTeam: awayTeam,
+      score: score,
+      time: DateFormat('HH:mm').format(matchDateTime),
+      status: getMatchStatus(f),
+    );
+    return match;
   }
 
   String getLogoUrl(List<FootballDataModels.Team> apiTeams, int teamId) {

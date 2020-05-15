@@ -8,7 +8,7 @@ import 'package:FlutterFootball/blocs/blocs.dart';
 import 'package:FlutterFootball/models/models.dart';
 import 'package:FlutterFootball/widgets/message.dart';
 import 'package:FlutterFootball/widgets/logo_icon.dart';
-import 'package:FlutterFootball/screens/competition_screen.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class CompetitionsScreen extends StatefulWidget {
   @override
@@ -17,10 +17,21 @@ class CompetitionsScreen extends StatefulWidget {
 
 class CompetitionsScreenState extends State<CompetitionsScreen> {
   Completer<void> _refreshCompleter;
+  List<String> favouriteCompetitions = List<String>();
+  SharedPreferences sharedPreferences;
 
   @override
   void initState() {
     super.initState();
+
+    SharedPreferences.getInstance().then((SharedPreferences sp) {
+      sharedPreferences = sp;
+
+      favouriteCompetitions = sharedPreferences.getStringList('favouriteCompetitions');
+      if (favouriteCompetitions == null) favouriteCompetitions = List<String>();
+
+      setState(() {});
+    });
 
     _refreshCompleter = Completer<void>();
     BlocProvider.of<CompetitionsBloc>(context).add(FetchCompetitions());
@@ -52,6 +63,15 @@ class CompetitionsScreenState extends State<CompetitionsScreen> {
     );
   }
 
+  _toggleCompetition(int competitionId) async {
+    print('toggle: $competitionId');
+    if (favouriteCompetitions.contains(competitionId.toString()))
+      favouriteCompetitions.remove(competitionId.toString());
+    else
+      favouriteCompetitions.add(competitionId.toString());
+    await sharedPreferences.setStringList('favouriteCompetitions', favouriteCompetitions);
+  }
+
   Widget buildCompetitionList(List<Competition> competitions) {
     return RefreshIndicator(
       onRefresh: () {
@@ -61,13 +81,19 @@ class CompetitionsScreenState extends State<CompetitionsScreen> {
       child: Container(
         child: ListView.separated(
           itemBuilder: (BuildContext context, index) {
-            Competition competition = competitions[index];
+            var competition = competitions[index];
+            final bool alreadySaved = favouriteCompetitions.contains(competition.id.toString());
             return new GestureDetector(
-              //You need to make my child interactive
-              onTap: () => Navigator.push(
-                context,
-                MaterialPageRoute(builder: (context) => CompetitionDetail(competition)),
-              ),
+              onTap: () {
+                setState(() {
+                  _toggleCompetition(competition.id);
+                });
+              },
+              // onTap: () => _toggleCompetition(competition.id),
+              // onTap: () => Navigator.push(
+              //   context,
+              //   MaterialPageRoute(builder: (context) => CompetitionDetail(competition)),
+              // ),
               child: Container(
                 color: Colors.white30,
                 child: ListTile(
@@ -78,6 +104,10 @@ class CompetitionsScreenState extends State<CompetitionsScreen> {
                   ),
                   title: Text(
                     competition.name,
+                  ),
+                  trailing: Icon(
+                    alreadySaved ? Icons.favorite : Icons.favorite_border,
+                    color: alreadySaved ? Colors.red : null,
                   ),
                 ),
               ),
