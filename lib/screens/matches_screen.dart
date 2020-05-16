@@ -44,40 +44,45 @@ class MatchesScreenState extends State<MatchesScreen> {
   @override
   Widget build(BuildContext context) {
     return Column(children: [
-      ButtonBar(
-        buttonPadding: EdgeInsets.symmetric(horizontal: 15),
-        buttonHeight: 25,
-        buttonMinWidth: 0,
-        alignment: MainAxisAlignment.start,
-        children: [
-          RaisedButton(
-            onPressed: () {
-              setState(() {
-                  showFavourites = false;
-                });
-              BlocProvider.of<MatchesBloc>(context).add(FetchMatches());
-            },
-            child: Text(
-              'All',
-              style: TextStyle(fontWeight: FontWeight.normal, fontSize: 12),
-            ),
-            color: showFavourites ? Colors.white : Colors.black,
-            shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(30.0)),
-          ),
-          RaisedButton(
-              onPressed: () {
-                setState(() {
-                  showFavourites = true;
-                });
-                BlocProvider.of<MatchesBloc>(context).add(FetchFavouriteMatches(favouriteCompetitions));
-              },
-              child: Text(
-                'Favourites',
-                style: TextStyle(fontWeight: FontWeight.normal, fontSize: 12),
+      ButtonTheme(
+        padding: EdgeInsets.symmetric(horizontal: 15, vertical: 0),
+        height: 25,
+        minWidth: 0,
+        textTheme: ButtonTextTheme.primary,
+        child: Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 15, vertical: 0),
+          child: Row(
+            children: [
+              RaisedButton(
+                onPressed: () {
+                  setState(() {
+                    showFavourites = false;
+                  });
+                  BlocProvider.of<MatchesBloc>(context).add(FetchMatches());
+                },
+                child: Text(
+                  'All',
+                  style: TextStyle(fontWeight: FontWeight.normal, fontSize: 12),
+                ),
+                color: showFavourites ? Colors.white : Colors.black,
+                shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(30.0)),
               ),
-              color: showFavourites ? Colors.black : Colors.white,
-              shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(30.0))),
-        ],
+              RaisedButton(
+                  onPressed: () {
+                    setState(() {
+                      showFavourites = true;
+                    });
+                    BlocProvider.of<MatchesBloc>(context).add(FetchFavouriteMatches(favouriteCompetitions));
+                  },
+                  child: Text(
+                    'Favourites',
+                    style: TextStyle(fontWeight: FontWeight.normal, fontSize: 12),
+                  ),
+                  color: showFavourites ? Colors.black : Colors.white,
+                  shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(30.0))),
+            ],
+          ),
+        ),
       ),
       BlocConsumer<MatchesBloc, MatchesState>(
         listener: (context, state) {
