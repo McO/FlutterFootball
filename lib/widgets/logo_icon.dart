@@ -37,32 +37,5 @@ class LogoIcon extends StatelessWidget {
       backgroundColor: Colors.grey,
       maxRadius: height / 2,
     );
-
-    return Container();
-
-//    try {
-//      if (team.logoUrl?.isEmpty ?? true) {
-//        String path = 'assets/images/teams/' + team.id.toString() + '.png';
-//        rootBundle.load(path).then((value) {
-//          return CircleAvatar(
-//            backgroundColor: Colors.grey,
-//            backgroundImage: AssetImage(path),
-//            maxRadius: 8,
-//          );
-//        }).catchError((_) {
-//          return null;
-//        });
-////      return AssetImage(path);
-//      }
-//    } catch (_) {}
-//
-//    try {
-//      return SvgPicture.network(
-//        team.logoUrl ?? '',
-//        height: 30,
-//      );
-//    } catch (_) {}
-//
-//    return Image.network(team.logoUrl);
   }
 }

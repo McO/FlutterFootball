@@ -52,7 +52,5 @@ class MatchDetailStatus extends StatelessWidget {
         }
         break;
     }
-
-    return Text('');
   }
 }

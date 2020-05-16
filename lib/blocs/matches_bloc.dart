@@ -23,6 +23,14 @@ class FetchMatches extends MatchesEvent {
   List<Object> get props => [];
 }
 
+class FetchFavouriteMatches extends MatchesEvent {
+  final List<String> favouriteCompetitions;
+  const FetchFavouriteMatches(this.favouriteCompetitions);
+
+  @override
+  List<Object> get props => [];
+}
+
 class RefreshMatches extends MatchesEvent {
   const RefreshMatches();
 
@@ -54,12 +62,13 @@ class MatchesLoaded extends MatchesState {
 
 class MatchesError extends MatchesState {}
 
-class MatchBloc extends Bloc<MatchesEvent, MatchesState> {
+class MatchesBloc extends Bloc<MatchesEvent, MatchesState> {
   final DummyFootballRepository dummyFootballRepository;
   final FootballDataRepository footballDataRepository;
   final ApiFootballRepository apiFootballRepository;
 
-  MatchBloc({@required this.footballDataRepository, @required this.apiFootballRepository, this.dummyFootballRepository})
+  MatchesBloc(
+      {@required this.footballDataRepository, @required this.apiFootballRepository, this.dummyFootballRepository})
       : assert(footballDataRepository != null, apiFootballRepository != null);
 
   @override
@@ -69,11 +78,16 @@ class MatchBloc extends Bloc<MatchesEvent, MatchesState> {
   Stream<MatchesState> mapEventToState(MatchesEvent event) async* {
     yield MatchesLoading();
     try {
+      List<String> favouriteCompetitions;
+      if (event is FetchFavouriteMatches) {
+        favouriteCompetitions = event.favouriteCompetitions;
+      }
+
       var days = List<Day>();
 
       var useApiFootball = true;
       if (useApiFootball) {
-        await handleApiFootball(days);
+        await handleApiFootball(days, favouriteCompetitions);
       } else {
         await handleFootballData(days);
       }
@@ -174,13 +188,23 @@ class MatchBloc extends Bloc<MatchesEvent, MatchesState> {
     });
   }
 
-  Future handleApiFootball(List<Day> days) async {
-    final List<ApiFootballModels.Fixture> apiFixtures = await apiFootballRepository.fixtures(
-        DateTime.now().add(Duration(days: 0)),
-        DateTime.now().subtract(Duration(days: 0)),
-        DateTime.now().add(Duration(days: 7)),
-        null,
-        null);
+  Future handleApiFootball(List<Day> days, List<String> favouriteCompetitions) async {
+    var apiFixtures = List<ApiFootballModels.Fixture>();
+
+    if (favouriteCompetitions != null && favouriteCompetitions.length > 0) {
+      await Future.forEach(favouriteCompetitions, (competition) async {
+        var apiCompetitionFixtures = await apiFootballRepository.fixtures(DateTime.now().add(Duration(days: 0)),
+            fromDate: null, toDate: null, leagueId: int.parse(competition), season: 2019);
+        apiFixtures.addAll(apiCompetitionFixtures);
+      });
+    } else {
+      var tempApiFixtures = await apiFootballRepository.fixtures(DateTime.now().add(Duration(days: 0)),
+          fromDate: DateTime.now().subtract(Duration(days: 0)),
+          toDate: DateTime.now().add(Duration(days: 7)),
+          leagueId: null,
+          season: null);
+      apiFixtures = tempApiFixtures.toList().take(50).toList();
+    }
 
     print(apiFixtures.length);
 

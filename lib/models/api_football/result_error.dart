@@ -4,6 +4,6 @@ class ResultError {
   const ResultError({this.message});
 
   static ResultError fromJson(dynamic json) {
-    return ResultError(message: json['error'] as String);
+    return ResultError(message: json['message'] as String);
   }
 }

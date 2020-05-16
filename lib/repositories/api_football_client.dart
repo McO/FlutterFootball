@@ -81,25 +81,25 @@ class ApiFootballClient {
     }
   }
 
-  Future<List<Fixture>> fixtures(DateTime date, DateTime fromDate, DateTime toDate, int leagueId, String season) async {
+  Future<List<Fixture>> fixtures(DateTime date, DateTime fromDate, DateTime toDate, int leagueId, int season) async {
     URLQueryParams queryParams = new URLQueryParams();
 
     // queryParams.append('to', new DateFormat("yyyy-MM-dd").format(toDate));
     // queryParams.append('from', new DateFormat("yyyy-MM-dd").format(fromDate));
     queryParams.append('date', new DateFormat("yyyy-MM-dd").format(date));
     if (leagueId != null && season != null) {
-      queryParams.append('league', league);
+      queryParams.append('league', leagueId);
       queryParams.append('season', season);
     }
 
     final url = '${baseUrl}fixtures?$queryParams';
     print('fixtures: $url');
 
-    // var jsonString = await apiDao.get(url);
-    // if (jsonString != null && jsonString.isNotEmpty) {
-    //   print('fixtures from cache');
-    //   return FixturesResult.fromJson(json.decode(jsonString)).fixtures;
-    // }
+    var jsonString = await apiDao.get(url);
+    if (jsonString != null && jsonString.isNotEmpty) {
+      print('fixtures from cache');
+      return FixturesResult.fromJson(json.decode(jsonString)).fixtures;
+    }
 
     final response = await httpClient.get(
       url,

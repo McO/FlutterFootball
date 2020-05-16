@@ -63,8 +63,8 @@ Future<Null> main() async {
               footballDataRepository: footballDataRepository,
               apiFootballRepository: apiFootballRepository),
         ),
-        BlocProvider<MatchBloc>(
-          create: (context) => MatchBloc(
+        BlocProvider<MatchesBloc>(
+          create: (context) => MatchesBloc(
               footballDataRepository: footballDataRepository,
               apiFootballRepository: apiFootballRepository,
               dummyFootballRepository: DummyFootballRepository()),

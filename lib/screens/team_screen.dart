@@ -5,7 +5,6 @@ import 'package:FlutterFootball/widgets/team_news.dart';
 import 'package:FlutterFootball/widgets/team_season.dart';
 import 'package:FlutterFootball/widgets/team_squad.dart';
 import '../models/models.dart';
-import '../classes/constants.dart' as Constants;
 
 class TeamDetail extends StatefulWidget {
   final Team team;

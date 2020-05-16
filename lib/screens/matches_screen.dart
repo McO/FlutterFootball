@@ -8,6 +8,7 @@ import 'package:FlutterFootball/blocs/blocs.dart';
 import 'package:FlutterFootball/models/models.dart';
 import 'package:FlutterFootball/widgets/day_list.dart';
 import 'package:FlutterFootball/widgets/message.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class MatchesScreen extends StatefulWidget {
   @override
@@ -16,18 +17,69 @@ class MatchesScreen extends StatefulWidget {
 
 class MatchesScreenState extends State<MatchesScreen> {
   Completer<void> _refreshCompleter;
+  List<String> favouriteCompetitions = List<String>();
+  SharedPreferences sharedPreferences;
+  bool showFavourites = false;
 
   @override
   void initState() {
     super.initState();
 
+    SharedPreferences.getInstance().then((SharedPreferences sp) {
+      sharedPreferences = sp;
+
+      favouriteCompetitions = sharedPreferences.getStringList('favouriteCompetitions');
+      if (favouriteCompetitions == null) favouriteCompetitions = List<String>();
+
+      setState(() {});
+    });
+
     _refreshCompleter = Completer<void>();
-    BlocProvider.of<MatchBloc>(context).add(FetchMatches());
+    if (showFavourites)
+      BlocProvider.of<MatchesBloc>(context).add(FetchFavouriteMatches(favouriteCompetitions));
+    else
+      BlocProvider.of<MatchesBloc>(context).add(FetchMatches());
   }
 
   @override
   Widget build(BuildContext context) {
-    return BlocConsumer<MatchBloc, MatchesState>(
+    return Column(children: [
+      ButtonBar(
+        buttonPadding: EdgeInsets.symmetric(horizontal: 15),
+        buttonHeight: 25,
+        buttonMinWidth: 0,
+        alignment: MainAxisAlignment.start,
+        children: [
+          RaisedButton(
+            onPressed: () {
+              setState(() {
+                  showFavourites = false;
+                });
+              BlocProvider.of<MatchesBloc>(context).add(FetchMatches());
+            },
+            child: Text(
+              'All',
+              style: TextStyle(fontWeight: FontWeight.normal, fontSize: 12),
+            ),
+            color: showFavourites ? Colors.white : Colors.black,
+            shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(30.0)),
+          ),
+          RaisedButton(
+              onPressed: () {
+                setState(() {
+                  showFavourites = true;
+                });
+                BlocProvider.of<MatchesBloc>(context).add(FetchFavouriteMatches(favouriteCompetitions));
+              },
+              child: Text(
+                'Favourites',
+                style: TextStyle(fontWeight: FontWeight.normal, fontSize: 12),
+              ),
+              color: showFavourites ? Colors.black : Colors.white,
+              shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(30.0))),
+        ],
+      ),
+      BlocConsumer<MatchesBloc, MatchesState>(
         listener: (context, state) {
           if (state is MatchesLoaded) {
             _refreshCompleter?.complete();
@@ -46,19 +98,22 @@ class MatchesScreenState extends State<MatchesScreen> {
           } else {
             final stateAsMatchesLoaded = state as MatchesLoaded;
             final days = stateAsMatchesLoaded.days;
-            return buildMatchesList(days);
+            return Expanded(child: buildMatchesList(days));
           }
         },
-    );
+      )
+    ]);
   }
 
   Widget buildMatchesList(List<Day> days) {
     return RefreshIndicator(
         onRefresh: () {
-          BlocProvider.of<MatchBloc>(context).add(FetchMatches());
+          if (showFavourites)
+            BlocProvider.of<MatchesBloc>(context).add(FetchFavouriteMatches(favouriteCompetitions));
+          else
+            BlocProvider.of<MatchesBloc>(context).add(FetchMatches());
           return _refreshCompleter.future;
         },
-        child: DayList(days: days)
-    );
+        child: DayList(days: days));
   }
 }
