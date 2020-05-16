@@ -54,8 +54,8 @@ class ApiFootballClient {
   }
 
   Future<List<League>> leagues(String countryCode) async {
-    URLQueryParams queryParams = new URLQueryParams();
-    queryParams.append('code', countryCode);
+    var queryParams = URLQueryParams();
+    if (countryCode != null && countryCode.isNotEmpty) queryParams.append('code', countryCode);
 
     final url = '${baseUrl}leagues?$queryParams';
     print('leagues: $url');
@@ -82,7 +82,7 @@ class ApiFootballClient {
   }
 
   Future<List<Fixture>> fixtures(DateTime date, DateTime fromDate, DateTime toDate, int leagueId, int season) async {
-    URLQueryParams queryParams = new URLQueryParams();
+    var queryParams = URLQueryParams();
 
     // queryParams.append('to', new DateFormat("yyyy-MM-dd").format(toDate));
     // queryParams.append('from', new DateFormat("yyyy-MM-dd").format(fromDate));
@@ -116,7 +116,7 @@ class ApiFootballClient {
   }
 
   Future<List<Team>> teams(List<int> areaIds) async {
-    URLQueryParams queryParams = new URLQueryParams();
+    var queryParams = URLQueryParams();
     queryParams.append('areas', areaIds.map((i) => i.toString()).join(","));
 
     final url = '${baseUrl}teams?$queryParams';
