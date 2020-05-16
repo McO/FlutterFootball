@@ -35,6 +35,11 @@ class MatchStatus extends StatelessWidget {
           return Text('Full Time');
         }
         break;
+      case Models.MatchStatus.In_Play:
+        {
+          return Text('Live');
+        }
+        break;
 
       default:
         {
