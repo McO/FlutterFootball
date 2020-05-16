@@ -67,6 +67,9 @@ class MatchesScreenState extends State<MatchesScreen> {
                 color: showFavourites ? Colors.white : Colors.black,
                 shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(30.0)),
               ),
+              Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 5, vertical: 0),
+              ),
               RaisedButton(
                   onPressed: () {
                     setState(() {
