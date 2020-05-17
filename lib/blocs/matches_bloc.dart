@@ -229,7 +229,7 @@ class MatchesBloc extends Bloc<MatchesEvent, MatchesState> {
           day.dayCompetitionsMatches.add(DayCompetitionMatches(
               date: day.date,
               competition: Competition(id: m.league.id, name: m.league.name, logoUrl: m.league.logo),
-              matchDayName: '', //getMatchDay(m),
+              matchDayName: m.league.round,
               matches: List<Match>()));
         }
       });

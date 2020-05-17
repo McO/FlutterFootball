@@ -32,7 +32,7 @@ Future<Null> main() async {
   final String authTokenFootballDat =
       remoteConfig?.getString('football_data_api_token');
   final String authTokenApiFootball =
-      remoteConfig?.getString('api_football_api_token');
+      remoteConfig?.getString('api_football_api_token2');
 
   final ApiDao apiDao = ApiDao();
 
