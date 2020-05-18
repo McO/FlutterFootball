@@ -21,7 +21,6 @@ class DayList extends StatefulWidget {
 class DayListState extends State<DayList> {
 //  BannerAd myBanner;
 
-
   @override
   void initState() {
     super.initState();
@@ -46,7 +45,7 @@ class DayListState extends State<DayList> {
           Container(
               padding: const EdgeInsets.all(10.0),
               child: Text(
-                DateFormat('EEEE, MMMM d').format(widget.days[i].date),
+                localizeDate(widget.days[i].date),
                 style: Theme.of(context).textTheme.headline5,
 //                style: new TextStyle(fontWeight: FontWeight.bold, fontSize: 14),
               )),
@@ -60,5 +59,16 @@ class DayListState extends State<DayList> {
         ],
       ),
     );
+  }
+
+  String localizeDate(DateTime date) {
+    var now = new DateTime.now();
+    var today = DateTime(now.year, now.month, now.day);
+    var yesterday = today.subtract(Duration(days: 1));
+    var tomorrow = today.add(Duration(days: 1));
+    if (date == yesterday) return 'Yesterday';
+    if (date == today) return 'Today';
+    if (date == tomorrow) return 'Tomorrow';
+    return DateFormat('EEEE, MMMM d').format(date);
   }
 }

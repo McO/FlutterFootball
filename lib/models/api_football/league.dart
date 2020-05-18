@@ -3,23 +3,17 @@ import 'package:FlutterFootball/models/api_football/models.dart';
 class LeagueDetails {
   final int id;
   final String name;
-  final String country;
+  final String type;
   final String logo;
-  final String flag;
-  final int season;
-  final String round;
 
-  const LeagueDetails({this.id, this.name, this.country, this.logo, this.flag, this.season, this.round});
+  const LeagueDetails({this.id, this.name, this.type, this.logo});
 
   static LeagueDetails fromJson(dynamic json) {
     return LeagueDetails(
         id: json['id'] as int,
         name: json['name'] as String,
-        country: json['country'] as String,
-        logo: json['logo'] as String,
-        flag: json['flag'] as String,
-        season: json['season'] as int,
-        round: json['round'] as String);
+        type: json['type'] as String,
+        logo: json['logo'] as String);
   }
 }
 

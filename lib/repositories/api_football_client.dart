@@ -10,8 +10,8 @@ import 'package:FlutterFootball/models/api_football/models.dart';
 import 'package:query_params/query_params.dart';
 
 class ApiFootballClient {
-  // static const baseUrl = "https://api-football-beta.p.rapidapi.com/";
-  static const baseUrl = "https://v3.football.api-sports.io/";
+  static const baseUrl = "https://api-football-beta.p.rapidapi.com/";
+  // static const baseUrl = "https://v3.football.api-sports.io/";
   final http.Client httpClient;
   final String authToken;
   final ApiDao apiDao;

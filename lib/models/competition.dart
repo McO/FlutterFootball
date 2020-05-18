@@ -4,7 +4,8 @@ class Competition {
   final int id;
   final String name;
   final String logoUrl;
+  final String country;
   final List<Team> teams;
 
-  const Competition({this.id, this.name, this.logoUrl, this.teams});
+  const Competition({this.id, this.name, this.logoUrl, this.country, this.teams});
 }

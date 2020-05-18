@@ -78,7 +78,7 @@ class FixtureDetails {
 
 class Fixture {
   final FixtureDetails details;
-  final LeagueDetails league;
+  final FixtureLeague league;
   final FixtureTeams teams;
   final ScoreDetail goals;
   final Score score;
@@ -94,7 +94,7 @@ class Fixture {
   static Fixture fromJson(dynamic json) {
     return Fixture(
       details: FixtureDetails.fromJson(json['fixture']),
-      league: LeagueDetails.fromJson(json['league']),
+      league: FixtureLeague.fromJson(json['league']),
       teams: FixtureTeams.fromJson(json['teams']),
       goals: ScoreDetail.fromJson(json['goals']),
       score: Score.fromJson(json['score'])

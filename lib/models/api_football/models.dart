@@ -1,7 +1,7 @@
 export 'league.dart';
 export 'competition_area.dart';
 export 'fixture.dart';
-export 'match_competition.dart';
+export 'fixture_league.dart';
 export 'match_area.dart';
 export 'score.dart';
 export 'match_team.dart';
