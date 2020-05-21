@@ -49,34 +49,39 @@ class CompetitionsScreenState extends State<CompetitionsScreen> {
   }
 
   Widget build(BuildContext context) {
-    return RefreshIndicator(
-        onRefresh: () {
-          competitionsBloc.add(FetchCompetitions());
-          return refreshCompleter.future;
-        },
-        child: BlocConsumer<CompetitionsBloc, CompetitionsState>(
-          listener: (context, state) {
-            if (state is CompetitionsLoaded) {
-              refreshCompleter?.complete();
-              refreshCompleter = Completer();
-            }
-          },
-          builder: (context, state) {
-            if (state is CompetitionsUninitialized) {
-              return Message(message: "Unintialised State");
-            } else if (state is CompetitionsEmpty) {
-              return Message(message: "No Competitions found");
-            } else if (state is CompetitionsError) {
-              return Message(message: "Something went wrong");
-            } else if (state is CompetitionsLoading) {
-              return Container(child: Center(child: CircularProgressIndicator()));
-            } else {
-              final stateAsCompetitionsLoaded = state as CompetitionsLoaded;
-              final competitions = stateAsCompetitionsLoaded.competitions;
-              return Column(children: [buildSearchBar(), Expanded(child: buildCompetitionList(competitions))]);
-            }
-          },
-        ));
+    return Column(children: [
+      buildSearchBar(),
+      Expanded(
+        child: RefreshIndicator(
+            onRefresh: () {
+              competitionsBloc.add(FetchCompetitions());
+              return refreshCompleter.future;
+            },
+            child: BlocConsumer<CompetitionsBloc, CompetitionsState>(
+              listener: (context, state) {
+                if (state is CompetitionsLoaded) {
+                  refreshCompleter?.complete();
+                  refreshCompleter = Completer();
+                }
+              },
+              builder: (context, state) {
+                if (state is CompetitionsUninitialized) {
+                  return Message(message: "Unintialised State");
+                } else if (state is CompetitionsEmpty) {
+                  return Message(message: "No Competitions found");
+                } else if (state is CompetitionsError) {
+                  return Message(message: "Something went wrong");
+                } else if (state is CompetitionsLoading) {
+                  return Container(child: Center(child: CircularProgressIndicator()));
+                } else {
+                  final stateAsCompetitionsLoaded = state as CompetitionsLoaded;
+                  final competitions = stateAsCompetitionsLoaded.competitions;
+                  return buildCompetitionList(competitions);
+                }
+              },
+            )),
+      )
+    ]);
   }
 
   _toggleCompetition(int competitionId) async {
@@ -89,44 +94,42 @@ class CompetitionsScreenState extends State<CompetitionsScreen> {
   }
 
   Widget buildCompetitionList(List<Competition> competitions) {
-    return Container(
-      child: ListView.separated(
-        itemBuilder: (BuildContext context, index) {
-          var competition = competitions[index];
-          final bool alreadySaved = favouriteCompetitions.contains(competition.id.toString());
-          return new GestureDetector(
-            onTap: () {
-              setState(() {
-                _toggleCompetition(competition.id);
-              });
-            },
-            child: Container(
-              color: Colors.white30,
-              child: ListTile(
-                leading: CircleAvatar(
-                  child: LogoIcon(competition.logoUrl ?? '', 30, false),
-                  radius: 30.0,
-                  backgroundColor: Colors.blue[50],
-                ),
-                title: Text(
-                  competition.name,
-                ),
-                trailing: Icon(
-                  alreadySaved ? Icons.favorite : Icons.favorite_border,
-                  color: alreadySaved ? Colors.red : null,
-                ),
+    return ListView.separated(
+      itemBuilder: (BuildContext context, index) {
+        var competition = competitions[index];
+        final bool alreadySaved = favouriteCompetitions.contains(competition.id.toString());
+        return new GestureDetector(
+          onTap: () {
+            setState(() {
+              _toggleCompetition(competition.id);
+            });
+          },
+          child: Container(
+            color: Colors.white30,
+            child: ListTile(
+              leading: CircleAvatar(
+                child: LogoIcon(competition.logoUrl ?? '', 30, false),
+                radius: 30.0,
+                backgroundColor: Colors.blue[50],
+              ),
+              title: Text(
+                competition.name,
+              ),
+              trailing: Icon(
+                alreadySaved ? Icons.favorite : Icons.favorite_border,
+                color: alreadySaved ? Colors.red : null,
               ),
             ),
-          );
-        },
-        separatorBuilder: (BuildContext context, index) {
-          return Divider(
-            height: 8.0,
-            color: Colors.transparent,
-          );
-        },
-        itemCount: competitions.length,
-      ),
+          ),
+        );
+      },
+      separatorBuilder: (BuildContext context, index) {
+        return Divider(
+          height: 8.0,
+          color: Colors.transparent,
+        );
+      },
+      itemCount: competitions.length,
     );
   }
 
@@ -140,12 +143,11 @@ class CompetitionsScreenState extends State<CompetitionsScreen> {
           child: TextField(
             controller: textEditingController,
             decoration: InputDecoration(
-              hintText: 'Search Competitions', 
-              icon: Icon(Icons.search),
-              border: InputBorder.none,
-              // contentPadding: EdgeInsets.symmetric(vertical: -10)
-              isDense: true
-              ),
+                hintText: 'Search Competitions',
+                icon: Icon(Icons.search),
+                border: InputBorder.none,
+                // contentPadding: EdgeInsets.symmetric(vertical: -10)
+                isDense: true),
             onChanged: (text) {
               competitionsBloc.add(SearchCompetitions(text));
             },
