@@ -26,34 +26,6 @@ class ApiFootballClient {
     return headers;
   }
 
-  Future<League> league(int leagueId) async {
-    URLQueryParams queryParams = new URLQueryParams();
-    queryParams.append('id', leagueId);
-
-    final url = '${baseUrl}leagues?$queryParams';
-    print('league: $url');
-
-    var jsonString = await apiDao.get(url);
-    if (jsonString != null && jsonString.isNotEmpty) {
-      print('leagues from cache');
-      return LeaguesResponse.fromJson(json.decode(jsonString)).leagues[0];
-    }
-
-    final response = await httpClient.get(
-      url,
-      headers: getHeaders(),
-    );
-
-    final responseBody = json.decode(response.body);
-
-    if (response.statusCode >= 200 && response.statusCode < 300) {
-      await apiDao.insert(url, response.body);
-      return LeaguesResponse.fromJson(responseBody).leagues[0];
-    } else {
-      throw ResultError.fromJson(responseBody).message;
-    }
-  }
-
   Future<List<League>> leagues(String countryCode) async {
     var queryParams = URLQueryParams();
     if (countryCode != null && countryCode.isNotEmpty) queryParams.append('code', countryCode);
@@ -138,57 +110,6 @@ class ApiFootballClient {
     if (response.statusCode >= 200 && response.statusCode < 300) {
       await apiDao.insert(url, response.body);
       return FixturesResult.fromJson(results).fixtures;
-    } else {
-      throw ResultError.fromJson(results).message;
-    }
-  }
-
-  Future<List<Team>> teams(List<int> areaIds) async {
-    var queryParams = URLQueryParams();
-    queryParams.append('areas', areaIds.map((i) => i.toString()).join(","));
-
-    final url = '${baseUrl}teams?$queryParams';
-    print('teams: $url');
-
-    var jsonString = await apiDao.get(url);
-    if (jsonString != null && jsonString.toString().isNotEmpty) {
-      print('teams from cache');
-      return TeamsResult.fromJson(json.decode(jsonString.toString())).teams;
-    }
-
-    final response = await httpClient.get(
-      url,
-      headers: getHeaders(),
-    );
-    final results = json.decode(response.body);
-
-    if (response.statusCode >= 200 && response.statusCode < 300) {
-      await apiDao.insert(url, response.body);
-      return TeamsResult.fromJson(results).teams;
-    } else {
-      throw ResultError.fromJson(results).message;
-    }
-  }
-
-  Future<List<Country>> countries() async {
-    final url = '${baseUrl}countries';
-    print('countries: $url');
-
-    var jsonString = await apiDao.get(url);
-    if (jsonString != null && jsonString.isNotEmpty) {
-      print('countries from cache');
-      return CountriesResult.fromJson(json.decode(jsonString)).countries;
-    }
-
-    final response = await httpClient.get(
-      url,
-      headers: getHeaders(),
-    );
-    final results = json.decode(response.body);
-
-    if (response.statusCode >= 200 && response.statusCode < 300) {
-      await apiDao.insert(url, response.body);
-      return CountriesResult.fromJson(results).countries;
     } else {
       throw ResultError.fromJson(results).message;
     }
