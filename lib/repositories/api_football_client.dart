@@ -81,7 +81,8 @@ class ApiFootballClient {
     }
   }
 
-  Future<List<Fixture>> fixtures(DateTime date, DateTime fromDate, DateTime toDate, int leagueId, int season) async {
+  Future<List<Fixture>> fixtures(
+      DateTime date, DateTime fromDate, DateTime toDate, int leagueId, int season) async {
     var queryParams = URLQueryParams();
 
     // queryParams.append('to', new DateFormat("yyyy-MM-dd").format(toDate));
@@ -95,11 +96,38 @@ class ApiFootballClient {
     final url = '${baseUrl}fixtures?$queryParams';
     print('fixtures: $url');
 
-    var jsonString = await apiDao.get(url);
-    if (jsonString != null && jsonString.isNotEmpty) {
-      print('fixtures from cache');
-      return FixturesResult.fromJson(json.decode(jsonString)).fixtures;
+    // var jsonString = await apiDao.get(url);
+    // if (jsonString != null && jsonString.isNotEmpty) {
+    //   print('fixtures from cache');
+    //   return FixturesResult.fromJson(json.decode(jsonString)).fixtures;
+    // }
+
+    final response = await httpClient.get(
+      url,
+      headers: getHeaders(),
+    );
+    final results = json.decode(response.body);
+
+    if (response.statusCode >= 200 && response.statusCode < 300) {
+      await apiDao.insert(url, response.body);
+      return FixturesResult.fromJson(results).fixtures;
+    } else {
+      throw ResultError.fromJson(results).message;
     }
+  }
+
+  Future<List<Fixture>> liveFixtures() async {
+    var queryParams = URLQueryParams();
+    queryParams.append('live', 'all');
+
+    final url = '${baseUrl}fixtures?$queryParams';
+    print('live fixtures: $url');
+
+    // var jsonString = await apiDao.get(url);
+    // if (jsonString != null && jsonString.isNotEmpty) {
+    //   print('fixtures from cache');
+    //   return FixturesResult.fromJson(json.decode(jsonString)).fixtures;
+    // }
 
     final response = await httpClient.get(
       url,

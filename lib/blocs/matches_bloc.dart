@@ -23,6 +23,13 @@ class FetchMatches extends MatchesEvent {
   List<Object> get props => [];
 }
 
+class FetchLiveMatches extends MatchesEvent {
+  const FetchLiveMatches();
+
+  @override
+  List<Object> get props => [];
+}
+
 class FetchFavouriteMatches extends MatchesEvent {
   final List<String> favouriteCompetitions;
   const FetchFavouriteMatches(this.favouriteCompetitions);
@@ -79,15 +86,20 @@ class MatchesBloc extends Bloc<MatchesEvent, MatchesState> {
     yield MatchesLoading();
     try {
       List<String> favouriteCompetitions;
+      bool showLiveMatches = false;
       if (event is FetchFavouriteMatches) {
         favouriteCompetitions = event.favouriteCompetitions;
+      }
+
+      if (event is FetchLiveMatches) {
+        showLiveMatches = true;
       }
 
       var days = List<Day>();
 
       var useApiFootball = true;
       if (useApiFootball) {
-        await handleApiFootball(days, favouriteCompetitions);
+        await handleApiFootball(days, favouriteCompetitions, showLiveMatches);
       } else {
         await handleFootballData(days);
       }
@@ -188,11 +200,14 @@ class MatchesBloc extends Bloc<MatchesEvent, MatchesState> {
     });
   }
 
-  Future handleApiFootball(List<Day> days, List<String> favouriteCompetitions) async {
+  Future handleApiFootball(List<Day> days, List<String> favouriteCompetitions, bool showLiveMatches) async {
     var apiFixtures = List<ApiFootballModels.Fixture>();
 
-    if (favouriteCompetitions != null && favouriteCompetitions.length > 0) {
+    if (showLiveMatches) {
+      apiFixtures = await apiFootballRepository.liveFixtures();
+    } else if (favouriteCompetitions != null && favouriteCompetitions.length > 0) {
       await Future.forEach(favouriteCompetitions, (competition) async {
+        //TODO: hard coded season
         var apiCompetitionFixtures = await apiFootballRepository.fixtures(DateTime.now().add(Duration(days: 0)),
             fromDate: null, toDate: null, leagueId: int.parse(competition), season: 2019);
         apiFixtures.addAll(apiCompetitionFixtures);
@@ -203,6 +218,7 @@ class MatchesBloc extends Bloc<MatchesEvent, MatchesState> {
           toDate: DateTime.now().add(Duration(days: 7)),
           leagueId: null,
           season: null);
+      //TODO hard coded limit
       apiFixtures = tempApiFixtures.toList().take(50).toList();
     }
 

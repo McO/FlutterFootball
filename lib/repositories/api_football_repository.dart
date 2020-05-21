@@ -22,6 +22,11 @@ class ApiFootballRepository {
     return resultAPI;
   }
 
+  Future<List<Fixture>> liveFixtures() async {
+    final resultAPI = await apiFootballClient.liveFixtures();
+    return resultAPI;
+  }
+
   Future<List<Team>> teams(List<int> areaIds) async {
     final resultAPI = await apiFootballClient.teams(areaIds);
     return resultAPI;
