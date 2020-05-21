@@ -78,7 +78,7 @@ class CompetitionsBloc extends Bloc<CompetitionsEvent, CompetitionsState> {
       if (useApiFootball) {
         final List<ApiFootballModels.League> apiLeagues = await apiFootballRepository.leagues(null);
         apiLeagues.forEach((c) => competitions
-            .add(Competition(id: c.league.id, name: c.league.name, logoUrl: c.league.logo, country: c.country.code)));
+            .add(Competition(id: c.league.id, name: c.league.name, logoUrl: c.league.logo, country: c.country.name)));
       } else {
         final List<FootballDataModels.Competition> apiCompetitions = await footballDataRepository.competitions();
 
@@ -88,8 +88,11 @@ class CompetitionsBloc extends Bloc<CompetitionsEvent, CompetitionsState> {
 
       try {
         if (event is SearchCompetitions) {
-          final String searchString = event.searchString;
-          competitions = competitions.where((competion) => competion.name.toLowerCase().contains(searchString)).toList();
+          final String searchString = event.searchString.toLowerCase();
+          competitions = competitions.where((competition) => 
+              competition.name.toLowerCase().contains(searchString) || 
+              (competition.country ?? '').toLowerCase().contains(searchString)
+          ).toList();
         }
       } catch (exception) {
         print(exception);
