@@ -9,7 +9,7 @@ class Message extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       child: Center(
-        child: Text(message, style: TextStyle(fontSize: 22.0,color: Colors.black), textAlign: TextAlign.center,),
+        child: Text(message, style: Theme.of(context).textTheme.bodyText2, textAlign: TextAlign.center,),
       ),
     );
   }

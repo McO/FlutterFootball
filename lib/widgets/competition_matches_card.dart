@@ -15,13 +15,13 @@ class CompetitionMatchesCard extends StatelessWidget {
   Widget build(BuildContext context) {
     return Card(
       child: new Column(
-        children: <Widget>[
+        children: [
           Container(
               padding: const EdgeInsets.only(left: Constants.defaultPadding, top: Constants.defaultPadding, bottom: 0),
               child: Row(
-                children: <Widget>[
+                children: [
                   Column(
-                    children: <Widget>[
+                    children: [
                       Container(
                         padding: const EdgeInsets.symmetric(vertical: 3.0, horizontal: Constants.defaultPadding),
                         child: LogoIcon(dayCompetitionMatches.competition.logoUrl, 20, true)
@@ -30,7 +30,7 @@ class CompetitionMatchesCard extends StatelessWidget {
                   ),
                   Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
-                    children: <Widget>[
+                    children: [
                       Text(
                         dayCompetitionMatches.competition.name,
                         style: Theme.of(context).textTheme.headline6,

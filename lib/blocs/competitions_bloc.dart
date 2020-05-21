@@ -20,6 +20,14 @@ class FetchCompetitions extends CompetitionsEvent {
   List<Object> get props => [];
 }
 
+class SearchCompetitions extends CompetitionsEvent {
+  final String searchString;
+  const SearchCompetitions(this.searchString);
+
+  @override
+  List<Object> get props => [searchString];
+}
+
 class RefreshCompetitions extends CompetitionsEvent {
   const RefreshCompetitions();
 
@@ -76,6 +84,15 @@ class CompetitionsBloc extends Bloc<CompetitionsEvent, CompetitionsState> {
 
         apiCompetitions
             .forEach((c) => competitions.add(Competition(id: c.id, name: c.name, logoUrl: c.area.ensignUrl)));
+      }
+
+      try {
+        if (event is SearchCompetitions) {
+          final String searchString = event.searchString;
+          competitions = competitions.where((competion) => competion.name.toLowerCase().contains(searchString)).toList();
+        }
+      } catch (exception) {
+        print(exception);
       }
 
       competitions.sort((a, b) => (a.country ?? '').compareTo(b.country ?? ''));

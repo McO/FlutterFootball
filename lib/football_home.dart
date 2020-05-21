@@ -41,10 +41,10 @@ class _FootballHomeState extends State<FootballHome> with SingleTickerProviderSt
           ],
         ),
         actions: <Widget>[
-          Icon(Icons.search),
-          Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 5.0),
-          ),
+          // Icon(Icons.search),
+          // Padding(
+          //   padding: const EdgeInsets.symmetric(horizontal: 5.0),
+          // ),
           IconButton(
             icon: Icon(Icons.settings_applications),
             onPressed: () {

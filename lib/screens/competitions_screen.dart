@@ -16,13 +16,17 @@ class CompetitionsScreen extends StatefulWidget {
 }
 
 class CompetitionsScreenState extends State<CompetitionsScreen> {
-  Completer<void> _refreshCompleter;
-  List<String> favouriteCompetitions = List<String>();
+  Completer<void> refreshCompleter;
+  CompetitionsBloc competitionsBloc;
+  var favouriteCompetitions = List<String>();
   SharedPreferences sharedPreferences;
+  final textEditingController = TextEditingController();
 
   @override
   void initState() {
     super.initState();
+
+    competitionsBloc = BlocProvider.of<CompetitionsBloc>(context);
 
     SharedPreferences.getInstance().then((SharedPreferences sp) {
       sharedPreferences = sp;
@@ -33,21 +37,28 @@ class CompetitionsScreenState extends State<CompetitionsScreen> {
       setState(() {});
     });
 
-    _refreshCompleter = Completer<void>();
-    BlocProvider.of<CompetitionsBloc>(context).add(FetchCompetitions());
+    refreshCompleter = Completer<void>();
+    competitionsBloc.add(FetchCompetitions());
+  }
+
+  @override
+  void dispose() {
+    // Clean up the controller when the widget is disposed.
+    textEditingController.dispose();
+    super.dispose();
   }
 
   Widget build(BuildContext context) {
     return RefreshIndicator(
         onRefresh: () {
-          BlocProvider.of<CompetitionsBloc>(context).add(FetchCompetitions());
-          return _refreshCompleter.future;
+          competitionsBloc.add(FetchCompetitions());
+          return refreshCompleter.future;
         },
         child: BlocConsumer<CompetitionsBloc, CompetitionsState>(
           listener: (context, state) {
             if (state is CompetitionsLoaded) {
-              _refreshCompleter?.complete();
-              _refreshCompleter = Completer();
+              refreshCompleter?.complete();
+              refreshCompleter = Completer();
             }
           },
           builder: (context, state) {
@@ -62,7 +73,7 @@ class CompetitionsScreenState extends State<CompetitionsScreen> {
             } else {
               final stateAsCompetitionsLoaded = state as CompetitionsLoaded;
               final competitions = stateAsCompetitionsLoaded.competitions;
-              return buildCompetitionList(competitions);
+              return Column(children: [buildSearchBar(), Expanded(child: buildCompetitionList(competitions))]);
             }
           },
         ));
@@ -115,6 +126,31 @@ class CompetitionsScreenState extends State<CompetitionsScreen> {
           );
         },
         itemCount: competitions.length,
+      ),
+    );
+  }
+
+  Widget buildSearchBar() {
+    return Padding(
+      padding: const EdgeInsets.all(10.0),
+      child: Card(
+        color: Colors.white70,
+        child: Padding(
+          padding: const EdgeInsets.all(8.0),
+          child: TextField(
+            controller: textEditingController,
+            decoration: InputDecoration(
+              hintText: 'Search Competitions', 
+              icon: Icon(Icons.search),
+              border: InputBorder.none,
+              // contentPadding: EdgeInsets.symmetric(vertical: -10)
+              isDense: true
+              ),
+            onChanged: (text) {
+              competitionsBloc.add(SearchCompetitions(text));
+            },
+          ),
+        ),
       ),
     );
   }
