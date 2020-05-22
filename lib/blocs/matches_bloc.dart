@@ -279,6 +279,7 @@ class MatchesBloc extends Bloc<MatchesEvent, MatchesState> {
 
     var score = Score(home: f.goals.home, away: f.goals.away);
     var match = Match(
+      matchId: f.details.id.toString(),
       homeTeam: homeTeam,
       awayTeam: awayTeam,
       score: score,

@@ -114,4 +114,31 @@ class ApiFootballClient {
       throw ResultError.fromJson(results).message;
     }
   }
+
+  Future<List<FixtureStatistics>> fixtureStatistics(int fixtureId) async {
+    var queryParams = URLQueryParams();
+    queryParams.append('fixture', fixtureId);
+
+    final url = '${baseUrl}fixtures/statistics?$queryParams';
+    print('fixture statistics: $url');
+
+    // var jsonString = await apiDao.get(url);
+    // if (jsonString != null && jsonString.isNotEmpty) {
+    //   print('fixtures from cache');
+    //   return FixturesResult.fromJson(json.decode(jsonString)).fixtures;
+    // }
+
+    final response = await httpClient.get(
+      url,
+      headers: getHeaders(),
+    );
+    final results = json.decode(response.body);
+
+    if (response.statusCode >= 200 && response.statusCode < 300) {
+      await apiDao.insert(url, response.body);
+      return FixtureStatisticsResult.fromJson(results).fixtureStatistics;
+    } else {
+      throw ResultError.fromJson(results).message;
+    }
+  }
 }

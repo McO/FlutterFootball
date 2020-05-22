@@ -113,7 +113,7 @@ class _MatchDetailState extends State<MatchDetail>
               MatchOverview(match),
               MatchLiveTicker(match),
               MatchLineUp(match),
-              MatchStats(match),
+              MatchStatistics(match),
             ],
             controller: _tabController,
           ),
