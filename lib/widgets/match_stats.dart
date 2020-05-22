@@ -126,18 +126,3 @@ class _MatchStatisticsState extends State<MatchStatistics> with SingleTickerProv
     );
   }
 }
-
-class YourRect extends CustomPainter {
-  @override
-  void paint(Canvas canvas, Size size) {
-    canvas.drawRect(
-      Rect.fromLTRB(0.0, 0.0, 50.0, 25.0),
-      Paint()..color = Color(0xFF0099FF),
-    );
-  }
-
-  @override
-  bool shouldRepaint(YourRect oldDelegate) {
-    return false;
-  }
-}
