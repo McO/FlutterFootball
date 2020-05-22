@@ -2,14 +2,14 @@ import 'package:FlutterFootball/models/api_football/models.dart';
 
 class Time {
   final int elapsed;
-  final String extra;
+  final int extra;
 
   const Time({this.elapsed, this.extra});
 
   static Time fromJson(dynamic json) {
     return Time(
       elapsed: json['elapsed'] as int,
-      extra: json['extra'] as String,
+      extra: json['extra'] as int,
     );
   }
 }
