@@ -31,4 +31,9 @@ class ApiFootballRepository {
     final resultAPI = await apiFootballClient.fixtureStatistics(fixtureId);
     return resultAPI;
   }
+
+  Future<List<FixtureEvent>> fixturesEvents(int fixtureId) async {
+    final resultAPI = await apiFootballClient.fixtureEvents(fixtureId);
+    return resultAPI;
+  }
 }
