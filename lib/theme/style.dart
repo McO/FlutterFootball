@@ -20,16 +20,19 @@ ThemeData buildThemeData() {
       primaryColorLight: kPrimaryLight,
       valueIndicatorTextStyle: TextStyle(),
     ),
-
     textTheme: TextTheme(
-      headline5: TextStyle(fontSize: 18.0, fontWeight: FontWeight.bold, color: Colors.black),
-      headline6: TextStyle(fontSize: 16.0, fontWeight: FontWeight.bold, color: Colors.black),
-      subtitle2: TextStyle(fontSize: 14.0, fontWeight: FontWeight.normal, color: Colors.black),
-      bodyText2: TextStyle(fontSize: 16.0, color: Colors.black),
-      subtitle1: TextStyle(fontSize: 16.0, color: Colors.black),
-      headline4: TextStyle(fontSize: 16.0, color: Colors.white),
-      headline3: TextStyle(fontSize: 14.0, color: Colors.white),
-      caption: TextStyle(fontSize: 12.0, color: Colors.black),
+      headline5: TextStyle(fontSize: 18.0, fontWeight: FontWeight.bold, color: kTextColor),
+      headline6: TextStyle(fontSize: 16.0, fontWeight: FontWeight.bold, color: kTextColor),
+      subtitle2: TextStyle(fontSize: 14.0, fontWeight: FontWeight.normal, color: kTextColor),
+      bodyText2: TextStyle(fontSize: 16.0, color: kTextColor),
+      subtitle1: TextStyle(fontSize: 16.0, color: kTextColor),
+      headline4: TextStyle(fontSize: 16.0, color: kTextColorLight),
+      headline3: TextStyle(fontSize: 14.0, color: kTextColorLight),
+      caption: TextStyle(
+        fontSize: 12.0,
+        color: kTextColor,
+        fontWeight: FontWeight.bold,
+      ),
     ),
   );
 }

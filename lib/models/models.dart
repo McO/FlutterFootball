@@ -1,6 +1,7 @@
 export 'competition.dart';
 export 'score.dart';
 export 'team.dart';
+export 'player.dart';
 export 'day.dart';
 export 'match.dart';
 export 'match_statistics.dart';

@@ -1,5 +1,3 @@
-import 'package:flutter/material.dart';
-
 import 'dart:async';
 
 import 'package:meta/meta.dart';
@@ -65,25 +63,45 @@ class MatchEventsBloc extends Bloc<MatchEventsEvent, MatchEventsState> {
     yield MatchEventsLoading();
     try {
       if (event is FetchMatchEvents) {
+        final apiPlayerStatistics = await apiFootballRepository.fixturePlayerStatistics(int.parse(event.match.matchId));
+
         final apiFixtureEvents = await apiFootballRepository.fixturesEvents(int.parse(event.match.matchId));
-        var events = MatchEvents(matchId: event.match.matchId, events: List<MatchEvent>());
+        var matchEvents = MatchEvents(matchId: event.match.matchId, events: List<MatchEvent>());
 
-        apiFixtureEvents.sort((b, a) => a.time.elapsed.compareTo(b.time.elapsed));
-        apiFixtureEvents.forEach((element) {
-          events.events.add(MatchEvent(
-            minute: element.time.elapsed,
-            text: '${element.comments} ${element.detail} ${element.type}'));
-        });
+        var events = List<MatchEvent>();
+        var currentScore = Score(home: 0, away: 0);
+        for (var i = 0; i < apiFixtureEvents.length; i++) {
+          var element = apiFixtureEvents[i];
+          currentScore = calculateScore(element, currentScore, event.match);
+          events.add(MatchEventFactory.createFrom(element, apiPlayerStatistics, currentScore));
+        }
 
-        if (events.events?.length == 0) {
+        matchEvents.events = List.from(events.reversed);
+
+        if (matchEvents.events?.length == 0) {
           yield MatchEventsEmpty();
         } else {
-          yield MatchEventsLoaded(events: events);
+          yield MatchEventsLoaded(events: matchEvents);
         }
       }
     } catch (e) {
       print('Exception: ' + e);
       yield MatchEventsError();
     }
+  }
+
+  Score calculateScore(ApiFootballModels.FixtureEvent event, Score currentScore, Match match) {
+    var newScore = new Score(home: currentScore.home, away: currentScore.away);
+    if (event.type.toLowerCase() == 'goal') {
+      var scoringTeamId = event.team.id;
+      if (match.homeTeam.id == scoringTeamId) {
+        newScore.home = currentScore.home + 1;
+        newScore.away = currentScore.away;
+      } else {
+        newScore.home = currentScore.home;
+        newScore.away = currentScore.away + 1;
+      }
+    }
+    return newScore;
   }
 }

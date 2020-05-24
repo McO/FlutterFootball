@@ -1,12 +1,17 @@
-import 'package:FlutterFootball/widgets/message.dart';
+import 'package:FlutterFootball/widgets/liveticker/match_liveticker_substitution.dart';
 import 'package:flutter/material.dart';
 
 import 'dart:async';
 
 import 'package:flutter_bloc/flutter_bloc.dart';
-
 import 'package:FlutterFootball/blocs/blocs.dart';
-import '../models/models.dart' as Models;
+
+import 'package:FlutterFootball/models/models.dart' as Models;
+import 'match_liveticker_card.dart';
+import 'match_liveticker_goal.dart';
+import 'package:FlutterFootball/widgets/message.dart';
+
+import 'match_liveticker_item.dart';
 
 class MatchLiveTicker extends StatefulWidget {
   final Models.Match match;
@@ -25,6 +30,8 @@ class _MatchLiveTickerState extends State<MatchLiveTicker> with SingleTickerProv
   Completer<void> refreshCompleter;
   MatchEventsBloc matchBloc;
 
+  Timer timer;
+
   @override
   void initState() {
     super.initState();
@@ -33,6 +40,15 @@ class _MatchLiveTickerState extends State<MatchLiveTicker> with SingleTickerProv
 
     refreshCompleter = Completer<void>();
     matchBloc.add(FetchMatchEvents(match: match));
+
+    if (match.status == Models.MatchStatus.In_Play) {
+      timer = Timer.periodic(Duration(seconds: 60), (timer) {
+        setState(() {
+          print('timer elapsed');
+          matchBloc.add(FetchMatchEvents(match: match));
+        });
+      });
+    }
   }
 
   @override
@@ -78,10 +94,22 @@ class _MatchLiveTickerState extends State<MatchLiveTicker> with SingleTickerProv
     return ListView.separated(
       itemBuilder: (BuildContext context, index) {
         var event = events.events[index];
-        return Row(children: [
-          Text(event.minute.toString() ?? ''),
-          Text(event.text ?? ''),
-        ]);
+        switch (event.type) {
+          case Models.EventType.Card:
+            return MatchLiveTickerCard(event);
+            break;
+          case Models.EventType.Substitution:
+            return MatchLiveTickerSubstitution(event);
+            break;
+          case Models.EventType.Goal:
+            return MatchLiveTickerGoal(event);
+            break;
+          case Models.EventType.Message:
+            return MatchLiveTickerItem(event);
+            break;
+          default:
+            return MatchLiveTickerItem(event);
+        }
       },
       separatorBuilder: (BuildContext context, index) {
         return Divider(

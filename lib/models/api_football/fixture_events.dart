@@ -16,16 +16,20 @@ class Time {
 
 class FixtureEvent {
   final Team team;
+  final Player player;
+  final Player assist;
   final String type;
   final String detail;
   final String comments;
   final Time time;
 
-  const FixtureEvent({this.team, this.type, this.detail, this.comments, this.time});
+  const FixtureEvent({this.team, this.player, this.assist, this.type, this.detail, this.comments, this.time});
 
   static FixtureEvent fromJson(dynamic json) {
     return FixtureEvent(
       team: Team.fromJson(json['team']),
+      player: Player.fromJson(json['player']),
+      assist: Player.fromJson(json['assist']),
       type: json['type'] as String,
       detail: json['detail'] as String,
       comments: json['comments'] as String,

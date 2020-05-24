@@ -1,8 +1,14 @@
 class Team {
   final int id;
   final String name;
-  final String shortName;
+  String _shortName;
   final String logoUrl;
 
-  Team({this.id, this.name, this.shortName, this.logoUrl});
+  Team({this.id, this.name, String shortName, this.logoUrl}) : _shortName = shortName;
+
+  String get shortName {
+    return _shortName ?? name;
+  }
+
+  set shortName(String name) => _shortName = name;
 }

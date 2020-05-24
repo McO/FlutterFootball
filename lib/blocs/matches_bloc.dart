@@ -171,6 +171,7 @@ class MatchesBloc extends Bloc<MatchesEvent, MatchesState> {
             name: m.homeTeam.name,
             shortName: apiTeams.firstWhere((t) => t.id == m.homeTeam.id).shortName,
             logoUrl: getLogoUrl(apiTeams, m.homeTeam.id));
+        
         var awayTeam = Team(
             id: m.awayTeam.id,
             name: m.awayTeam.name,
