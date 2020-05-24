@@ -2,7 +2,7 @@ import 'package:FlutterFootball/models/api_football/models.dart' as ApiModels;
 import 'package:FlutterFootball/models/models.dart';
 
 enum CardType { Yellow, Red }
-enum EventType { Card, Substitution, Goal, Message }
+enum EventType { Card, Substitution, Goal, MissedPenalty, Message }
 
 class IEventData {}
 
@@ -11,6 +11,12 @@ class Card implements IEventData {
   final CardType type;
 
   Card({this.booked, this.type});
+}
+
+class MissedPenalty implements IEventData {
+  Player shooter;
+
+  MissedPenalty({this.shooter});
 }
 
 class Goal implements IEventData {
@@ -53,19 +59,28 @@ class MatchEventFactory {
 
     switch (event.type.toLowerCase()) {
       case 'goal':
-        var scorer = Player(
-            id: event.player.id,
-            name: event.player.name,
-            pictureUrl: getPlayerPicture(playerStatistics, event.team.id, event.player?.id));
-        var assist = Player(
-            id: event.assist.id,
-            name: event.assist.name,
-            pictureUrl: getPlayerPicture(playerStatistics, event.team.id, event.assist?.id));
+        if (event.detail == 'Missed Penalty') {
+          var shooter = Player(
+              id: event.player.id,
+              name: event.player.name,
+              pictureUrl: getPlayerPicture(playerStatistics, event.team.id, event.player?.id));
+          matchEvent.type = EventType.MissedPenalty;
+          matchEvent.text = event.detail;
+          matchEvent.data = MissedPenalty(shooter: shooter);
+        } else {
+          var scorer = Player(
+              id: event.player.id,
+              name: event.player.name,
+              pictureUrl: getPlayerPicture(playerStatistics, event.team.id, event.player?.id));
+          var assist = Player(
+              id: event.assist.id,
+              name: event.assist.name,
+              pictureUrl: getPlayerPicture(playerStatistics, event.team.id, event.assist?.id));
 
-        matchEvent.type = EventType.Goal;
-        matchEvent.text = 'Goal';
-        print('createFrom: ' + currentScore.toString());
-        matchEvent.data = Goal(scorer: scorer, assist: assist, score: currentScore);
+          matchEvent.type = EventType.Goal;
+          matchEvent.text = 'Goal';
+          matchEvent.data = Goal(scorer: scorer, assist: assist, score: currentScore);
+        }
         break;
       case 'subst':
         matchEvent.type = EventType.Substitution;

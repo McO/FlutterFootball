@@ -1,4 +1,3 @@
-import 'package:FlutterFootball/widgets/liveticker/match_liveticker_substitution.dart';
 import 'package:flutter/material.dart';
 
 import 'dart:async';
@@ -7,11 +6,13 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:FlutterFootball/blocs/blocs.dart';
 
 import 'package:FlutterFootball/models/models.dart' as Models;
-import 'match_liveticker_card.dart';
-import 'match_liveticker_goal.dart';
 import 'package:FlutterFootball/widgets/message.dart';
 
+import 'package:FlutterFootball/widgets/liveticker/match_liveticker_substitution.dart';
+import 'match_liveticker_card.dart';
+import 'match_liveticker_goal.dart';
 import 'match_liveticker_item.dart';
+import 'match_liveticker_missed_penalty.dart';
 
 class MatchLiveTicker extends StatefulWidget {
   final Models.Match match;
@@ -103,6 +104,9 @@ class _MatchLiveTickerState extends State<MatchLiveTicker> with SingleTickerProv
             break;
           case Models.EventType.Goal:
             return MatchLiveTickerGoal(event);
+            break;
+          case Models.EventType.MissedPenalty:
+            return MatchLiveTickerMissedPenalty(event);
             break;
           case Models.EventType.Message:
             return MatchLiveTickerItem(event);

@@ -92,7 +92,7 @@ class MatchEventsBloc extends Bloc<MatchEventsEvent, MatchEventsState> {
 
   Score calculateScore(ApiFootballModels.FixtureEvent event, Score currentScore, Match match) {
     var newScore = new Score(home: currentScore.home, away: currentScore.away);
-    if (event.type.toLowerCase() == 'goal') {
+    if (event.type.toLowerCase() == 'goal' && event.detail.toLowerCase()!='missed penalty') {
       var scoringTeamId = event.team.id;
       if (match.homeTeam.id == scoringTeamId) {
         newScore.home = currentScore.home + 1;
