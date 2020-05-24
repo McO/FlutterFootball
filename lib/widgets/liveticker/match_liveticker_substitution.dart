@@ -71,11 +71,9 @@ class MatchLiveTickerSubstitution extends StatelessWidget {
           '${event.minute}\'   ',
           style: Theme.of(context).textTheme.caption,
         ),
-        // Image(
-        //     image: AssetImage(type == Models.CardType.Yellow
-        //         ? 'assets/images/icons/yellow-card.png'
-        //         : 'assets/images/icons/red-card.png'),
-        //     height: 16),
+        Image(
+            image: AssetImage('assets/images/icons/substitution.png'),
+            height: 16),
         Text(
           '   Substitution for ${event.team.shortName}  ',
           style: Theme.of(context).textTheme.caption,
