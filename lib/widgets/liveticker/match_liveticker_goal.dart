@@ -29,9 +29,7 @@ class MatchLiveTickerGoal extends StatelessWidget {
                     child: Column(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
-                        Row(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
+                        Row(crossAxisAlignment: CrossAxisAlignment.start, children: [
                           Expanded(
                             child: Text(
                               goal.scorer.name,
@@ -77,6 +75,10 @@ class MatchLiveTickerGoal extends StatelessWidget {
   }
 
   Padding buildHeader(BuildContext context) {
+    var goal = event.data as Models.Goal;
+    var additionalInfo = '';
+    if (goal.type == Models.GoalType.OwnGoal) additionalInfo = '(Own Goal)  ';
+    if (goal.type == Models.GoalType.Penalty) additionalInfo = '(Penalty)  ';
     return Padding(
       padding: const EdgeInsets.only(bottom: 8.0),
       child: Row(children: [
@@ -86,7 +88,7 @@ class MatchLiveTickerGoal extends StatelessWidget {
         ),
         Image(image: AssetImage('assets/images/icons/soccer-ball.png')),
         Text(
-          '   Goal for ${event.team.shortName}  ',
+          '   Goal for ${event.team.shortName}  $additionalInfo',
           style: Theme.of(context).textTheme.caption,
         ),
         Expanded(

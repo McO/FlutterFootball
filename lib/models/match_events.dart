@@ -3,6 +3,7 @@ import 'package:FlutterFootball/models/models.dart';
 
 enum CardType { Yellow, Red }
 enum EventType { Card, Substitution, Goal, MissedPenalty, Message }
+enum GoalType { Normal, Penalty, OwnGoal }
 
 class IEventData {}
 
@@ -20,11 +21,12 @@ class MissedPenalty implements IEventData {
 }
 
 class Goal implements IEventData {
+  GoalType type;
   Player scorer;
   Player assist;
   Score score;
 
-  Goal({this.scorer, this.assist, this.score});
+  Goal({this.scorer, this.assist, this.score, this.type});
 }
 
 class Substitution implements IEventData {
@@ -79,7 +81,7 @@ class MatchEventFactory {
 
           matchEvent.type = EventType.Goal;
           matchEvent.text = 'Goal';
-          matchEvent.data = Goal(scorer: scorer, assist: assist, score: currentScore);
+          matchEvent.data = Goal(scorer: scorer, assist: assist, score: currentScore, type: getGoalType(event.detail));
         }
         break;
       case 'subst':
@@ -110,6 +112,18 @@ class MatchEventFactory {
     }
 
     return matchEvent;
+  }
+
+  static GoalType getGoalType(String type) {
+    switch (type.toLowerCase()) {
+      case 'penalty':
+        return GoalType.Penalty;
+        break;
+      case 'own goal':
+        return GoalType.OwnGoal;
+        break;
+    }
+    return GoalType.Normal;
   }
 
   static String getPlayerPicture(List<ApiModels.FixturePlayersStatistics> playerStatistics, int teamId, int playerId) {
