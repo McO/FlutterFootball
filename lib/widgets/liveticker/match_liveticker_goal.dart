@@ -32,7 +32,7 @@ class MatchLiveTickerGoal extends StatelessWidget {
                         Row(crossAxisAlignment: CrossAxisAlignment.start, children: [
                           Expanded(
                             child: Text(
-                              goal.scorer.name,
+                              goal.scorer.name ?? '',
                               style: Theme.of(context).textTheme.caption,
                             ),
                           ),

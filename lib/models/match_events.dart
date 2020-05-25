@@ -71,12 +71,12 @@ class MatchEventFactory {
           matchEvent.data = MissedPenalty(shooter: shooter);
         } else {
           var scorer = Player(
-              id: event.player.id,
-              name: event.player.name,
+              id: event.player?.id,
+              name: event.player?.name,
               pictureUrl: getPlayerPicture(playerStatistics, event.team.id, event.player?.id));
           var assist = Player(
-              id: event.assist.id,
-              name: event.assist.name,
+              id: event.assist?.id,
+              name: event.assist?.name,
               pictureUrl: getPlayerPicture(playerStatistics, event.team.id, event.assist?.id));
 
           matchEvent.type = EventType.Goal;
