@@ -127,12 +127,12 @@ class MatchEventFactory {
   }
 
   static String getPlayerPicture(List<ApiModels.FixturePlayersStatistics> playerStatistics, int teamId, int playerId) {
+    ApiModels.PlayerStatistics apiPlayer;
     try {
-      var apiPlayer = playerStatistics
-          .firstWhere((t) => t.team.id == teamId)
-          .playerStatistics
-          .firstWhere((p) => p.player.id == playerId);
-      return apiPlayer?.player?.photo;
+      playerStatistics.forEach((element) {
+        apiPlayer = element.playerStatistics.firstWhere((p) => p.player.id == playerId, orElse: () => apiPlayer);
+      });
+      if (apiPlayer != null) return apiPlayer?.player?.photo;
     } catch (e) {
       print(e);
     }
