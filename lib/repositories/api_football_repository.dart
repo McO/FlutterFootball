@@ -41,4 +41,9 @@ class ApiFootballRepository {
     final resultAPI = await apiFootballClient.fixturePlayerStatistics(fixtureId);
     return resultAPI;
   }
+
+  Future<StandingsLeague> standings(int leagueId, int season) async {
+    final resultAPI = await apiFootballClient.standings(leagueId, season);
+    return resultAPI;
+  }
 }

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import '../../models/models.dart' as Models;
+import 'package:FlutterFootball/models/models.dart' as Models;
 
 class MatchLiveTickerItem extends StatelessWidget {
   final Models.MatchEvent event;

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import '../models/models.dart';
+import 'package:FlutterFootball/models/models.dart';
 
 class TeamSeason extends StatelessWidget {
   final Team team;

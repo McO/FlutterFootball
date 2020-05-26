@@ -14,12 +14,11 @@ class MatchCardItem extends StatelessWidget {
 
   Widget _buildMatchRow(BuildContext context, Models.Team team, int score) {
     return new Row(
-      children: <Widget>[
+      children: [
         Container(
             padding: const EdgeInsets.symmetric(vertical: 3.0, horizontal: 10.0),
             width: 35,
-            child: LogoIcon(team.logoUrl, 30, false)
-        ),
+            child: LogoIcon(team.logoUrl, 30, false)),
         Expanded(
           child: Text(
             team.name,

@@ -6,7 +6,7 @@ import 'dart:async';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import 'package:FlutterFootball/blocs/blocs.dart';
-import '../models/models.dart' as Models;
+import 'package:FlutterFootball/models/models.dart' as Models;
 
 class MatchStatistics extends StatefulWidget {
   final Models.Match match;

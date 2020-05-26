@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import '../models/match.dart';
+import 'package:FlutterFootball/models/match.dart';
 
 class MatchOverview extends StatelessWidget {
   final Match match;

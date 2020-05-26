@@ -11,4 +11,8 @@ class Team {
   }
 
   set shortName(String name) => _shortName = name;
+
+  String toString() {
+    return "Team: $name";
+  }
 }

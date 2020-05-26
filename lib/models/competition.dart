@@ -8,4 +8,8 @@ class Competition {
   final List<Team> teams;
 
   const Competition({this.id, this.name, this.logoUrl, this.country, this.teams});
+
+  String toString() {
+    return "Competition: $name";
+  }
 }

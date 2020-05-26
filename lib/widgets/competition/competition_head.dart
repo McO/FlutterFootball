@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 
 import 'package:FlutterFootball/widgets/logo_icon.dart';
-import '../classes/constants.dart' as Constants;
-import '../models/models.dart';
+import 'package:FlutterFootball/classes/constants.dart' as Constants;
+import 'package:FlutterFootball/models/models.dart';
 
 class CompetitionHead extends StatelessWidget {
   final Competition competition;

@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 
-import 'package:FlutterFootball/widgets/match_head.dart';
-import 'package:FlutterFootball/widgets/match_lineup.dart';
-import 'package:FlutterFootball/widgets/liveticker/match_liveticker.dart';
-import 'package:FlutterFootball/widgets/match_overview.dart';
-import 'package:FlutterFootball/widgets/match_stats.dart';
+import 'package:FlutterFootball/widgets/match/match_head.dart';
+import 'package:FlutterFootball/widgets/match/match_lineup.dart';
+import 'package:FlutterFootball/widgets/match/liveticker/match_liveticker.dart';
+import 'package:FlutterFootball/widgets/match/match_overview.dart';
+import 'package:FlutterFootball/widgets/match/match_stats.dart';
 import '../models/match.dart';
 
 class MatchDetail extends StatefulWidget {

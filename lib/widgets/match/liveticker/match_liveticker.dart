@@ -8,7 +8,7 @@ import 'package:FlutterFootball/blocs/blocs.dart';
 import 'package:FlutterFootball/models/models.dart' as Models;
 import 'package:FlutterFootball/widgets/message.dart';
 
-import 'package:FlutterFootball/widgets/liveticker/match_liveticker_substitution.dart';
+import 'match_liveticker_substitution.dart';
 import 'match_liveticker_card.dart';
 import 'match_liveticker_goal.dart';
 import 'match_liveticker_item.dart';

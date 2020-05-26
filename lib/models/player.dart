@@ -4,4 +4,8 @@ class Player {
   String pictureUrl;
 
   Player({this.id, this.name, this.pictureUrl});
+
+  String toString() {
+    return "Player: $name";
+  }
 }

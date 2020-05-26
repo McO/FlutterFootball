@@ -1,3 +1,4 @@
+import 'package:FlutterFootball/screens/competition_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
 
@@ -14,35 +15,42 @@ class CompetitionMatchesCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Card(
-      child: new Column(
+      child: Column(
         children: [
-          Container(
-              padding: const EdgeInsets.only(left: Constants.defaultPadding, top: Constants.defaultPadding, bottom: 0),
-              child: Row(
-                children: [
-                  Column(
+          GestureDetector(
+              onTap: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => CompetitionDetail(dayCompetitionMatches.competition)),
+                );
+              },
+              child: Container(
+                  padding:
+                      const EdgeInsets.only(left: Constants.defaultPadding, top: Constants.defaultPadding, bottom: 0),
+                  child: Row(
                     children: [
-                      Container(
-                        padding: const EdgeInsets.symmetric(vertical: 3.0, horizontal: Constants.defaultPadding),
-                        child: LogoIcon(dayCompetitionMatches.competition.logoUrl, 20, true)
+                      Column(
+                        children: [
+                          Container(
+                              padding: const EdgeInsets.symmetric(vertical: 3.0, horizontal: Constants.defaultPadding),
+                              child: LogoIcon(dayCompetitionMatches.competition.logoUrl, 20, true)),
+                        ],
                       ),
-                    ],
-                  ),
-                  Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Text(
-                        dayCompetitionMatches.competition.name,
-                        style: Theme.of(context).textTheme.headline6,
-                      ),
-                      Text(
-                        dayCompetitionMatches.matchDayName,
-                        style: Theme.of(context).textTheme.subtitle2,
+                      Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Text(
+                            dayCompetitionMatches.competition.name,
+                            style: Theme.of(context).textTheme.headline6,
+                          ),
+                          Text(
+                            dayCompetitionMatches.matchDayName,
+                            style: Theme.of(context).textTheme.subtitle2,
+                          )
+                        ],
                       )
                     ],
-                  )
-                ],
-              )),
+                  ))),
           Padding(
             padding: const EdgeInsets.only(
                 left: Constants.defaultPadding, right: Constants.defaultPadding, bottom: Constants.defaultPadding),

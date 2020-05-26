@@ -41,7 +41,7 @@ class DayListState extends State<DayList> {
     return ListView.builder(
       itemCount: widget.days.length,
       itemBuilder: (context, i) => Column(
-        children: <Widget>[
+        children: [
           Container(
               padding: const EdgeInsets.all(10.0),
               child: Text(

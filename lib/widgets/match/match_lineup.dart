@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import '../models/match.dart';
+import 'package:FlutterFootball/models/match.dart';
 
 class MatchLineUp extends StatelessWidget {
   final Match match;

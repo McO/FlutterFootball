@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 
-import 'package:FlutterFootball/widgets/competition_head.dart';
-import 'package:FlutterFootball/widgets/competition_overview.dart';
+import 'package:FlutterFootball/widgets/competition/competition_head.dart';
+import 'package:FlutterFootball/widgets/competition/competition_overview.dart';
+import 'package:FlutterFootball/widgets/competition/competition_standings.dart';
 import 'package:FlutterFootball/models/models.dart';
 
 class CompetitionDetail extends StatefulWidget {
@@ -19,7 +20,6 @@ class _CompetitionDetailState extends State<CompetitionDetail>
   ScrollController _scrollController;
   TabController _tabController;
   bool silverCollapsed = false;
-  String myTitle = "";
 
   _CompetitionDetailState(this.competition);
 
@@ -31,32 +31,6 @@ class _CompetitionDetailState extends State<CompetitionDetail>
     _tabController.addListener(() {
       setState(() {});
     });
-
-    // _scrollController = ScrollController();
-    // _scrollController.addListener(() {
-    //   print(_scrollController.offset);
-    //   if (_scrollController.offset > 100 &&
-    //       !_scrollController.position.outOfRange) {
-    //     if (!silverCollapsed) {
-    //       // do what ever you want when silver is collapsing !
-
-    //       print(_scrollController.offset);
-    //       // myTitle = '${match.homeTeam.shortName} - ${match.awayTeam.shortName}';
-    //       silverCollapsed = true;
-    //       setState(() {});
-    //     }
-    //   }
-    //   if (_scrollController.offset <= 100 &&
-    //       !_scrollController.position.outOfRange) {
-    //     if (silverCollapsed) {
-    //       // do what ever you want when silver is expanding !
-
-    //       myTitle = "";
-    //       silverCollapsed = false;
-    //       setState(() {});
-    //     }
-    //   }
-    // });
   }
 
   @override
@@ -74,7 +48,7 @@ class _CompetitionDetailState extends State<CompetitionDetail>
                 pinned: true,
                 flexibleSpace: FlexibleSpaceBar(
                     centerTitle: true,
-                    title: Text(myTitle),
+                    title: Text(''),
                     // title: MatchHead(match), //Text(myTitle),
                     collapseMode: CollapseMode.parallax,
                     background: CompetitionHead(competition)),
@@ -105,7 +79,7 @@ class _CompetitionDetailState extends State<CompetitionDetail>
           body: TabBarView(
             children: [
               CompetitionOverview(competition),
-              CompetitionOverview(competition),
+              CompetitionStandings(competition),
               CompetitionOverview(competition),
               // MatchLiveTicker(match),
               // MatchLineUp(match),

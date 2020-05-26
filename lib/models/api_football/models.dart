@@ -11,5 +11,6 @@ export 'match_team.dart';
 export 'team.dart';
 export 'player.dart';
 export 'country.dart';
+export 'standings.dart';
 
 export 'result_error.dart';
