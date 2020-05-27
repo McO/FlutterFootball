@@ -1,5 +1,6 @@
 import 'dart:async';
 
+import 'package:FlutterFootball/theme/colors.dart';
 import 'package:flutter/material.dart';
 
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -68,9 +69,9 @@ class MatchesScreenState extends State<MatchesScreen> {
                 },
                 child: Text(
                   'All',
-                  style: TextStyle(fontWeight: FontWeight.normal, fontSize: 12),
                 ),
                 color: showMatches == ShowMatches.all ? Colors.black : Colors.white,
+                textColor: showMatches == ShowMatches.all ? Colors.white : kTextColor,
                 shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(30.0)),
               ),
               Padding(
@@ -85,9 +86,9 @@ class MatchesScreenState extends State<MatchesScreen> {
                   },
                   child: Text(
                     'Favourites',
-                    style: TextStyle(fontWeight: FontWeight.normal, fontSize: 12),
                   ),
                   color: showMatches == ShowMatches.favorites ? Colors.black : Colors.white,
+                  textColor: showMatches == ShowMatches.favorites ? Colors.white : kTextColor,
                   shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(30.0))),
               Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 5, vertical: 0),
@@ -101,9 +102,9 @@ class MatchesScreenState extends State<MatchesScreen> {
                   },
                   child: Text(
                     'Live',
-                    style: TextStyle(fontWeight: FontWeight.normal, fontSize: 12),
                   ),
                   color: showMatches == ShowMatches.live ? Colors.black : Colors.white,
+                  textColor: showMatches == ShowMatches.live ? Colors.white : kTextColor,
                   shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(30.0))),
             ],
           ),

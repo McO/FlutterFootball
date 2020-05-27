@@ -10,3 +10,4 @@ const kSecondaryDark = const Color(0xFF009faf);
 const kTextColor = Colors.black;
 const kTextColorLight = Colors.white;
 const kSecondaryTextColor = Color.fromRGBO(75, 75, 75, 1);
+const kAlternatingBackgroundColor = const Color(0xF5F5F5FF);

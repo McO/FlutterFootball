@@ -1,12 +1,14 @@
-import 'package:FlutterFootball/widgets/message.dart';
 import 'package:flutter/material.dart';
 
 import 'dart:async';
+
+import 'package:FlutterFootball/theme/colors.dart';
 
 import 'package:FlutterFootball/blocs/blocs.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import 'package:FlutterFootball/models/models.dart';
+import 'package:FlutterFootball/widgets/message.dart';
 
 class CompetitionStandings extends StatefulWidget {
   final Competition competition;
@@ -68,70 +70,166 @@ class _CompetitionStandingsState extends State<CompetitionStandings> with Single
   }
 
   Widget buildPositions(Standings standings) {
-    List<TableRow> rows = [];
-    rows.add(TableRow(children: [
-      Text(
-        '#',
-        style: Theme.of(context).textTheme.caption,
-      ),
-      Text(
-        'Team',
-        style: Theme.of(context).textTheme.caption,
-      ),
-      Text(
-        'Pl',
-        style: Theme.of(context).textTheme.caption,
-      ),
-      Text(
-        'W-D-L',
-        style: Theme.of(context).textTheme.caption,
-      ),
-      Text(
-        '+/-',
-        style: Theme.of(context).textTheme.caption,
-      ),
-      Text(
-        'GD',
-        style: Theme.of(context).textTheme.caption,
-      ),
-      Text(
-        'Pts',
-        style: Theme.of(context).textTheme.caption,
-      ),
-    ]));
+    var rows = List<TableRow>();
+    rows.add(TableRow(
+        decoration: BoxDecoration(border: Border(bottom: BorderSide(color: Colors.black))),
+        children: [
+          TableCell(
+            child: Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: Text(
+                '#',
+                style: Theme.of(context).textTheme.caption,
+              ),
+            ),
+          ),
+          TableCell(
+            child: Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: Text(
+                'Team',
+                style: Theme.of(context).textTheme.caption,
+              ),
+            ),
+          ),
+          TableCell(
+            child: Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: Text(
+                'Pl',
+                style: Theme.of(context).textTheme.caption,
+              ),
+            ),
+          ),
+          TableCell(
+            child: Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: Text(
+                'W-D-L',
+                style: Theme.of(context).textTheme.caption,
+              ),
+            ),
+          ),
+          TableCell(
+            child: Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: Text(
+                '+/-',
+                style: Theme.of(context).textTheme.caption,
+                textAlign: TextAlign.center,
+              ),
+            ),
+          ),
+          TableCell(
+            child: Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: Text(
+                'GD',
+                style: Theme.of(context).textTheme.caption,
+                textAlign: TextAlign.right,
+              ),
+            ),
+          ),
+          TableCell(
+            child: Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: Text(
+                'Pts',
+                style: Theme.of(context).textTheme.caption,
+                textAlign: TextAlign.right,
+              ),
+            ),
+          ),
+        ]));
     for (int i = 0; i < standings.positions.length; ++i) {
       var position = standings.positions[i];
-      rows.add(TableRow(children: [
-        Text(
-          position.rank.toString(),
-          style: Theme.of(context).textTheme.caption,
-        ),
-        Text(
-          position.team.name,
-          style: Theme.of(context).textTheme.caption,
-        ),
-        Text(
-          position.played.toString(),
-          style: Theme.of(context).textTheme.caption,
-        ),
-        Text(
-          '${position.wins}-${position.draws}-${position.losses}',
-          style: Theme.of(context).textTheme.caption,
-        ),
-        Text(
-          '${position.goalsFor}:${position.goalsAgainst}',
-          style: Theme.of(context).textTheme.caption,
-        ),
-        Text(
-          position.goalsDifference.toString(),
-          style: Theme.of(context).textTheme.caption,
-        ),
-        Text(
-          position.points.toString(),
-          style: Theme.of(context).textTheme.caption,
-        ),
-      ]));
+      rows.add(TableRow(
+          decoration: BoxDecoration(
+              color: (i.isOdd ? kAlternatingBackgroundColor : Colors.white),
+              border: Border(bottom: BorderSide(color: Theme.of(context).dividerColor))),
+          children: [
+            TableCell(
+              child: Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: Text(
+                  position.rank.toString(),
+                  style: Theme.of(context).textTheme.bodyText2,
+                ),
+              ),
+            ),
+            TableCell(
+              child: Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: Text(
+                  position.team.shortName,
+                  style: Theme.of(context).textTheme.bodyText2.copyWith(fontWeight: FontWeight.bold),
+                ),
+              ),
+            ),
+            TableCell(
+              child: Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: Text(
+                  position.played.toString(),
+                  style: Theme.of(context).textTheme.bodyText2,
+                  textAlign: TextAlign.right,
+                ),
+              ),
+            ),
+            TableCell(
+              child: Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: Text(
+                  '${position.wins}-${position.draws}-${position.losses}',
+                  style: Theme.of(context).textTheme.bodyText2,
+                ),
+              ),
+            ),
+            TableCell(
+              child: Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: Text(
+                  '${position.goalsFor}:${position.goalsAgainst}',
+                  style: Theme.of(context).textTheme.bodyText2,
+                ),
+              ),
+            ),
+            TableCell(
+              child: Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 8.0),
+                child: Text(
+                  position.goalsDifference.toString(),
+                  style: Theme.of(context).textTheme.bodyText2,
+                  textAlign: TextAlign.right,
+                ),
+              ),
+            ),
+            TableCell(
+              child: Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 8.0),
+                child: Text(
+                  position.points.toString(),
+                  style: Theme.of(context).textTheme.bodyText2.copyWith(fontWeight: FontWeight.bold),
+                  textAlign: TextAlign.right,
+                ),
+              ),
+            ),
+          ]));
     }
-    return Table(children: rows);
+    return Padding(
+      padding: const EdgeInsets.symmetric(vertical: 8.0),
+      child: Table(
+          defaultVerticalAlignment: TableCellVerticalAlignment.middle,
+          columnWidths: {
+            0: IntrinsicColumnWidth(),
+            1: IntrinsicColumnWidth(),
+            2: IntrinsicColumnWidth(),
+            3: IntrinsicColumnWidth(),
+            4: IntrinsicColumnWidth(),
+            5: IntrinsicColumnWidth(),
+            6: IntrinsicColumnWidth(),
+          },
+          children: rows),
+    );
   }
 }

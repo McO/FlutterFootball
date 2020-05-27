@@ -23,7 +23,7 @@ class MatchCardItem extends StatelessWidget {
           child: Text(
             team.name,
             textAlign: TextAlign.start,
-            style: Theme.of(context).textTheme.bodyText2,
+            style: Theme.of(context).textTheme.subtitle1,
           ),
         ),
         Padding(
