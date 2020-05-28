@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 
 import 'package:FlutterFootball/widgets/logo_icon.dart';
-import 'package:FlutterFootball/widgets/match_status.dart';
+import 'package:FlutterFootball/widgets/matches/match_status.dart';
 
 import 'package:FlutterFootball/screens/match_screen.dart';
-import '../classes/constants.dart' as Constants;
+import 'package:FlutterFootball/classes/constants.dart' as Constants;
 import 'package:FlutterFootball/models/models.dart' as Models;
 
 class MatchCardItem extends StatelessWidget {

@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 
 import 'package:FlutterFootball/widgets/logo_icon.dart';
 import 'package:FlutterFootball/screens/team_screen.dart';
-import 'package:FlutterFootball/widgets/match_detail_status.dart';
+import 'package:FlutterFootball/widgets/match/match_detail_status.dart';
 import 'package:FlutterFootball/classes/constants.dart' as Constants;
 import 'package:FlutterFootball/models/models.dart';
 

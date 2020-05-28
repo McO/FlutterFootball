@@ -7,7 +7,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 
 import 'package:FlutterFootball/blocs/blocs.dart';
 import 'package:FlutterFootball/models/models.dart';
-import 'package:FlutterFootball/widgets/day_list.dart';
+import 'package:FlutterFootball/widgets/matches/day_list.dart';
 import 'package:FlutterFootball/widgets/message.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 

@@ -1,11 +1,12 @@
 import 'package:FlutterFootball/screens/competition_screen.dart';
+import 'package:FlutterFootball/widgets/competition/competition_standings.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
 
 import 'package:FlutterFootball/models/models.dart' as Models;
 import 'match_card_item.dart';
 import 'package:FlutterFootball/widgets/logo_icon.dart';
-import '../classes/constants.dart' as Constants;
+import 'package:FlutterFootball/classes/constants.dart' as Constants;
 
 class CompetitionMatchesCard extends StatelessWidget {
   final Models.DayCompetitionMatches dayCompetitionMatches;
@@ -21,7 +22,7 @@ class CompetitionMatchesCard extends StatelessWidget {
               onTap: () {
                 Navigator.push(
                   context,
-                  MaterialPageRoute(builder: (context) => CompetitionDetail(dayCompetitionMatches.competition)),
+                  MaterialPageRoute(builder: (context) => CompetitionDetail(dayCompetitionMatches.competition, 0)),
                 );
               },
               child: Container(
@@ -68,6 +69,22 @@ class CompetitionMatchesCard extends StatelessWidget {
               ),
             ),
           ),
+          Divider(
+            height: 0,
+          ),
+          SizedBox(
+            width: double.infinity,
+            child: FlatButton(
+                padding: EdgeInsets.all(0),
+                onPressed: () => {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) => CompetitionDetail(dayCompetitionMatches.competition, 1)),
+                      )
+                    },
+                child: Text('See Standings')),
+          )
         ],
       ),
     );

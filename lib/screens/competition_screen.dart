@@ -7,27 +7,29 @@ import 'package:FlutterFootball/models/models.dart';
 
 class CompetitionDetail extends StatefulWidget {
   final Competition competition;
+  final int initialTabIndex;
 
-  CompetitionDetail(this.competition);
+  CompetitionDetail(this.competition, this.initialTabIndex);
 
   @override
-  _CompetitionDetailState createState() => _CompetitionDetailState(competition);
+  _CompetitionDetailState createState() => _CompetitionDetailState();
 }
 
 class _CompetitionDetailState extends State<CompetitionDetail>
     with SingleTickerProviderStateMixin {
-  final Competition competition;
+  // final Competition competition;
+  // final int initialTabIndex;
   ScrollController _scrollController;
   TabController _tabController;
   bool silverCollapsed = false;
 
-  _CompetitionDetailState(this.competition);
+  _CompetitionDetailState();
 
   @override
   void initState() {
     super.initState();
 
-    _tabController = TabController(vsync: this, initialIndex: 0, length: 3);
+    _tabController = TabController(vsync: this, initialIndex: widget.initialTabIndex, length: 3);
     _tabController.addListener(() {
       setState(() {});
     });
@@ -51,7 +53,7 @@ class _CompetitionDetailState extends State<CompetitionDetail>
                     title: Text(''),
                     // title: MatchHead(match), //Text(myTitle),
                     collapseMode: CollapseMode.parallax,
-                    background: CompetitionHead(competition)),
+                    background: CompetitionHead(widget.competition)),
               ),
               SliverPersistentHeader(
                 delegate: _SliverAppBarDelegate(
@@ -78,9 +80,9 @@ class _CompetitionDetailState extends State<CompetitionDetail>
           },
           body: TabBarView(
             children: [
-              CompetitionOverview(competition),
-              CompetitionStandings(competition),
-              CompetitionOverview(competition),
+              CompetitionOverview(widget.competition),
+              CompetitionStandings(widget.competition),
+              CompetitionOverview(widget.competition),
               // MatchLiveTicker(match),
               // MatchLineUp(match),
             ],
