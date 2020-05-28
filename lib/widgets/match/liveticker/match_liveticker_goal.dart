@@ -14,7 +14,7 @@ class MatchLiveTickerGoal extends StatelessWidget {
     var goal = event.data as Models.Goal;
     return Expanded(
       child: Container(
-        decoration: new BoxDecoration(color: kPrimaryLight),
+        decoration: new BoxDecoration(color: kHighlightBackgroundColor),
         child: Padding(
           padding: const EdgeInsets.all(8.0),
           child: Column(children: [
