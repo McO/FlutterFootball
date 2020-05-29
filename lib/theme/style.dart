@@ -29,7 +29,7 @@ ThemeData buildThemeData() {
       headline5: TextStyle(fontSize: 18.0, fontWeight: FontWeight.bold, color: kTextColor),
       headline6: TextStyle(fontSize: 16.0, fontWeight: FontWeight.bold, color: kTextColor),
       subtitle1: TextStyle(fontSize: 16.0, color: kTextColor),
-      subtitle2: TextStyle(fontSize: 14.0, fontWeight: FontWeight.normal, color: kTextColor),
+      subtitle2: TextStyle(fontSize: 14.0, fontWeight: FontWeight.normal, color: kSecondaryTextColor),
       bodyText1: TextStyle(fontSize: 16.0, color: kTextColor),
       bodyText2: TextStyle(fontSize: 14.0, color: kTextColor),
       button: TextStyle(fontSize: 12.0, color: kTextColor),

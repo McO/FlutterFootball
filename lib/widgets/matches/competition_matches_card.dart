@@ -1,10 +1,9 @@
-import 'package:FlutterFootball/screens/competition_screen.dart';
-import 'package:FlutterFootball/widgets/competition/competition_standings.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
 
 import 'package:FlutterFootball/models/models.dart' as Models;
 import 'match_card_item.dart';
+import 'package:FlutterFootball/screens/competition_screen.dart';
 import 'package:FlutterFootball/widgets/logo_icon.dart';
 import 'package:FlutterFootball/classes/constants.dart' as Constants;
 
@@ -83,7 +82,7 @@ class CompetitionMatchesCard extends StatelessWidget {
                             builder: (context) => CompetitionDetail(dayCompetitionMatches.competition, 1)),
                       )
                     },
-                child: Text('See Standings')),
+                child: Text('See Standings', style: Theme.of(context).textTheme.subtitle2,)),
           )
         ],
       ),
