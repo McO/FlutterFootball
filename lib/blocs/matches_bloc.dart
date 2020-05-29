@@ -171,7 +171,7 @@ class MatchesBloc extends Bloc<MatchesEvent, MatchesState> {
             name: m.homeTeam.name,
             shortName: apiTeams.firstWhere((t) => t.id == m.homeTeam.id).shortName,
             logoUrl: getLogoUrl(apiTeams, m.homeTeam.id));
-        
+
         var awayTeam = Team(
             id: m.awayTeam.id,
             name: m.awayTeam.name,
@@ -203,14 +203,19 @@ class MatchesBloc extends Bloc<MatchesEvent, MatchesState> {
 
   Future handleApiFootball(List<Day> days, List<String> favouriteCompetitions, bool showLiveMatches) async {
     var apiFixtures = List<ApiFootballModels.Fixture>();
+    var apiLeagues = await apiFootballRepository.leagues();
 
     if (showLiveMatches) {
       apiFixtures = await apiFootballRepository.liveFixtures();
     } else if (favouriteCompetitions != null && favouriteCompetitions.length > 0) {
       await Future.forEach(favouriteCompetitions, (competition) async {
-        //TODO: hard coded season
+        var currentSeason = apiLeagues
+            .singleWhere((l) => l.league.id == int.parse(competition))
+            .seasons
+            .singleWhere((s) => s.current == true)
+            .year;
         var apiCompetitionFixtures = await apiFootballRepository.fixtures(DateTime.now().add(Duration(days: 0)),
-            fromDate: null, toDate: null, leagueId: int.parse(competition), season: 2019);
+            fromDate: null, toDate: null, leagueId: int.parse(competition), season: currentSeason);
         apiFixtures.addAll(apiCompetitionFixtures);
       });
     } else {

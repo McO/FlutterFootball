@@ -76,7 +76,7 @@ class CompetitionsBloc extends Bloc<CompetitionsEvent, CompetitionsState> {
       var competitions = new List<Competition>();
       var useApiFootball = true;
       if (useApiFootball) {
-        final List<ApiFootballModels.League> apiLeagues = await apiFootballRepository.leagues(null);
+        final List<ApiFootballModels.League> apiLeagues = await apiFootballRepository.leagues();
         apiLeagues.forEach((c) => competitions
             .add(Competition(id: c.league.id, name: c.league.name, logoUrl: c.league.logo, country: c.country.name)));
       } else {

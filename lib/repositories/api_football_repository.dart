@@ -12,7 +12,12 @@ class ApiFootballRepository {
       : assert(apiFootballClient != null);
 
 
-  Future<List<League>> leagues(String countryCode) async {
+  Future<List<League>> leagues() async {
+    final resultAPI = await apiFootballClient.leagues(null);
+    return resultAPI;
+  }
+
+  Future<List<League>> leaguesByCountry(String countryCode) async {
     final resultAPI = await apiFootballClient.leagues(countryCode);
     return resultAPI;
   }

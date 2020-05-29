@@ -33,11 +33,11 @@ class ApiFootballClient {
     final url = '${baseUrl}leagues?$queryParams';
     print('leagues: $url');
 
-    var jsonString = await apiDao.get(url);
-    if (jsonString != null && jsonString.isNotEmpty) {
-      print('leagues from cache');
-      return LeaguesResponse.fromJson(json.decode(jsonString)).leagues;
-    }
+    // var jsonString = await apiDao.get(url);
+    // if (jsonString != null && jsonString.isNotEmpty) {
+    //   print('leagues from cache');
+    //   return LeaguesResponse.fromJson(json.decode(jsonString)).leagues;
+    // }
 
     final response = await httpClient.get(
       url,
