@@ -250,7 +250,11 @@ class MatchesBloc extends Bloc<MatchesEvent, MatchesState> {
         if (day.dayCompetitionsMatches.where((d) => d.competition.id == m.league.id).length == 0) {
           day.dayCompetitionsMatches.add(DayCompetitionMatches(
               date: day.date,
-              competition: Competition(id: m.league.id, name: m.league.name, logoUrl: m.league.logo),
+              competition: Competition(
+                  id: m.league.id,
+                  name: m.league.name,
+                  logoUrl: m.league.logo,
+                  hasStandings: hasStandings(apiLeagues, m.league.id)),
               matchDayName: m.league.round,
               matches: List<Match>()));
         }
@@ -275,6 +279,17 @@ class MatchesBloc extends Bloc<MatchesEvent, MatchesState> {
         print('Fixture: ${f.details.id}');
       }
     });
+  }
+
+  bool hasStandings(List<ApiFootballModels.League> leagues, int competitionId) {
+    bool hasStandings = false;
+    hasStandings = leagues
+        .singleWhere((l) => l.league.id == competitionId)
+        .seasons
+        .singleWhere((s) => s.current)
+        .coverage
+        .standings;
+    return hasStandings;
   }
 
   Match getMatch(ApiFootballModels.Fixture f, DateTime matchDateTime) {

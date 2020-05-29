@@ -68,24 +68,34 @@ class CompetitionMatchesCard extends StatelessWidget {
               ),
             ),
           ),
-          Divider(
-            height: 0,
-          ),
-          SizedBox(
-            width: double.infinity,
-            child: FlatButton(
-                padding: EdgeInsets.all(0),
-                onPressed: () => {
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                            builder: (context) => CompetitionDetail(dayCompetitionMatches.competition, 1)),
-                      )
-                    },
-                child: Text('See Standings', style: Theme.of(context).textTheme.subtitle2,)),
-          )
+          buildStndingsLink(context, dayCompetitionMatches.competition)
         ],
       ),
     );
   }
+}
+
+Widget buildStndingsLink(BuildContext context, Models.Competition competition) {
+  if (!competition.hasStandings) return Container();
+
+  return Column(children: [
+    Divider(
+      height: 0,
+    ),
+    SizedBox(
+      width: double.infinity,
+      child: FlatButton(
+          padding: EdgeInsets.all(0),
+          onPressed: () => {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => CompetitionDetail(competition, 1)),
+                )
+              },
+          child: Text(
+            'See Standings',
+            style: Theme.of(context).textTheme.subtitle2,
+          )),
+    ),
+  ]);
 }
