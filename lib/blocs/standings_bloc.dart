@@ -62,7 +62,7 @@ class StandingsBloc extends Bloc<StandingsEvent, StandingsState> {
       if (event is FetchStandings) {
         var standings = Standings(positions: List<Position>());
         var positions = List<Position>();
-        final apiStandings = await apiFootballRepository.standings(event.competition.id, 2019);
+        final apiStandings = await apiFootballRepository.standings(event.competition.id, event.competition.year);
 
         apiStandings.standings[0].positions.forEach((element) {
           positions.add(Position(

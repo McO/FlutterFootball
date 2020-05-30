@@ -31,7 +31,7 @@ class MatchLiveTickerCard extends StatelessWidget {
                         Row(children: [
                           Expanded(
                             child: Text(
-                              card.booked.name,
+                              card.booked.name ?? '',
                               style: Theme.of(context).textTheme.caption,
                             ),
                           ),

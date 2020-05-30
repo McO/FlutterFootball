@@ -228,7 +228,7 @@ class MatchesBloc extends Bloc<MatchesEvent, MatchesState> {
       apiFixtures = tempApiFixtures.toList().take(50).toList();
     }
 
-    print(apiFixtures.length);
+    print('Matches found:' + apiFixtures.length.toString());
 
     //adding match days
     apiFixtures.forEach((ApiFootballModels.Fixture f) {
@@ -254,7 +254,8 @@ class MatchesBloc extends Bloc<MatchesEvent, MatchesState> {
                   id: m.league.id,
                   name: m.league.name,
                   logoUrl: m.league.logo,
-                  hasStandings: hasStandings(apiLeagues, m.league.id)),
+                  hasStandings: hasStandings(apiLeagues, m.league.id),
+                  year: m.league.season),
               matchDayName: m.league.round,
               matches: List<Match>()));
         }
