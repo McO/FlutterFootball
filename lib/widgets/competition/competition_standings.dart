@@ -1,3 +1,4 @@
+import 'package:FlutterFootball/widgets/logo_icon.dart';
 import 'package:flutter/material.dart';
 
 import 'dart:async';
@@ -71,76 +72,79 @@ class _CompetitionStandingsState extends State<CompetitionStandings> with Single
 
   Widget buildPositions(Standings standings) {
     var rows = List<TableRow>();
-    rows.add(TableRow(
-        decoration: BoxDecoration(border: Border(bottom: BorderSide(color: Colors.black))),
-        children: [
-          TableCell(
-            child: Padding(
-              padding: const EdgeInsets.all(8.0),
-              child: Text(
-                '#',
-                style: Theme.of(context).textTheme.caption,
-              ),
-            ),
+    rows.add(TableRow(decoration: BoxDecoration(border: Border(bottom: BorderSide(color: Colors.black))), children: [
+      TableCell(
+        child: Padding(
+          padding: const EdgeInsets.all(8.0),
+          child: Text(
+            '#',
+            style: Theme.of(context).textTheme.caption,
           ),
-          TableCell(
-            child: Padding(
-              padding: const EdgeInsets.all(8.0),
-              child: Text(
-                'Team',
-                style: Theme.of(context).textTheme.caption,
-              ),
-            ),
+        ),
+      ),
+      TableCell(
+        child: Padding(
+          padding: const EdgeInsets.all(8.0),
+        ),
+      ),
+      TableCell(
+        child: Padding(
+          padding: const EdgeInsets.all(8.0),
+          child: Text(
+            'Team',
+            style: Theme.of(context).textTheme.caption,
           ),
-          TableCell(
-            child: Padding(
-              padding: const EdgeInsets.all(8.0),
-              child: Text(
-                'Pl',
-                style: Theme.of(context).textTheme.caption,
-              ),
-            ),
+        ),
+      ),
+      TableCell(
+        child: Padding(
+          padding: const EdgeInsets.all(8.0),
+          child: Text(
+            'Pl',
+            style: Theme.of(context).textTheme.caption,
           ),
-          TableCell(
-            child: Padding(
-              padding: const EdgeInsets.all(8.0),
-              child: Text(
-                'W-D-L',
-                style: Theme.of(context).textTheme.caption,
-              ),
-            ),
+        ),
+      ),
+      TableCell(
+        child: Padding(
+          padding: const EdgeInsets.all(8.0),
+          child: Text(
+            'W-D-L',
+            style: Theme.of(context).textTheme.caption,
           ),
-          TableCell(
-            child: Padding(
-              padding: const EdgeInsets.all(8.0),
-              child: Text(
-                '+/-',
-                style: Theme.of(context).textTheme.caption,
-                textAlign: TextAlign.center,
-              ),
-            ),
+        ),
+      ),
+      TableCell(
+        child: Padding(
+          padding: const EdgeInsets.all(8.0),
+          child: Text(
+            '+/-',
+            style: Theme.of(context).textTheme.caption,
+            textAlign: TextAlign.center,
           ),
-          TableCell(
-            child: Padding(
-              padding: const EdgeInsets.all(8.0),
-              child: Text(
-                'GD',
-                style: Theme.of(context).textTheme.caption,
-                textAlign: TextAlign.right,
-              ),
-            ),
+        ),
+      ),
+      TableCell(
+        child: Padding(
+          padding: const EdgeInsets.all(8.0),
+          child: Text(
+            'GD',
+            style: Theme.of(context).textTheme.caption,
+            textAlign: TextAlign.right,
           ),
-          TableCell(
-            child: Padding(
-              padding: const EdgeInsets.all(8.0),
-              child: Text(
-                'Pts',
-                style: Theme.of(context).textTheme.caption,
-                textAlign: TextAlign.right,
-              ),
-            ),
+        ),
+      ),
+      TableCell(
+        child: Padding(
+          padding: const EdgeInsets.all(8.0),
+          child: Text(
+            'Pts',
+            style: Theme.of(context).textTheme.caption,
+            textAlign: TextAlign.right,
           ),
-        ]));
+        ),
+      ),
+    ]));
     for (int i = 0; i < standings.positions.length; ++i) {
       var position = standings.positions[i];
       rows.add(TableRow(
@@ -156,6 +160,9 @@ class _CompetitionStandingsState extends State<CompetitionStandings> with Single
                   style: Theme.of(context).textTheme.bodyText2,
                 ),
               ),
+            ),
+            TableCell(
+              child: Padding(padding: const EdgeInsets.all(8.0), child: LogoIcon(position.team.logoUrl, 16, false)),
             ),
             TableCell(
               child: Padding(
@@ -228,6 +235,7 @@ class _CompetitionStandingsState extends State<CompetitionStandings> with Single
             4: IntrinsicColumnWidth(),
             5: IntrinsicColumnWidth(),
             6: IntrinsicColumnWidth(),
+            7: IntrinsicColumnWidth(),
           },
           children: rows),
     );
