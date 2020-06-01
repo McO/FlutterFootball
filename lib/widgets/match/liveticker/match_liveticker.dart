@@ -44,10 +44,9 @@ class _MatchLiveTickerState extends State<MatchLiveTicker> with SingleTickerProv
 
     if (match.status == Models.MatchStatus.In_Play) {
       timer = Timer.periodic(Duration(seconds: 60), (timer) {
-        setState(() {
-          print('timer elapsed');
-          matchBloc.add(FetchMatchEvents(match: match));
-        });
+        print('timer elapsed');
+        matchBloc.add(FetchMatchEvents(match: match));
+        setState(() {});
       });
     }
   }
