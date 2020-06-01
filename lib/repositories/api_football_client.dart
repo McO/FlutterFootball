@@ -196,6 +196,33 @@ class ApiFootballClient {
     }
   }
 
+  Future<List<Lineup>> fixtureLineups(int fixtureId) async {
+    var queryParams = URLQueryParams();
+    queryParams.append('fixture', fixtureId);
+
+    final url = '${baseUrl}fixtures/lineups?$queryParams';
+    print('fixture lineups: $url');
+
+    // var jsonString = await apiDao.get(url);
+    // if (jsonString != null && jsonString.isNotEmpty) {
+    //   print('lineups from cache');
+    //   return FixtureLineupsResult.fromJson(json.decode(jsonString)).lineups;
+    // }
+
+    final response = await httpClient.get(
+      url,
+      headers: getHeaders(),
+    );
+    final results = json.decode(response.body);
+
+    if (response.statusCode >= 200 && response.statusCode < 300) {
+      await apiDao.insert(url, response.body);
+      return FixtureLineupsResult.fromJson(results).lineups;
+    } else {
+      throw ResultError.fromJson(results).message;
+    }
+  }
+
   Future<StandingsLeague> standings(int leagueId, int season) async {
     var queryParams = URLQueryParams();
     queryParams.append('league', leagueId);

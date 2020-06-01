@@ -81,6 +81,12 @@ Future<Null> main() async {
               apiFootballRepository: apiFootballRepository,
               dummyFootballRepository: DummyFootballRepository()),
         ),
+        BlocProvider<MatchLineupsBloc>(
+          create: (context) => MatchLineupsBloc(
+              footballDataRepository: footballDataRepository,
+              apiFootballRepository: apiFootballRepository,
+              dummyFootballRepository: DummyFootballRepository()),
+        ),
         BlocProvider<StandingsBloc>(
           create: (context) => StandingsBloc(
               footballDataRepository: footballDataRepository,

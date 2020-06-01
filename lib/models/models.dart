@@ -7,4 +7,5 @@ export 'day.dart';
 export 'match.dart';
 export 'match_statistics.dart';
 export 'match_events.dart';
+export 'match_lineups.dart';
 export 'day_competition_matches.dart';

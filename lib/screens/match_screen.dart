@@ -112,7 +112,7 @@ class _MatchDetailState extends State<MatchDetail>
             children: [
               MatchOverview(match),
               MatchLiveTicker(match),
-              MatchLineUp(match),
+              MatchLineups(match),
               MatchStatistics(match),
             ],
             controller: _tabController,
