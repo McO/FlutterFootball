@@ -75,6 +75,20 @@ class _MatchLinupsState extends State<MatchLineups> with SingleTickerProviderSta
   Widget buildLineups(BuildContext context, Models.MatchLineups lineups) {
     return Column(children: [
       Row(children: [
+        Expanded(
+            flex: 5,
+            child: Padding(
+              padding: const EdgeInsets.only(top: 8.0),
+              child: Center(child: Text(lineups.home.formation)),
+            )),
+        Expanded(
+            flex: 5,
+            child: Padding(
+              padding: const EdgeInsets.only(top: 8.0),
+              child: Center(child: Text(lineups.away.formation)),
+            )),
+      ]),
+      Row(children: [
         Expanded(flex: 5, child: buildLineup(context, lineups.home.startingPlayers)),
         Expanded(flex: 5, child: buildLineup(context, lineups.away.startingPlayers)),
       ]),
