@@ -1,4 +1,5 @@
 export 'competition.dart';
+export 'competition_round.dart';
 export 'competition_standings.dart';
 export 'score.dart';
 export 'team.dart';

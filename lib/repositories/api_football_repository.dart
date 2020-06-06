@@ -8,9 +8,7 @@ import 'package:FlutterFootball/models/api_football/models.dart';
 class ApiFootballRepository {
   final ApiFootballClient apiFootballClient;
 
-  ApiFootballRepository({@required this.apiFootballClient})
-      : assert(apiFootballClient != null);
-
+  ApiFootballRepository({@required this.apiFootballClient}) : assert(apiFootballClient != null);
 
   Future<List<League>> leagues() async {
     final resultAPI = await apiFootballClient.leagues(null);
@@ -22,8 +20,13 @@ class ApiFootballRepository {
     return resultAPI;
   }
 
-  Future<List<Fixture>> fixtures(DateTime date,{ DateTime fromDate, DateTime toDate, int leagueId, int season}) async {
+  Future<List<Fixture>> fixtures(DateTime date, {DateTime fromDate, DateTime toDate, int leagueId, int season}) async {
     final resultAPI = await apiFootballClient.fixtures(date, fromDate, toDate, leagueId, season);
+    return resultAPI;
+  }
+
+  Future<List<Fixture>> roundFixtures(int leagueId, int season, String round) async {
+    final resultAPI = await apiFootballClient.roundFixtures(leagueId, season, round);
     return resultAPI;
   }
 
@@ -42,7 +45,7 @@ class ApiFootballRepository {
     return resultAPI;
   }
 
-   Future<List<Lineup>> fixturesLineups(int fixtureId) async {
+  Future<List<Lineup>> fixturesLineups(int fixtureId) async {
     final resultAPI = await apiFootballClient.fixtureLineups(fixtureId);
     return resultAPI;
   }
@@ -54,6 +57,16 @@ class ApiFootballRepository {
 
   Future<StandingsLeague> standings(int leagueId, int season) async {
     final resultAPI = await apiFootballClient.standings(leagueId, season);
+    return resultAPI;
+  }
+
+  Future<List<String>> rounds(int leagueId, int season) async {
+    final resultAPI = await apiFootballClient.rounds(leagueId, season);
+    return resultAPI;
+  }
+
+  Future<String> currentRound(int leagueId, int season) async {
+    final resultAPI = await apiFootballClient.currentRound(leagueId, season);
     return resultAPI;
   }
 }

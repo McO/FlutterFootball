@@ -1,3 +1,4 @@
+import 'package:FlutterFootball/widgets/competition/competition_matchday.dart';
 import 'package:flutter/material.dart';
 
 import 'package:FlutterFootball/widgets/competition/competition_head.dart';
@@ -29,7 +30,7 @@ class _CompetitionDetailState extends State<CompetitionDetail>
   void initState() {
     super.initState();
 
-    _tabController = TabController(vsync: this, initialIndex: widget.initialTabIndex, length: 3);
+    _tabController = TabController(vsync: this, initialIndex: widget.initialTabIndex, length: 4);
     _tabController.addListener(() {
       setState(() {});
     });
@@ -66,6 +67,9 @@ class _CompetitionDetailState extends State<CompetitionDetail>
                           child: Text("Overview",
                               style: Theme.of(context).textTheme.headline3)),
                       Tab(
+                          child: Text("Matchday",
+                              style: Theme.of(context).textTheme.headline3)),
+                      Tab(
                           child: Text("Standings",
                               style: Theme.of(context).textTheme.headline3)),
                       Tab(
@@ -81,6 +85,7 @@ class _CompetitionDetailState extends State<CompetitionDetail>
           body: TabBarView(
             children: [
               CompetitionOverview(widget.competition),
+              CompetitionMatchDay(widget.competition),
               CompetitionStandings(widget.competition),
               CompetitionOverview(widget.competition),
               // MatchLiveTicker(match),

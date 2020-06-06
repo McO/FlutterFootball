@@ -53,8 +53,7 @@ class ApiFootballClient {
     }
   }
 
-  Future<List<Fixture>> fixtures(
-      DateTime date, DateTime fromDate, DateTime toDate, int leagueId, int season) async {
+  Future<List<Fixture>> fixtures(DateTime date, DateTime fromDate, DateTime toDate, int leagueId, int season) async {
     var queryParams = URLQueryParams();
 
     // queryParams.append('to', new DateFormat("yyyy-MM-dd").format(toDate));
@@ -94,6 +93,36 @@ class ApiFootballClient {
 
     final url = '${baseUrl}fixtures?$queryParams';
     print('live fixtures: $url');
+
+    // var jsonString = await apiDao.get(url);
+    // if (jsonString != null && jsonString.isNotEmpty) {
+    //   print('fixtures from cache');
+    //   return FixturesResult.fromJson(json.decode(jsonString)).fixtures;
+    // }
+
+    final response = await httpClient.get(
+      url,
+      headers: getHeaders(),
+    );
+    final results = json.decode(response.body);
+
+    if (response.statusCode >= 200 && response.statusCode < 300) {
+      await apiDao.insert(url, response.body);
+      return FixturesResult.fromJson(results).fixtures;
+    } else {
+      throw ResultError.fromJson(results).message;
+    }
+  }
+
+  Future<List<Fixture>> roundFixtures(int leagueId, int season, String round) async {
+    var queryParams = URLQueryParams();
+
+    queryParams.append('league', leagueId);
+    queryParams.append('season', season);
+    queryParams.append('round', round);
+
+    final url = '${baseUrl}fixtures?$queryParams';
+    print('fixtures: $url');
 
     // var jsonString = await apiDao.get(url);
     // if (jsonString != null && jsonString.isNotEmpty) {
@@ -246,6 +275,51 @@ class ApiFootballClient {
     if (response.statusCode >= 200 && response.statusCode < 300) {
       await apiDao.insert(url, response.body);
       return StandingsResponse.fromJson(results).leagues[0].league;
+    } else {
+      throw ResultError.fromJson(results).message;
+    }
+  }
+
+  Future<List<String>> rounds(int leagueId, int season) async {
+    var queryParams = URLQueryParams();
+    queryParams.append('league', leagueId);
+    queryParams.append('season', season);
+
+    final url = '${baseUrl}fixtures/rounds?$queryParams';
+    print('rounds: $url');
+
+    final response = await httpClient.get(
+      url,
+      headers: getHeaders(),
+    );
+    final results = json.decode(response.body);
+
+    if (response.statusCode >= 200 && response.statusCode < 300) {
+      await apiDao.insert(url, response.body);
+      return RoundsResponse.fromJson(results).rounds;
+    } else {
+      throw ResultError.fromJson(results).message;
+    }
+  }
+
+  Future<String> currentRound(int leagueId, int season) async {
+    var queryParams = URLQueryParams();
+    queryParams.append('league', leagueId);
+    queryParams.append('season', season);
+    queryParams.append('current', true);
+
+    final url = '${baseUrl}fixtures/rounds?$queryParams';
+    print('current round: $url');
+
+    final response = await httpClient.get(
+      url,
+      headers: getHeaders(),
+    );
+    final results = json.decode(response.body);
+
+    if (response.statusCode >= 200 && response.statusCode < 300) {
+      await apiDao.insert(url, response.body);
+      return RoundsResponse.fromJson(results).rounds[0];
     } else {
       throw ResultError.fromJson(results).message;
     }
