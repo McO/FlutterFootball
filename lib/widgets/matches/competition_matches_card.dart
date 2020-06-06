@@ -58,16 +58,16 @@ class CompetitionMatchesCard extends StatelessWidget {
           Padding(
             padding: const EdgeInsets.only(
                 left: Constants.defaultPadding, right: Constants.defaultPadding, bottom: Constants.defaultPadding),
-            child: new ListView.builder(
-              physics: new NeverScrollableScrollPhysics(),
+            child: ListView.builder(
+              physics: NeverScrollableScrollPhysics(),
               shrinkWrap: true,
               itemCount: dayCompetitionMatches.matches.length,
-              itemBuilder: (context, k) => new Column(
-                children: <Widget>[
-                  new Divider(
+              itemBuilder: (context, k) => Column(
+                children: [
+                  Divider(
                     height: 10.0,
                   ),
-                  new MatchCardItem(dayCompetitionMatches.matches[k])
+                  MatchCardItem(dayCompetitionMatches.matches[k])
                 ],
               ),
             ),
