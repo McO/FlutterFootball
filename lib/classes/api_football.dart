@@ -10,7 +10,7 @@ class ApiFootball {
 
   ApiFootball(this.apiFootballRepository);
 
-  Future handleApiFootball(List<Day> days, List<String> favouriteCompetitions, bool showLiveMatches) async {
+  Future<List<Day>> handleApiFootball(List<String> favouriteCompetitions, bool showLiveMatches) async {
     var apiFixtures = List<ApiFootballModels.Fixture>();
     var apiLeagues = await apiFootballRepository.leagues();
 
@@ -39,6 +39,11 @@ class ApiFootball {
 
     print('Matches found:' + apiFixtures.length.toString());
 
+    return getDays(apiFixtures, apiLeagues);
+  }
+
+  List<Day> getDays(List<ApiFootballModels.Fixture> apiFixtures, List<ApiFootballModels.League> apiLeagues) {
+    var days = List<Day>();
     //adding match days
     apiFixtures.forEach((ApiFootballModels.Fixture f) {
       var matchDateTime = f.details.date.toLocal();
@@ -63,7 +68,7 @@ class ApiFootball {
                   id: m.league.id,
                   name: m.league.name,
                   logoUrl: m.league.logo,
-                  hasStandings: hasStandings(apiLeagues, m.league.id),
+                  hasStandings: apiLeagues == null ? false : hasStandings(apiLeagues, m.league.id),
                   year: m.league.season),
               matchDayName: m.league.round,
               matches: List<Match>()));
@@ -89,6 +94,8 @@ class ApiFootball {
         print('Fixture: ${f.details.id}');
       }
     });
+
+    return days;
   }
 
   bool hasStandings(List<ApiFootballModels.League> leagues, int competitionId) {
@@ -102,7 +109,7 @@ class ApiFootball {
     return hasStandings;
   }
 
-  Match getMatch(ApiFootballModels.Fixture fixture) {   
+  Match getMatch(ApiFootballModels.Fixture fixture) {
     var homeTeam = Team(
         id: fixture.teams.home.id,
         name: fixture.teams.home.name,

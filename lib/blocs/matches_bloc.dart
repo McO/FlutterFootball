@@ -5,7 +5,6 @@ import 'package:meta/meta.dart';
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
 
-
 import 'package:FlutterFootball/classes/api_football.dart';
 import 'package:FlutterFootball/classes/football_data.dart';
 
@@ -101,7 +100,7 @@ class MatchesBloc extends Bloc<MatchesEvent, MatchesState> {
       var useApiFootball = true;
       if (useApiFootball) {
         var apiFootball = ApiFootball(apiFootballRepository);
-        await apiFootball.handleApiFootball(days, favouriteCompetitions, showLiveMatches);
+        days = await apiFootball.handleApiFootball(favouriteCompetitions, showLiveMatches);
       } else {
         var footballData = FootballData(footballDataRepository);
         await footballData.handleFootballData(days);

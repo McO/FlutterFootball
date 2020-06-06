@@ -9,15 +9,16 @@ import 'package:FlutterFootball/classes/constants.dart' as Constants;
 
 class CompetitionMatchesCard extends StatelessWidget {
   final Models.DayCompetitionMatches dayCompetitionMatches;
+  final bool showCompetitionHead;
 
-  const CompetitionMatchesCard(this.dayCompetitionMatches);
+  const CompetitionMatchesCard(this.dayCompetitionMatches, this.showCompetitionHead);
 
   @override
   Widget build(BuildContext context) {
     return Card(
       child: Column(
         children: [
-          GestureDetector(
+          if(showCompetitionHead) GestureDetector(
               onTap: () {
                 Navigator.push(
                   context,

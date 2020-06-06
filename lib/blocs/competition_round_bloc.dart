@@ -35,13 +35,14 @@ class CompetitionRoundEmpty extends CompetitionRoundState {}
 class CompetitionRoundLoading extends CompetitionRoundState {}
 
 class CompetitionRoundLoaded extends CompetitionRoundState {
-  final List<Match> matches;
+  final List<Day> days;
+  // final List<Match> matches;
   final List<Round> rounds;
 
-  const CompetitionRoundLoaded({@required this.matches, this.rounds}) : assert(matches != null);
+  const CompetitionRoundLoaded({@required this.days, this.rounds}) : assert(days != null);
 
   @override
-  List<Object> get props => [matches];
+  List<Object> get props => [days, rounds];
 }
 
 class CompetitionRoundError extends CompetitionRoundState {}
@@ -61,7 +62,8 @@ class CompetitionRoundBloc extends Bloc<CompetitionRoundEvent, CompetitionRoundS
     yield CompetitionRoundLoading();
     try {
       var rounds = List<Round>();
-      var matches = List<Match>();
+      // var matches = List<Match>();
+      var days = List<Day>();
 
       if (event is FetchCompetitionRound) {
         var round = event.round;
@@ -75,16 +77,16 @@ class CompetitionRoundBloc extends Bloc<CompetitionRoundEvent, CompetitionRoundS
         });
 
         var apiMatches = await apiFootballRepository.roundFixtures(competitionId, year, round);
+        apiMatches.sort((a, b) => a.details.date.compareTo(b.details.date));
+
 
         var apiFootball = ApiFootball(apiFootballRepository);
-        apiMatches.forEach((m) {
-          matches.add(apiFootball.getMatch(m));
-        });
+        days = apiFootball.getDays(apiMatches, null).toList();
 
         if (rounds.length == 0) {
           yield CompetitionRoundEmpty();
         } else {
-          yield CompetitionRoundLoaded(matches: matches, rounds: rounds);
+          yield CompetitionRoundLoaded(days: days, rounds: rounds);
         }
       }
     } catch (e) {
