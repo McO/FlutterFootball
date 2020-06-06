@@ -11,7 +11,7 @@ class DayList extends StatefulWidget {
   final List<Day> days;
   final bool showCompetitionHead;
 
-  const DayList({Key key, this.days, this.showCompetitionHead}) : super(key: key);
+  const DayList({Key key, this.days, this.showCompetitionHead = true}) : super(key: key);
 
   @override
   DayListState createState() {
@@ -54,7 +54,9 @@ class DayListState extends State<DayList> {
             shrinkWrap: true,
             physics: NeverScrollableScrollPhysics(),
             itemCount: widget.days[i].dayCompetitionsMatches.length,
-            itemBuilder: (context, j) => CompetitionMatchesCard(widget.days[i].dayCompetitionsMatches[j], widget.showCompetitionHead),
+            itemBuilder: (context, j) => CompetitionMatchesCard(
+                widget.days[i].dayCompetitionsMatches[j],
+                showCompetitionHead: widget.showCompetitionHead),
           ),
           NativeAd(),
         ],

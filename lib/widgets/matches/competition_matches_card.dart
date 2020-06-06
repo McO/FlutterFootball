@@ -11,47 +11,50 @@ class CompetitionMatchesCard extends StatelessWidget {
   final Models.DayCompetitionMatches dayCompetitionMatches;
   final bool showCompetitionHead;
 
-  const CompetitionMatchesCard(this.dayCompetitionMatches, this.showCompetitionHead);
+  const CompetitionMatchesCard(this.dayCompetitionMatches, {this.showCompetitionHead = true})
+      : assert(showCompetitionHead != null);
 
   @override
   Widget build(BuildContext context) {
     return Card(
       child: Column(
         children: [
-          if(showCompetitionHead) GestureDetector(
-              onTap: () {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(builder: (context) => CompetitionDetail(dayCompetitionMatches.competition, 0)),
-                );
-              },
-              child: Container(
-                  padding:
-                      const EdgeInsets.only(left: Constants.defaultPadding, top: Constants.defaultPadding, bottom: 0),
-                  child: Row(
-                    children: [
-                      Column(
-                        children: [
-                          Container(
-                              padding: const EdgeInsets.symmetric(vertical: 3.0, horizontal: Constants.defaultPadding),
-                              child: LogoIcon(dayCompetitionMatches.competition.logoUrl, 20, true)),
-                        ],
-                      ),
-                      Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Text(
-                            dayCompetitionMatches.competition.name,
-                            style: Theme.of(context).textTheme.headline6,
-                          ),
-                          Text(
-                            dayCompetitionMatches.matchDayName,
-                            style: Theme.of(context).textTheme.subtitle2,
-                          )
-                        ],
-                      )
-                    ],
-                  ))),
+          if (showCompetitionHead)
+            GestureDetector(
+                onTap: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(builder: (context) => CompetitionDetail(dayCompetitionMatches.competition, 0)),
+                  );
+                },
+                child: Container(
+                    padding:
+                        const EdgeInsets.only(left: Constants.defaultPadding, top: Constants.defaultPadding, bottom: 0),
+                    child: Row(
+                      children: [
+                        Column(
+                          children: [
+                            Container(
+                                padding:
+                                    const EdgeInsets.symmetric(vertical: 3.0, horizontal: Constants.defaultPadding),
+                                child: LogoIcon(dayCompetitionMatches.competition.logoUrl, 20, true)),
+                          ],
+                        ),
+                        Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Text(
+                              dayCompetitionMatches.competition.name,
+                              style: Theme.of(context).textTheme.headline6,
+                            ),
+                            Text(
+                              dayCompetitionMatches.matchDayName,
+                              style: Theme.of(context).textTheme.subtitle2,
+                            )
+                          ],
+                        )
+                      ],
+                    ))),
           Padding(
             padding: const EdgeInsets.only(
                 left: Constants.defaultPadding, right: Constants.defaultPadding, bottom: Constants.defaultPadding),
