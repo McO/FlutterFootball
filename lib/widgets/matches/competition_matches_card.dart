@@ -24,7 +24,7 @@ class CompetitionMatchesCard extends StatelessWidget {
                 onTap: () {
                   Navigator.push(
                     context,
-                    MaterialPageRoute(builder: (context) => CompetitionDetail(dayCompetitionMatches.competition, 0)),
+                    MaterialPageRoute(builder: (context) => CompetitionDetail(dayCompetitionMatches.competition, 1)),
                   );
                 },
                 child: Container(
@@ -72,14 +72,14 @@ class CompetitionMatchesCard extends StatelessWidget {
               ),
             ),
           ),
-          buildStndingsLink(context, dayCompetitionMatches.competition)
+          buildStandingsLink(context, dayCompetitionMatches.competition)
         ],
       ),
     );
   }
 }
 
-Widget buildStndingsLink(BuildContext context, Models.Competition competition) {
+Widget buildStandingsLink(BuildContext context, Models.Competition competition) {
   if (!competition.hasStandings) return Container();
 
   return Column(children: [
@@ -93,7 +93,7 @@ Widget buildStndingsLink(BuildContext context, Models.Competition competition) {
           onPressed: () => {
                 Navigator.push(
                   context,
-                  MaterialPageRoute(builder: (context) => CompetitionDetail(competition, 1)),
+                  MaterialPageRoute(builder: (context) => CompetitionDetail(competition, 2)),
                 )
               },
           child: Text(
