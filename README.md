@@ -4,7 +4,11 @@ My first mobile project using Flutter. A small demo project for football matches
 
 ## Features
 
-This project is a starting point for a Flutter application.
+Besides of technical features like serialization, Firebase integration, caching and so on I added a few business features:
+* Liveticker
+* Competition standings
+* Matchday overview
+* and many more ...
 
 <img src="doc/assets/competitions.png" width="200" /><img src="doc/assets/matches.png" width="200" /><img src="doc/assets/liveticker.png" width="200" /><img src="doc/assets/stats.png" width="200" /><img src="doc/assets/standings.png" width="200" /><img src="doc/assets/matchday.png" width="200" /><img src="doc/assets/ads.png" width="200" />
 
