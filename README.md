@@ -6,13 +6,13 @@ My first mobile project using Flutter. A small demo project for football matches
 
 This project is a starting point for a Flutter application.
 
-![alt text](/docs/assets/competitions.png "Competitions")
-![alt text](/docs/assets/matches.png "Matches")
-![alt text](/docs/assets/liveticker.png "Liveticker")
-![alt text](/docs/assets/statistics.png "Match Statistics")
-![alt text](/docs/assets/standings.png "Standings")
-![alt text](/docs/assets/matchday.png "Matchday")
-![alt text](/docs/assets/ads.png "Ads")
+![Competitions](docs/assets/competitions.png "Competitions")
+![Matches](docs/assets/matches.png "Matches")
+![Liveticker](docs/assets/liveticker.png "Liveticker")
+![Match Statistics](docs/assets/statistics.png "Match Statistics")
+![Standings](docs/assets/standings.png "Standings")
+![Matchday](docs/assets/matchday.png "Matchday")
+![Ads](docs/assets/ads.png "Ads")
 
 
 ## Getting Started
