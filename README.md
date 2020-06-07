@@ -10,7 +10,7 @@ Besides of technical features like serialization, Firebase integration, caching 
 * Matchday overview
 * and many more ...
 
-<img src="doc/assets/competitions.png" width="200" /><img src="doc/assets/matches.png" width="200" /><img src="doc/assets/liveticker.png" width="200" /><img src="doc/assets/stats.png" width="200" /><img src="doc/assets/standings.png" width="200" /><img src="doc/assets/matchday.png" width="200" /><img src="doc/assets/ads.png" width="200" />
+<img src="doc/assets/competitions.png" width="200" /> <img src="doc/assets/matches.png" width="200" /> <img src="doc/assets/liveticker.png" width="200" /> <img src="doc/assets/stats.png" width="200" /> <img src="doc/assets/standings.png" width="200" /> <img src="doc/assets/matchday.png" width="200" /> <img src="doc/assets/ads.png" width="200" />
 
 
 ## Getting Started
