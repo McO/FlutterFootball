@@ -20,26 +20,21 @@ class DayList extends StatefulWidget {
 }
 
 class DayListState extends State<DayList> {
-//  BannerAd myBanner;
 
   @override
   void initState() {
     super.initState();
-
-//    FirebaseAdMob.instance.initialize(appId: FirebaseAdMob.testAppId);
-//    myBanner = buildBannerAd()
-//      ..load();
   }
 
   @override
   void dispose() {
-//    myBanner.dispose();
     super.dispose();
   }
 
   @override
   Widget build(BuildContext context) {
     return ListView.builder(
+      // padding: const EdgeInsets.symmetric(vertical: 0.0),
       itemCount: widget.days.length,
       itemBuilder: (context, i) => Column(
         children: [

@@ -62,28 +62,36 @@ class _CompetitionMatchDayState extends State<CompetitionMatchDay> with SingleTi
           return Container(child: Center(child: CircularProgressIndicator()));
         } else {
           final stateAsRoundLoaded = state as CompetitionRoundLoaded;
-          return buildPositions(context, stateAsRoundLoaded.rounds, stateAsRoundLoaded.days);
+          return buildMatches(context, stateAsRoundLoaded.rounds, stateAsRoundLoaded.days);
         }
       },
     ));
   }
 
-  Widget buildPositions(BuildContext context, List<Models.Round> rounds, List<Models.Day> days) {
+  Widget buildMatches(BuildContext context, List<Models.Round> rounds, List<Models.Day> days) {
+    var previousRoundIndex = rounds.indexWhere((r) => r.current) - 1;
+    var nextRoundIndex = rounds.indexWhere((r) => r.current) + 1;
     return Column(children: [
-      Padding(
-        padding: const EdgeInsets.all(8.0),
-        child: Row(
-          mainAxisAlignment: MainAxisAlignment.center,
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Icon(Icons.arrow_left),
-            Padding(
-              padding: const EdgeInsets.all(4.0),
-              child: Text(rounds.firstWhere((r) => r.current).name),
-            ),
-            Icon(Icons.arrow_right),
-          ],
-        ),
+      Row(
+        mainAxisAlignment: MainAxisAlignment.center,
+        // crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          IconButton(
+            // padding: const EdgeInsets.all(0),
+            onPressed: () {
+              competitionRoundBloc.add(FetchCompetitionRound(competition, rounds[previousRoundIndex].name));
+            },
+            icon: Icon(Icons.arrow_left),
+          ),
+          Text(rounds.firstWhere((r) => r.current).name),
+          IconButton(
+            // padding: const EdgeInsets.all(0),
+            onPressed: () {
+              competitionRoundBloc.add(FetchCompetitionRound(competition, rounds[nextRoundIndex].name));
+            },
+            icon: Icon(Icons.arrow_right),
+          ),
+        ],
       ),
       Expanded(child: DayList(days: days, showCompetitionHead: false))
     ]);

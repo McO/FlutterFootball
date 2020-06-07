@@ -57,8 +57,9 @@ class MatchCardItem extends StatelessWidget {
             ),
           ),
           Container(
-              height: 36,
+              height: 50,
               child: VerticalDivider(
+                color: Colors.grey,
                 width: 5,
               )),
           Container(
