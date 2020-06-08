@@ -108,16 +108,16 @@ class MatchStatisticsBloc extends Bloc<MatchStatisticsEvent, MatchStatisticsStat
     statistics.add(MatchStatisticDetail(
         name: key,
         category: StatisticsCategory.General,
-        home: int.parse(homeStatistics.firstWhere((element) => element.type == key).value),
-        away: int.parse(awayStatistics.firstWhere((element) => element.type == key).value),
+        home: getInt(homeStatistics, key),
+        away: getInt(awayStatistics, key),
         isPercentage: false));
 
     key = "Offsides";
     statistics.add(MatchStatisticDetail(
         name: key,
         category: StatisticsCategory.General,
-        home: int.parse(homeStatistics.firstWhere((element) => element.type == key).value),
-        away: int.parse(awayStatistics.firstWhere((element) => element.type == key).value),
+        home: getInt(homeStatistics, key),
+        away: getInt(awayStatistics, key),
         isPercentage: false));
 
     //Offense
@@ -125,56 +125,56 @@ class MatchStatisticsBloc extends Bloc<MatchStatisticsEvent, MatchStatisticsStat
     statistics.add(MatchStatisticDetail(
         name: key,
         category: StatisticsCategory.Offense,
-        home: int.parse(homeStatistics.firstWhere((element) => element.type == key).value),
-        away: int.parse(awayStatistics.firstWhere((element) => element.type == key).value),
+        home: getInt(homeStatistics, key),
+        away: getInt(awayStatistics, key),
         isPercentage: false));
 
     key = "Shots on Goal";
     statistics.add(MatchStatisticDetail(
         name: key,
         category: StatisticsCategory.Offense,
-        home: int.parse(homeStatistics.firstWhere((element) => element.type == key).value),
-        away: int.parse(awayStatistics.firstWhere((element) => element.type == key).value),
+        home: getInt(homeStatistics, key),
+        away: getInt(awayStatistics, key),
         isPercentage: false));
 
     key = "Shots off Goal";
     statistics.add(MatchStatisticDetail(
         name: key,
         category: StatisticsCategory.Offense,
-        home: int.parse(homeStatistics.firstWhere((element) => element.type == key).value),
-        away: int.parse(awayStatistics.firstWhere((element) => element.type == key).value),
+        home: getInt(homeStatistics, key),
+        away: getInt(awayStatistics, key),
         isPercentage: false));
 
     key = "Blocked Shots";
     statistics.add(MatchStatisticDetail(
         name: key,
         category: StatisticsCategory.Offense,
-        home: int.parse(homeStatistics.firstWhere((element) => element.type == key).value),
-        away: int.parse(awayStatistics.firstWhere((element) => element.type == key).value),
+        home: getInt(homeStatistics, key),
+        away: getInt(awayStatistics, key),
         isPercentage: false));
 
     key = "Shots insidebox";
     statistics.add(MatchStatisticDetail(
         name: key,
         category: StatisticsCategory.Offense,
-        home: int.parse(homeStatistics.firstWhere((element) => element.type == key).value),
-        away: int.parse(awayStatistics.firstWhere((element) => element.type == key).value),
+        home: getInt(homeStatistics, key),
+        away: getInt(awayStatistics, key),
         isPercentage: false));
 
     key = "Shots outsidebox";
     statistics.add(MatchStatisticDetail(
         name: key,
         category: StatisticsCategory.Offense,
-        home: int.parse(homeStatistics.firstWhere((element) => element.type == key).value),
-        away: int.parse(awayStatistics.firstWhere((element) => element.type == key).value),
+        home: getInt(homeStatistics, key),
+        away: getInt(awayStatistics, key),
         isPercentage: false));
 
     key = "Goalkeeper Saves";
     statistics.add(MatchStatisticDetail(
         name: key,
         category: StatisticsCategory.Offense,
-        home: int.parse(homeStatistics.firstWhere((element) => element.type == key).value),
-        away: int.parse(awayStatistics.firstWhere((element) => element.type == key).value),
+        home: getInt(homeStatistics, key),
+        away: getInt(awayStatistics, key),
         isPercentage: false));
 
     //Distribution
@@ -182,16 +182,16 @@ class MatchStatisticsBloc extends Bloc<MatchStatisticsEvent, MatchStatisticsStat
     statistics.add(MatchStatisticDetail(
         name: key,
         category: StatisticsCategory.Distribution,
-        home: int.parse(homeStatistics.firstWhere((element) => element.type == key).value),
-        away: int.parse(awayStatistics.firstWhere((element) => element.type == key).value),
+        home: getInt(homeStatistics, key),
+        away: getInt(awayStatistics, key),
         isPercentage: false));
 
     key = "Passes accurate";
     statistics.add(MatchStatisticDetail(
         name: key,
         category: StatisticsCategory.Discipline,
-        home: int.parse(homeStatistics.firstWhere((element) => element.type == key).value),
-        away: int.parse(awayStatistics.firstWhere((element) => element.type == key).value),
+        home: getInt(homeStatistics, key),
+        away: getInt(awayStatistics, key),
         isPercentage: false));
 
     key = "Passes %";
@@ -207,26 +207,30 @@ class MatchStatisticsBloc extends Bloc<MatchStatisticsEvent, MatchStatisticsStat
     statistics.add(MatchStatisticDetail(
         name: key,
         category: StatisticsCategory.Discipline,
-        home: int.parse(homeStatistics.firstWhere((element) => element.type == key).value),
-        away: int.parse(awayStatistics.firstWhere((element) => element.type == key).value),
+        home: getInt(homeStatistics, key),
+        away: getInt(awayStatistics, key),
         isPercentage: false));
 
     key = "Yellow Cards";
     statistics.add(MatchStatisticDetail(
         name: key,
         category: StatisticsCategory.Discipline,
-        home: int.parse(homeStatistics.firstWhere((element) => element.type == key).value),
-        away: int.parse(awayStatistics.firstWhere((element) => element.type == key).value),
+        home: getInt(homeStatistics, key),
+        away: getInt(awayStatistics, key),
         isPercentage: false));
 
     key = "Red Cards";
     statistics.add(MatchStatisticDetail(
         name: key,
         category: StatisticsCategory.Discipline,
-        home: int.parse(homeStatistics.firstWhere((element) => element.type == key).value),
-        away: int.parse(awayStatistics.firstWhere((element) => element.type == key).value),
+        home: getInt(homeStatistics, key),
+        away: getInt(awayStatistics, key),
         isPercentage: false));
 
     return statistics;
+  }
+
+  int getInt(List<ApiFootballModels.StatisticDetail> homeStatistics, String key) {
+     return int.parse(homeStatistics.firstWhere((element) => element.type == key).value);
   }
 }

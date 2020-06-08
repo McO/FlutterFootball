@@ -91,24 +91,44 @@ class _MatchStatisticsState extends State<MatchStatistics> with SingleTickerProv
               Expanded(
                 flex: 5,
                 child: SizedBox(
-                  height: 42.0,
+                  height: 38.0,
                   child: Card(
-                      child: Padding(
-                    padding: const EdgeInsets.all(8.0),
-                    child: Text(statisticDetail.home.toString() ?? ''),
+                      child: Stack(
+                    alignment: FractionalOffset.centerRight,
+                    children: [
+                      if (statisticDetail.maxValue > 0)
+                        FractionallySizedBox(
+                          widthFactor: statisticDetail.home / statisticDetail.maxValue,
+                          heightFactor: 1,
+                          child: Container(color: Colors.lightGreen),
+                        ),
+                      Padding(
+                        padding: const EdgeInsets.all(8.0),
+                        child: Text(statisticDetail.home.toString() ?? ''),
+                      )
+                    ],
                   )),
                 ),
               ),
               Expanded(
                 flex: 5,
                 child: SizedBox(
-                  height: 42.0,
+                  height: 38.0,
                   child: Card(
-                      child: Padding(
-                    padding: const EdgeInsets.all(8.0),
-                    child: Text(statisticDetail.away.toString() ?? '', 
-                    textAlign: TextAlign.right,
-                    style: Theme.of(context).textTheme.bodyText2,),
+                      child: Stack(
+                    children: [
+                      if (statisticDetail.maxValue > 0)
+                        FractionallySizedBox(
+                          alignment: FractionalOffset.centerLeft,
+                          widthFactor: statisticDetail.away / statisticDetail.maxValue,
+                          heightFactor: 1,
+                          child: Container(color: Colors.blueGrey),
+                        ),
+                      Padding(
+                        padding: const EdgeInsets.all(8.0),
+                        child: Text(statisticDetail.away.toString() ?? ''),
+                      )
+                    ],
                   )),
                 ),
               ),
