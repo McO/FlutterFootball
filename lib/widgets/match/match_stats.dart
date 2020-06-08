@@ -95,7 +95,7 @@ class _MatchStatisticsState extends State<MatchStatistics> with SingleTickerProv
                   child: Card(
                       child: Padding(
                     padding: const EdgeInsets.all(8.0),
-                    child: Text(statisticDetail.home ?? ''),
+                    child: Text(statisticDetail.home.toString() ?? ''),
                   )),
                 ),
               ),
@@ -106,7 +106,7 @@ class _MatchStatisticsState extends State<MatchStatistics> with SingleTickerProv
                   child: Card(
                       child: Padding(
                     padding: const EdgeInsets.all(8.0),
-                    child: Text(statisticDetail.away ?? '', 
+                    child: Text(statisticDetail.away.toString() ?? '', 
                     textAlign: TextAlign.right,
                     style: Theme.of(context).textTheme.bodyText2,),
                   )),

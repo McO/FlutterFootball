@@ -1,19 +1,29 @@
+import 'dart:math';
+
 import 'package:FlutterFootball/models/models.dart';
 
-class MatchStatisticDetail {
-  final String category;
-  final String name;
-  String home;
-  String away;
+enum StatisticsCategory { General, Offense, Defense, Distribution, Discipline }
 
-  MatchStatisticDetail({this.category, this.name, this.home, this.away});
+class MatchStatisticDetail {
+  final StatisticsCategory category;
+  final String name;
+  int home;
+  int away;
+  bool isPercentage;
+
+  MatchStatisticDetail({this.category, this.name, this.home, this.away, this.isPercentage});
+
+  int get maxValue {
+    if (isPercentage) return 100;
+    return max(home, away);
+  }
 }
 
 class MatchStatistics {
   final String matchId;
   final Team homeTeam;
   final Team awayTeam;
-  final List<MatchStatisticDetail> details;
+  List<MatchStatisticDetail> details;
 
   MatchStatistics({this.matchId, this.homeTeam, this.awayTeam, this.details});
 }

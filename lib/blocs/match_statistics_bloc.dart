@@ -72,17 +72,7 @@ class MatchStatisticsBloc extends Bloc<MatchStatisticsEvent, MatchStatisticsStat
             awayTeam: event.match.awayTeam,
             details: List<MatchStatisticDetail>());
         if (apiFixtureStatistics.length == 2) {
-          var homeStatistics =
-              apiFixtureStatistics.firstWhere((element) => element.team.id == event.match.homeTeam.id).statistics;
-          homeStatistics.forEach((statisticsItem) {
-            statistics.details.add(MatchStatisticDetail(name: statisticsItem.type, home: statisticsItem.value));
-          });
-
-          var awayStatistics =
-              apiFixtureStatistics.firstWhere((element) => element.team.id == event.match.awayTeam.id).statistics;
-          awayStatistics.forEach((statisticsItem) {
-            statistics.details.firstWhere((element) => element.name == statisticsItem.type).away = statisticsItem.value;
-          });
+          statistics.details = getStatistics(apiFixtureStatistics, event.match.homeTeam.id, event.match.awayTeam.id);
         }
 
         if (statistics.details?.length == 0) {
@@ -95,5 +85,148 @@ class MatchStatisticsBloc extends Bloc<MatchStatisticsEvent, MatchStatisticsStat
       print('Exception: ' + e);
       yield MatchStatisticsError();
     }
+  }
+
+  List<MatchStatisticDetail> getStatistics(
+      List<ApiFootballModels.FixtureStatistics> apiFixtureStatistics, int homeTeamId, int awayTeamId) {
+    var statistics = List<MatchStatisticDetail>();
+    var homeStatistics = apiFixtureStatistics.firstWhere((element) => element.team.id == homeTeamId).statistics;
+    var awayStatistics = apiFixtureStatistics.firstWhere((element) => element.team.id == awayTeamId).statistics;
+
+    var key = "Total Shots";
+
+    // General
+    key = "Ball Possession";
+    statistics.add(MatchStatisticDetail(
+        name: key,
+        category: StatisticsCategory.General,
+        home: int.parse(homeStatistics.firstWhere((element) => element.type == key).value.replaceAll('%', '')),
+        away: int.parse(awayStatistics.firstWhere((element) => element.type == key).value.replaceAll('%', '')),
+        isPercentage: true));
+
+    key = "Corner Kicks";
+    statistics.add(MatchStatisticDetail(
+        name: key,
+        category: StatisticsCategory.General,
+        home: int.parse(homeStatistics.firstWhere((element) => element.type == key).value),
+        away: int.parse(awayStatistics.firstWhere((element) => element.type == key).value),
+        isPercentage: false));
+
+    key = "Offsides";
+    statistics.add(MatchStatisticDetail(
+        name: key,
+        category: StatisticsCategory.General,
+        home: int.parse(homeStatistics.firstWhere((element) => element.type == key).value),
+        away: int.parse(awayStatistics.firstWhere((element) => element.type == key).value),
+        isPercentage: false));
+
+    //Offense
+    key = "Total Shots";
+    statistics.add(MatchStatisticDetail(
+        name: key,
+        category: StatisticsCategory.Offense,
+        home: int.parse(homeStatistics.firstWhere((element) => element.type == key).value),
+        away: int.parse(awayStatistics.firstWhere((element) => element.type == key).value),
+        isPercentage: false));
+
+    key = "Shots on Goal";
+    statistics.add(MatchStatisticDetail(
+        name: key,
+        category: StatisticsCategory.Offense,
+        home: int.parse(homeStatistics.firstWhere((element) => element.type == key).value),
+        away: int.parse(awayStatistics.firstWhere((element) => element.type == key).value),
+        isPercentage: false));
+
+    key = "Shots off Goal";
+    statistics.add(MatchStatisticDetail(
+        name: key,
+        category: StatisticsCategory.Offense,
+        home: int.parse(homeStatistics.firstWhere((element) => element.type == key).value),
+        away: int.parse(awayStatistics.firstWhere((element) => element.type == key).value),
+        isPercentage: false));
+
+    key = "Blocked Shots";
+    statistics.add(MatchStatisticDetail(
+        name: key,
+        category: StatisticsCategory.Offense,
+        home: int.parse(homeStatistics.firstWhere((element) => element.type == key).value),
+        away: int.parse(awayStatistics.firstWhere((element) => element.type == key).value),
+        isPercentage: false));
+
+    key = "Shots insidebox";
+    statistics.add(MatchStatisticDetail(
+        name: key,
+        category: StatisticsCategory.Offense,
+        home: int.parse(homeStatistics.firstWhere((element) => element.type == key).value),
+        away: int.parse(awayStatistics.firstWhere((element) => element.type == key).value),
+        isPercentage: false));
+
+    key = "Shots outsidebox";
+    statistics.add(MatchStatisticDetail(
+        name: key,
+        category: StatisticsCategory.Offense,
+        home: int.parse(homeStatistics.firstWhere((element) => element.type == key).value),
+        away: int.parse(awayStatistics.firstWhere((element) => element.type == key).value),
+        isPercentage: false));
+
+    key = "Goalkeeper Saves";
+    statistics.add(MatchStatisticDetail(
+        name: key,
+        category: StatisticsCategory.Offense,
+        home: int.parse(homeStatistics.firstWhere((element) => element.type == key).value),
+        away: int.parse(awayStatistics.firstWhere((element) => element.type == key).value),
+        isPercentage: false));
+
+    //Distribution
+    key = "Total passes";
+    statistics.add(MatchStatisticDetail(
+        name: key,
+        category: StatisticsCategory.Distribution,
+        home: int.parse(homeStatistics.firstWhere((element) => element.type == key).value),
+        away: int.parse(awayStatistics.firstWhere((element) => element.type == key).value),
+        isPercentage: false));
+
+    key = "Passes accurate";
+    statistics.add(MatchStatisticDetail(
+        name: key,
+        category: StatisticsCategory.Discipline,
+        home: int.parse(homeStatistics.firstWhere((element) => element.type == key).value),
+        away: int.parse(awayStatistics.firstWhere((element) => element.type == key).value),
+        isPercentage: false));
+
+    key = "Passes %";
+    statistics.add(MatchStatisticDetail(
+        name: key,
+        category: StatisticsCategory.Discipline,
+        home: int.parse(homeStatistics.firstWhere((element) => element.type == key).value.replaceAll('%', '')),
+        away: int.parse(awayStatistics.firstWhere((element) => element.type == key).value.replaceAll('%', '')),
+        isPercentage: true));
+
+    //Discipline
+    key = "Fouls";
+    statistics.add(MatchStatisticDetail(
+        name: key,
+        category: StatisticsCategory.Discipline,
+        home: int.parse(homeStatistics.firstWhere((element) => element.type == key).value),
+        away: int.parse(awayStatistics.firstWhere((element) => element.type == key).value),
+        isPercentage: false));
+
+    key = "Yellow Cards";
+    statistics.add(MatchStatisticDetail(
+        name: key,
+        category: StatisticsCategory.Discipline,
+        home: int.parse(homeStatistics.firstWhere((element) => element.type == key).value),
+        away: int.parse(awayStatistics.firstWhere((element) => element.type == key).value),
+        isPercentage: false));
+
+    key = "Red Cards";
+    statistics.add(MatchStatisticDetail(
+        name: key,
+        category: StatisticsCategory.Discipline,
+        home: int.parse(homeStatistics.firstWhere((element) => element.type == key).value),
+        away: int.parse(awayStatistics.firstWhere((element) => element.type == key).value),
+        isPercentage: false));
+
+    return statistics;
   }
 }
