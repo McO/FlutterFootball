@@ -100,8 +100,8 @@ class MatchStatisticsBloc extends Bloc<MatchStatisticsEvent, MatchStatisticsStat
     statistics.add(MatchStatisticDetail(
         name: key,
         category: StatisticsCategory.General,
-        home: int.parse(homeStatistics.firstWhere((element) => element.type == key).value.replaceAll('%', '')),
-        away: int.parse(awayStatistics.firstWhere((element) => element.type == key).value.replaceAll('%', '')),
+        home: getIntFromPercentage(homeStatistics, key),
+        away: getIntFromPercentage(awayStatistics, key),
         isPercentage: true));
 
     key = "Corner Kicks";
@@ -198,8 +198,8 @@ class MatchStatisticsBloc extends Bloc<MatchStatisticsEvent, MatchStatisticsStat
     statistics.add(MatchStatisticDetail(
         name: key,
         category: StatisticsCategory.Discipline,
-        home: int.parse(homeStatistics.firstWhere((element) => element.type == key).value.replaceAll('%', '')),
-        away: int.parse(awayStatistics.firstWhere((element) => element.type == key).value.replaceAll('%', '')),
+        home: getIntFromPercentage(homeStatistics, key),
+        away: getIntFromPercentage(awayStatistics, key),
         isPercentage: true));
 
     //Discipline
@@ -230,7 +230,11 @@ class MatchStatisticsBloc extends Bloc<MatchStatisticsEvent, MatchStatisticsStat
     return statistics;
   }
 
-  int getInt(List<ApiFootballModels.StatisticDetail> homeStatistics, String key) {
-     return int.parse(homeStatistics.firstWhere((element) => element.type == key).value);
+  int getInt(List<ApiFootballModels.StatisticDetail> statistics, String key) {
+     return int.tryParse(statistics.firstWhere((element) => element.type == key).value) ?? 0;
+  }
+
+  int getIntFromPercentage(List<ApiFootballModels.StatisticDetail> statistics, String key) {
+     return int.tryParse(statistics.firstWhere((element) => element.type == key).value.replaceAll('%', '')) ?? 0;
   }
 }
