@@ -35,16 +35,12 @@ class _FootballHomeState extends State<FootballHome> with SingleTickerProviderSt
         bottom: TabBar(
           controller: _tabController,
           indicatorColor: Colors.white,
-          tabs: <Widget>[
-            Tab(child: Text("Competitions", style: Theme.of(context).textTheme.headline3)),
+          tabs: [
             Tab(child: Text("Matches", style: Theme.of(context).textTheme.headline3)),
+            Tab(child: Text("Competitions", style: Theme.of(context).textTheme.headline3)),
           ],
         ),
-        actions: <Widget>[
-          // Icon(Icons.search),
-          // Padding(
-          //   padding: const EdgeInsets.symmetric(horizontal: 5.0),
-          // ),
+        actions: [
           IconButton(
             icon: Icon(Icons.settings_applications),
             onPressed: () {
@@ -58,9 +54,7 @@ class _FootballHomeState extends State<FootballHome> with SingleTickerProviderSt
       ),
       body: TabBarView(
         controller: _tabController,
-        children: [
-          CompetitionsScreen(),
-          MatchesScreen()],
+        children: [MatchesScreen(), CompetitionsScreen()],
       ),
     );
   }
