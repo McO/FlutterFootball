@@ -21,6 +21,7 @@ class _CompetitionDetailState extends State<CompetitionDetail> with SingleTicker
   ScrollController _scrollController;
   TabController _tabController;
   bool silverCollapsed = false;
+  int tabCount = 3;
 
   _CompetitionDetailState();
 
@@ -28,7 +29,6 @@ class _CompetitionDetailState extends State<CompetitionDetail> with SingleTicker
   void initState() {
     super.initState();
 
-    var tabCount = 3;
     if (widget.competition.hasStandings) tabCount = 4;
 
     _tabController = TabController(vsync: this, initialIndex: widget.initialTabIndex, length: tabCount);
@@ -41,7 +41,7 @@ class _CompetitionDetailState extends State<CompetitionDetail> with SingleTicker
   Widget build(BuildContext context) {
     return Scaffold(
       body: DefaultTabController(
-        length: 4,
+        length: tabCount,
         child: NestedScrollView(
           controller: _scrollController,
           headerSliverBuilder: (BuildContext context, bool innerBoxIsScrolled) {

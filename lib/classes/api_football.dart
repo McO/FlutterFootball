@@ -69,7 +69,8 @@ class ApiFootball {
                   name: m.league.name,
                   logoUrl: m.league.logo,
                   hasStandings: apiLeagues == null ? false : hasStandings(apiLeagues, m.league.id),
-                  year: m.league.season),
+                  year: m.league.season,
+                  type: apiLeagues == null ? CompetitionType.League : getCompetitionType(apiLeagues, m.league.id)),
               matchDayName: m.league.round,
               matches: List<Match>()));
         }
@@ -107,6 +108,12 @@ class ApiFootball {
         .coverage
         .standings;
     return hasStandings;
+  }
+
+  CompetitionType getCompetitionType(List<ApiFootballModels.League> leagues, int competitionId) {
+    var type = leagues.singleWhere((l) => l.league.id == competitionId).league.type;
+    if (type.toLowerCase() == 'cup') return CompetitionType.Cup;
+    return CompetitionType.League;
   }
 
   Match getMatch(ApiFootballModels.Fixture fixture) {

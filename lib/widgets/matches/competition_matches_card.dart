@@ -75,7 +75,10 @@ class CompetitionMatchesCard extends StatelessWidget {
                 ),
               ),
             ),
-            buildStandingsLink(context, dayCompetitionMatches.competition)
+            if (dayCompetitionMatches.competition.hasStandings)
+              buildStandingsLink(context, dayCompetitionMatches.competition),
+            if (dayCompetitionMatches.competition.type == Models.CompetitionType.Cup)
+              buildMatchDayLink(context, dayCompetitionMatches.competition)
           ],
         ),
       ),
@@ -84,8 +87,6 @@ class CompetitionMatchesCard extends StatelessWidget {
 }
 
 Widget buildStandingsLink(BuildContext context, Models.Competition competition) {
-  if (!competition.hasStandings) return Container();
-
   return Column(children: [
     Divider(
       height: 0,
@@ -102,6 +103,29 @@ Widget buildStandingsLink(BuildContext context, Models.Competition competition) 
               },
           child: Text(
             'See Standings',
+            style: Theme.of(context).textTheme.subtitle2,
+          )),
+    ),
+  ]);
+}
+
+Widget buildMatchDayLink(BuildContext context, Models.Competition competition) {
+  return Column(children: [
+    Divider(
+      height: 0,
+    ),
+    SizedBox(
+      width: double.infinity,
+      child: FlatButton(
+          padding: EdgeInsets.all(0),
+          onPressed: () => {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => CompetitionDetail(competition, 1)),
+                )
+              },
+          child: Text(
+            'See Matchday',
             style: Theme.of(context).textTheme.subtitle2,
           )),
     ),
