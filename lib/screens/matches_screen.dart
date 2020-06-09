@@ -27,13 +27,11 @@ class MatchesScreenState extends State<MatchesScreen> {
   Completer<void> refreshCompleter;
   var favouriteCompetitions = List<String>();
   SharedPreferences sharedPreferences;
-  var showMatches = ShowMatches.all;
+  var showMatches = ShowMatches.favorites;
 
   @override
   void initState() {
     super.initState();
-
-    matchesBloc = BlocProvider.of<MatchesBloc>(context);
 
     SharedPreferences.getInstance().then((SharedPreferences sp) {
       sharedPreferences = sp;
@@ -42,10 +40,11 @@ class MatchesScreenState extends State<MatchesScreen> {
       if (favouriteCompetitions == null) favouriteCompetitions = List<String>();
 
       setState(() {});
+      matchesBloc = BlocProvider.of<MatchesBloc>(context);
+      fetchMatches();
     });
 
     refreshCompleter = Completer<void>();
-    fetchMatches();
   }
 
   @override
@@ -60,23 +59,6 @@ class MatchesScreenState extends State<MatchesScreen> {
           padding: const EdgeInsets.symmetric(horizontal: 15, vertical: 0),
           child: Row(
             children: [
-              RaisedButton(
-                onPressed: () {
-                  setState(() {
-                    showMatches = ShowMatches.all;
-                  });
-                  fetchMatches();
-                },
-                child: Text(
-                  'All',
-                ),
-                color: showMatches == ShowMatches.all ? Colors.black : Colors.white,
-                textColor: showMatches == ShowMatches.all ? Colors.white : kTextColor,
-                shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(30.0)),
-              ),
-              Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 5, vertical: 0),
-              ),
               RaisedButton(
                   onPressed: () {
                     setState(() {
@@ -106,6 +88,23 @@ class MatchesScreenState extends State<MatchesScreen> {
                   color: showMatches == ShowMatches.live ? Colors.black : Colors.white,
                   textColor: showMatches == ShowMatches.live ? Colors.white : kTextColor,
                   shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(30.0))),
+              Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 5, vertical: 0),
+              ),
+              RaisedButton(
+                onPressed: () {
+                  setState(() {
+                    showMatches = ShowMatches.all;
+                  });
+                  fetchMatches();
+                },
+                child: Text(
+                  'All',
+                ),
+                color: showMatches == ShowMatches.all ? Colors.black : Colors.white,
+                textColor: showMatches == ShowMatches.all ? Colors.white : kTextColor,
+                shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(30.0)),
+              ),
             ],
           ),
         ),
