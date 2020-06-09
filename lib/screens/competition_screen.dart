@@ -16,9 +16,7 @@ class CompetitionDetail extends StatefulWidget {
   _CompetitionDetailState createState() => _CompetitionDetailState();
 }
 
-class _CompetitionDetailState extends State<CompetitionDetail>
-    with SingleTickerProviderStateMixin {
-  // final Competition competition;
+class _CompetitionDetailState extends State<CompetitionDetail> with SingleTickerProviderStateMixin {
   // final int initialTabIndex;
   ScrollController _scrollController;
   TabController _tabController;
@@ -30,7 +28,10 @@ class _CompetitionDetailState extends State<CompetitionDetail>
   void initState() {
     super.initState();
 
-    _tabController = TabController(vsync: this, initialIndex: widget.initialTabIndex, length: 4);
+    var tabCount = 3;
+    if (widget.competition.hasStandings) tabCount = 4;
+
+    _tabController = TabController(vsync: this, initialIndex: widget.initialTabIndex, length: tabCount);
     _tabController.addListener(() {
       setState(() {});
     });
@@ -62,19 +63,12 @@ class _CompetitionDetailState extends State<CompetitionDetail>
                     isScrollable: true,
                     indicatorColor: Colors.white,
                     controller: _tabController,
-                    tabs: <Widget>[
-                      Tab(
-                          child: Text("Overview",
-                              style: Theme.of(context).textTheme.headline3)),
-                      Tab(
-                          child: Text("Matchday",
-                              style: Theme.of(context).textTheme.headline3)),
-                      Tab(
-                          child: Text("Standings",
-                              style: Theme.of(context).textTheme.headline3)),
-                      Tab(
-                          child: Text("News",
-                              style: Theme.of(context).textTheme.headline3)),
+                    tabs: [
+                      Tab(child: Text("Overview", style: Theme.of(context).textTheme.headline3)),
+                      Tab(child: Text("Matchday", style: Theme.of(context).textTheme.headline3)),
+                      if (widget.competition.hasStandings)
+                        Tab(child: Text("Standings", style: Theme.of(context).textTheme.headline3)),
+                      Tab(child: Text("News", style: Theme.of(context).textTheme.headline3)),
                     ],
                   ),
                 ),
@@ -86,7 +80,8 @@ class _CompetitionDetailState extends State<CompetitionDetail>
             children: [
               CompetitionOverview(widget.competition),
               CompetitionMatchDay(widget.competition),
-              CompetitionStandings(widget.competition),
+              if (widget.competition.hasStandings)
+                CompetitionStandings(widget.competition),
               CompetitionOverview(widget.competition),
               // MatchLiveTicker(match),
               // MatchLineUp(match),
@@ -111,8 +106,7 @@ class _SliverAppBarDelegate extends SliverPersistentHeaderDelegate {
   double get maxExtent => _tabBar.preferredSize.height;
 
   @override
-  Widget build(
-      BuildContext context, double shrinkOffset, bool overlapsContent) {
+  Widget build(BuildContext context, double shrinkOffset, bool overlapsContent) {
     return new Container(
       color: Theme.of(context).primaryColor,
       child: _tabBar,
