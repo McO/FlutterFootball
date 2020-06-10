@@ -26,7 +26,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
           return Preferences.SwitchSettingsTile(
             settingKey: Constants.SETTINGS_SHOW_ADS_KEY,
             title: 'Show Ads',
-            defaultValue: state.showAds,
+            // defaultValue: state.showAds,
             onChange: (value) {
               debugPrint(Constants.SETTINGS_SHOW_ADS_KEY + ':' + value.toString());
               BlocProvider.of<SettingsBloc>(context).add(ShowAdsToggled());

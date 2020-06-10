@@ -3,7 +3,8 @@ import 'dart:async';
 import 'package:meta/meta.dart';
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
-import 'package:shared_preferences/shared_preferences.dart';
+
+import 'package:flutter_settings_screens/flutter_settings_screens.dart';
 
 abstract class SettingsEvent extends Equatable {}
 
@@ -22,13 +23,12 @@ class SettingsState extends Equatable {
 }
 
 class SettingsBloc extends Bloc<SettingsEvent, SettingsState> {
-  final SharedPreferences preferences;
 
-  SettingsBloc({@required this.preferences}) : assert(preferences != null);
+  SettingsBloc();
 
   @override
   SettingsState get initialState {
-    var showAdsSetting = (preferences.getBool('showAds') ?? true);
+    var showAdsSetting = Settings.getValue<bool>('showAds', true);
     print('initialState (showAds): $showAdsSetting');
     return SettingsState(showAds: showAdsSetting);
   }
@@ -36,9 +36,9 @@ class SettingsBloc extends Bloc<SettingsEvent, SettingsState> {
   @override
   Stream<SettingsState> mapEventToState(SettingsEvent event) async* {
     if (event is ShowAdsToggled) {
-      var showAdsSetting = (preferences.getBool('showAds') ?? true);
+      var showAdsSetting = Settings.getValue<bool>('showAds', true);
       print('ShowAdsToggled: $showAdsSetting');
-      await preferences.setBool('showAds', !showAdsSetting);
+      Settings.getValue<bool>('showAds', !showAdsSetting);
       yield SettingsState(
         showAds: !showAdsSetting,
       );
