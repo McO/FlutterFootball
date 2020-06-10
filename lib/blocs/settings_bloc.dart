@@ -36,7 +36,7 @@ class SettingsBloc extends Bloc<SettingsEvent, SettingsState> {
   @override
   Stream<SettingsState> mapEventToState(SettingsEvent event) async* {
     if (event is ShowAdsToggled) {
-      var showAdsSetting = preferences.getBool('showAds');
+      var showAdsSetting = (preferences.getBool('showAds') ?? true);
       print('ShowAdsToggled: $showAdsSetting');
       await preferences.setBool('showAds', !showAdsSetting);
       yield SettingsState(
