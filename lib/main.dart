@@ -16,6 +16,8 @@ import 'package:FlutterFootball/blocs/blocs.dart';
 import 'package:FlutterFootball/classes/cache_provider.dart';
 import 'package:FlutterFootball/repositories/repositories.dart';
 
+import 'package:shared_preferences/shared_preferences.dart';
+
 import 'data/api_dao.dart';
 
 Future<Null> main() async {
@@ -25,6 +27,7 @@ Future<Null> main() async {
   final RemoteConfig remoteConfig = await RemoteConfig.instance;
   await remoteConfig.fetch(expiration: const Duration(hours: 5));
   await remoteConfig.activateFetched();
+  final SharedPreferences preferences = await SharedPreferences.getInstance();
 
   final String authTokenFootballDat =
       remoteConfig?.getString('football_data_api_token');
@@ -53,7 +56,7 @@ Future<Null> main() async {
     MultiBlocProvider(
       providers: [
         BlocProvider<SettingsBloc>(
-          create: (context) => SettingsBloc(),
+          create: (context) => SettingsBloc(preferences: preferences),
         ),
         BlocProvider<CompetitionsBloc>(
           create: (context) => CompetitionsBloc(
