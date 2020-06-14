@@ -45,7 +45,7 @@ class _CompetitionDetailState extends State<CompetitionDetail> with SingleTicker
         child: NestedScrollView(
           controller: _scrollController,
           headerSliverBuilder: (BuildContext context, bool innerBoxIsScrolled) {
-            return <Widget>[
+            return [
               SliverAppBar(
                 expandedHeight: 110.0,
                 floating: true,

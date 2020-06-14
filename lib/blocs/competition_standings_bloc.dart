@@ -66,16 +66,18 @@ class StandingsBloc extends Bloc<StandingsEvent, StandingsState> {
 
         apiStandings.standings[0].positions.forEach((element) {
           positions.add(Position(
-            rank: element.rank,
-            team: Team(id: element.team.id, name: element.team.name, logoUrl: element.team.logo),
-            played: element.all.played,
-            points: element.points,
-            goalsFor: element.all.goals.for_,
-            goalsAgainst: element.all.goals.against,
-            wins: element.all.win,
-            draws: element.all.draw,
-            losses: element.all.lose,
-            ));
+              rank: element.rank,
+              team: Team(id: element.team.id, name: element.team.name, logoUrl: element.team.logo),
+              played: element.all.played,
+              points: element.points,
+              goalsFor: element.all.goals.for_,
+              goalsAgainst: element.all.goals.against,
+              wins: element.all.win,
+              draws: element.all.draw,
+              losses: element.all.lose,
+              description: element.description,
+              form: element.form,
+              status: getStatus(element.status)));
         });
 
         standings.positions = positions;
@@ -90,5 +92,19 @@ class StandingsBloc extends Bloc<StandingsEvent, StandingsState> {
       print(e);
       yield StandingsError();
     }
+  }
+}
+
+Status getStatus(String status) {
+  switch (status.toLowerCase()) {
+    case 'up':
+      return Status.Up;
+      break;
+    case 'down':
+      return Status.Down;
+      break;
+    default:
+      return Status.Same;
+      break;
   }
 }
