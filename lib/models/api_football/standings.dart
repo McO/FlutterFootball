@@ -45,8 +45,9 @@ class Position {
   final String status;
   final String form;
   final String description;
+  final String group;
 
-  const Position({this.rank, this.team, this.points, this.goalsDiff, this.all, this.away, this.home, this.status, this.form, this.description});
+  const Position({this.rank, this.team, this.points, this.goalsDiff, this.all, this.away, this.home, this.status, this.form, this.description, this.group});
 
   static Position fromJson(dynamic json) {
     return Position(
@@ -60,6 +61,7 @@ class Position {
       status: json['status'] as String,
       form: json['form'] as String,
       description: json['description'] as String,
+      group: json['group'] as String,
     );
   }
 }

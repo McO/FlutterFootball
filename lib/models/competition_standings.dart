@@ -36,7 +36,8 @@ class Position {
 }
 
 class Standings {
+  String description;
   List<Position> positions;
 
-  Standings({this.positions});
+  Standings({this.description, this.positions});
 }

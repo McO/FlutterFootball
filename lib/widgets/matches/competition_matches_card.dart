@@ -68,7 +68,7 @@ class CompetitionMatchesCard extends StatelessWidget {
                   children: [
                     Divider(
                       height: 10.0,
-                      color: ((showCompetitionHead && k == 0) || k > 0) ? Colors.grey : Colors.transparent,
+                      color: ((showCompetitionHead && k == 0) || k > 0) ? Theme.of(context).dividerColor : Colors.transparent,
                     ),
                     MatchCardItem(dayCompetitionMatches.matches[k])
                   ],

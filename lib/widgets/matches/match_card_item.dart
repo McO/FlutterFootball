@@ -59,7 +59,7 @@ class MatchCardItem extends StatelessWidget {
           Container(
               height: 50,
               child: VerticalDivider(
-                color: Colors.grey,
+                color: Theme.of(context).dividerColor,
                 width: 5,
               )),
           Container(
