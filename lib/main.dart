@@ -55,9 +55,6 @@ Future<Null> main() async {
   runApp(
     MultiBlocProvider(
       providers: [
-        BlocProvider<SettingsBloc>(
-          create: (context) => SettingsBloc(preferences: preferences),
-        ),
         BlocProvider<CompetitionsBloc>(
           create: (context) => CompetitionsBloc(
               footballDataRepository: footballDataRepository,
@@ -103,13 +100,14 @@ Future<Null> main() async {
   );
 }
 
+bool _isUsingHive = true;
+
 Future<void> initSettings() async {
   await Settings.init(
     cacheProvider: _isUsingHive ? HiveCache() : SharePreferenceCache(),
   );
 }
 
-bool _isUsingHive = true;
 
 class App extends StatelessWidget {
   App({Key key}) : super(key: key);

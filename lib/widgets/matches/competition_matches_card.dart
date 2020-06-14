@@ -75,7 +75,7 @@ class CompetitionMatchesCard extends StatelessWidget {
                 ),
               ),
             ),
-            if (dayCompetitionMatches.competition.hasStandings)
+            if (dayCompetitionMatches.competition.hasStandings && dayCompetitionMatches.competition.type != Models.CompetitionType.Cup)
               buildStandingsLink(context, dayCompetitionMatches.competition),
             if (dayCompetitionMatches.competition.type == Models.CompetitionType.Cup)
               buildMatchDayLink(context, dayCompetitionMatches.competition)
