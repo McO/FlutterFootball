@@ -107,11 +107,13 @@ class CompetitionsScreenState extends State<CompetitionsScreen> {
           child: Container(
             color: Colors.white30,
             child: ListTile(
-              leading: CircleAvatar(
-                child: LogoIcon(competition.logoUrl ?? '', 30, false),
-                radius: 30.0,
-                backgroundColor: Colors.blue[50],
-              ),
+              leading: 
+              LogoIcon(competition.logoUrl ?? '', 25, false),
+              // CircleAvatar(
+              //   child: LogoIcon(competition.logoUrl ?? '', 35, false),
+              //   radius: 15.0,
+              //   backgroundColor: Colors.blue[50],
+              // ),
               title: Text(
                 competition.name,
               ),
