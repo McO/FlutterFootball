@@ -65,11 +65,10 @@ class MatchLiveTickerCard extends StatelessWidget {
           '${event.minute}\'   ',
           style: Theme.of(context).textTheme.caption,
         ),
-        Image(
-            image: AssetImage(type == Models.CardType.Yellow
-                ? 'assets/images/icons/yellow-card.png'
-                : 'assets/images/icons/red-card.png'),
-            height: 16),
+        if (type == Models.CardType.Yellow || type == Models.CardType.YellowRed)
+          Image(image: AssetImage('assets/images/icons/yellow-card.png'), height: 16),
+        if (type == Models.CardType.Red || type == Models.CardType.YellowRed)
+          Image(image: AssetImage('assets/images/icons/red-card.png'), height: 16),
         Text(
           '   Card for ${event.team.shortName}  ',
           style: Theme.of(context).textTheme.caption,

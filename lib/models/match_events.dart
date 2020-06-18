@@ -1,7 +1,7 @@
 import 'package:FlutterFootball/models/api_football/models.dart' as ApiModels;
 import 'package:FlutterFootball/models/models.dart';
 
-enum CardType { Yellow, Red }
+enum CardType { Yellow, Red, YellowRed }
 enum EventType { Card, Substitution, Goal, MissedPenalty, Message }
 enum GoalType { Normal, Penalty, OwnGoal }
 
@@ -9,7 +9,7 @@ class IEventData {}
 
 class Card implements IEventData {
   final Player booked;
-  final CardType type;
+  CardType type;
 
   Card({this.booked, this.type});
 }

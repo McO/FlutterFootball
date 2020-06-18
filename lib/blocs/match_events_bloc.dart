@@ -1,5 +1,6 @@
 import 'dart:async';
 
+import "package:collection/collection.dart";
 import 'package:meta/meta.dart';
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
@@ -76,6 +77,16 @@ class MatchEventsBloc extends Bloc<MatchEventsEvent, MatchEventsState> {
           events.add(MatchEventFactory.createFrom(element, apiPlayerStatistics, currentScore));
         }
 
+        var cardEventsByPlayers = groupBy(events.where((e) => e.type == EventType.Card), (e) => e.data.booked.id);
+        cardEventsByPlayers.removeWhere((key, value) => value.length == 1);
+        if (cardEventsByPlayers.length > 0) {
+          // 2nd yellow card for at least one player
+          cardEventsByPlayers.forEach((key, value) {
+            removeSecondYellowCardEvent(events, key);
+            changeRedCardToYellowRedCardEvent(events, key);
+          });
+        }
+
         matchEvents.events = List.from(events.reversed);
 
         if (matchEvents.events?.length == 0) {
@@ -90,9 +101,27 @@ class MatchEventsBloc extends Bloc<MatchEventsEvent, MatchEventsState> {
     }
   }
 
+  void changeRedCardToYellowRedCardEvent(List<MatchEvent> events, key) {
+    (events
+            .firstWhere((element) =>
+                element.type == EventType.Card &&
+                (element.data as Card).booked.id == key &&
+                (element.data as Card).type == CardType.Red)
+            .data as Card)
+        .type = CardType.YellowRed;
+  }
+
+  void removeSecondYellowCardEvent(List<MatchEvent> events, key) {
+       var index = events.lastIndexWhere((element) =>
+        element.type == EventType.Card &&
+        (element.data as Card).booked.id == key &&
+        (element.data as Card).type == CardType.Yellow);
+    events.removeAt(index);
+  }
+
   Score calculateScore(ApiFootballModels.FixtureEvent event, Score currentScore, Match match) {
     var newScore = new Score(home: currentScore.home, away: currentScore.away);
-    if (event.type.toLowerCase() == 'goal' && event.detail.toLowerCase()!='missed penalty') {
+    if (event.type.toLowerCase() == 'goal' && event.detail.toLowerCase() != 'missed penalty') {
       var scoringTeamId = event.team.id;
       if (match.homeTeam.id == scoringTeamId) {
         newScore.home = currentScore.home + 1;
