@@ -54,6 +54,7 @@ class _MatchLiveTickerState extends State<MatchLiveTicker> with SingleTickerProv
   @override
   void dispose() {
     super.dispose();
+    timer.cancel();
   }
 
   Widget build(BuildContext context) {
