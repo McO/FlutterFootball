@@ -79,13 +79,13 @@ class _MatchLinupsState extends State<MatchLineups> with SingleTickerProviderSta
             flex: 5,
             child: Padding(
               padding: const EdgeInsets.only(top: 8.0),
-              child: Center(child: Text(lineups.home.formation)),
+              child: Center(child: Text(lineups.home.formation ?? '')),
             )),
         Expanded(
             flex: 5,
             child: Padding(
               padding: const EdgeInsets.only(top: 8.0),
-              child: Center(child: Text(lineups.away.formation)),
+              child: Center(child: Text(lineups.away.formation ?? '')),
             )),
       ]),
       Row(children: [
