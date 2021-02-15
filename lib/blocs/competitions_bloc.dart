@@ -64,10 +64,8 @@ class CompetitionsBloc extends Bloc<CompetitionsEvent, CompetitionsState> {
   final ApiFootballRepository apiFootballRepository;
 
   CompetitionsBloc({@required this.footballDataRepository, @required this.apiFootballRepository})
-      : assert(footballDataRepository != null, apiFootballRepository != null);
-
-  @override
-  CompetitionsState get initialState => CompetitionsUninitialized();
+      : assert(footballDataRepository != null, apiFootballRepository != null),
+        super(CompetitionsUninitialized());
 
   @override
   Stream<CompetitionsState> mapEventToState(CompetitionsEvent event) async* {
@@ -89,10 +87,11 @@ class CompetitionsBloc extends Bloc<CompetitionsEvent, CompetitionsState> {
       try {
         if (event is SearchCompetitions) {
           final String searchString = event.searchString.toLowerCase();
-          competitions = competitions.where((competition) => 
-              competition.name.toLowerCase().contains(searchString) || 
-              (competition.country ?? '').toLowerCase().contains(searchString)
-          ).toList();
+          competitions = competitions
+              .where((competition) =>
+                  competition.name.toLowerCase().contains(searchString) ||
+                  (competition.country ?? '').toLowerCase().contains(searchString))
+              .toList();
         }
       } catch (exception) {
         print(exception);

@@ -50,10 +50,8 @@ class StandingsBloc extends Bloc<StandingsEvent, StandingsState> {
   final ApiFootballRepository apiFootballRepository;
 
   StandingsBloc({@required this.footballDataRepository, @required this.apiFootballRepository})
-      : assert(footballDataRepository != null, apiFootballRepository != null);
-
-  @override
-  StandingsState get initialState => StandingsUninitialized();
+      : assert(footballDataRepository != null, apiFootballRepository != null),
+        super(StandingsUninitialized());
 
   @override
   Stream<StandingsState> mapEventToState(StandingsEvent event) async* {

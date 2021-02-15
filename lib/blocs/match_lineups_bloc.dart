@@ -53,10 +53,8 @@ class MatchLineupsBloc extends Bloc<MatchLineupsEvent, MatchLineupsState> {
 
   MatchLineupsBloc(
       {@required this.footballDataRepository, @required this.apiFootballRepository, this.dummyFootballRepository})
-      : assert(footballDataRepository != null, apiFootballRepository != null);
-
-  @override
-  MatchLineupsState get initialState => MatchLineupsUninitialized();
+      : assert(footballDataRepository != null, apiFootballRepository != null),
+        super(MatchLineupsUninitialized());
 
   @override
   Stream<MatchLineupsState> mapEventToState(MatchLineupsEvent event) async* {

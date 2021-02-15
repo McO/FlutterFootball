@@ -20,32 +20,32 @@ dependencies:
   flutter:
     sdk: flutter
 
-  http: ^0.12.0+4
+  http: ^0.12.2
   query_params: ^0.6.1
-  meta: ^1.1.8
-  equatable: ^1.1.1
-  bloc: ^3.0.0
-  flutter_bloc: ^3.2.0
+  meta: ^1.2.4
+  equatable: ^1.2.6
+  bloc: ^6.1.1
+  flutter_bloc: ^6.1.2
   intl: ^0.16.1
-  json_annotation: ^3.0.1
-  firebase_admob: ^0.9.3+4
+  json_annotation: ^3.1.1
+  firebase_admob: ^0.11.0+1
   flutter_native_admob: ^2.1.0
-  shared_preferences: ^0.5.6+3
-  flutter_settings_screens: ^0.2.0+1
-  flutter_cache_manager: ^1.2.2
+  shared_preferences: ^0.5.12+4
+  flutter_settings_screens: ^0.2.1+1
+  flutter_cache_manager: ^2.1.1
   #library to store the preference/settings using hive library
-  hive_flutter: ^0.2.1
-  firebase_remote_config: ^0.3.1+1
-  provider: ^4.0.4
-  flutter_svg: ^0.18.1
-  sembast: ^2.4.3
+  hive_flutter: ^0.3.1
+  firebase_remote_config: ^0.6.0
+  provider: ^4.3.3
+  flutter_svg: ^0.19.0
+  sembast: ^2.4.9
   characters: ^1.0.0
 
 dev_dependencies:
   flutter_test:
     sdk: flutter
-  build_runner: ^1.0.0
-  json_serializable: ^3.2.0
+  build_runner: ^1.11.1
+  json_serializable: ^3.5.1
 
 
 # dependency_overrides:

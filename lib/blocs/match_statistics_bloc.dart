@@ -55,10 +55,8 @@ class MatchStatisticsBloc extends Bloc<MatchStatisticsEvent, MatchStatisticsStat
 
   MatchStatisticsBloc(
       {@required this.footballDataRepository, @required this.apiFootballRepository, this.dummyFootballRepository})
-      : assert(footballDataRepository != null, apiFootballRepository != null);
-
-  @override
-  MatchStatisticsState get initialState => MatchStatisticsUninitialized();
+      : assert(footballDataRepository != null, apiFootballRepository != null),
+        super(MatchStatisticsUninitialized());
 
   @override
   Stream<MatchStatisticsState> mapEventToState(MatchStatisticsEvent event) async* {
@@ -231,10 +229,10 @@ class MatchStatisticsBloc extends Bloc<MatchStatisticsEvent, MatchStatisticsStat
   }
 
   int getInt(List<ApiFootballModels.StatisticDetail> statistics, String key) {
-     return int.tryParse(statistics.firstWhere((element) => element.type == key).value) ?? 0;
+    return int.tryParse(statistics.firstWhere((element) => element.type == key).value) ?? 0;
   }
 
   int getIntFromPercentage(List<ApiFootballModels.StatisticDetail> statistics, String key) {
-     return int.tryParse(statistics.firstWhere((element) => element.type == key).value.replaceAll('%', '')) ?? 0;
+    return int.tryParse(statistics.firstWhere((element) => element.type == key).value.replaceAll('%', '')) ?? 0;
   }
 }

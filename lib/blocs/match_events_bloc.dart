@@ -54,10 +54,8 @@ class MatchEventsBloc extends Bloc<MatchEventsEvent, MatchEventsState> {
 
   MatchEventsBloc(
       {@required this.footballDataRepository, @required this.apiFootballRepository, this.dummyFootballRepository})
-      : assert(footballDataRepository != null, apiFootballRepository != null);
-
-  @override
-  MatchEventsState get initialState => MatchEventsUninitialized();
+      : assert(footballDataRepository != null, apiFootballRepository != null),
+        super(MatchEventsUninitialized());
 
   @override
   Stream<MatchEventsState> mapEventToState(MatchEventsEvent event) async* {
@@ -112,7 +110,7 @@ class MatchEventsBloc extends Bloc<MatchEventsEvent, MatchEventsState> {
   }
 
   void removeSecondYellowCardEvent(List<MatchEvent> events, key) {
-       var index = events.lastIndexWhere((element) =>
+    var index = events.lastIndexWhere((element) =>
         element.type == EventType.Card &&
         (element.data as Card).booked.id == key &&
         (element.data as Card).type == CardType.Yellow);

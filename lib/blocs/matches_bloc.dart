@@ -76,10 +76,8 @@ class MatchesBloc extends Bloc<MatchesEvent, MatchesState> {
 
   MatchesBloc(
       {@required this.footballDataRepository, @required this.apiFootballRepository, this.dummyFootballRepository})
-      : assert(footballDataRepository != null, apiFootballRepository != null);
-
-  @override
-  MatchesState get initialState => MatchesUninitialized();
+      : assert(footballDataRepository != null, apiFootballRepository != null),
+        super(MatchesUninitialized());
 
   @override
   Stream<MatchesState> mapEventToState(MatchesEvent event) async* {

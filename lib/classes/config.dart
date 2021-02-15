@@ -1,11 +1,10 @@
 import 'package:firebase_remote_config/firebase_remote_config.dart';
 
-class Config  {
-
+class Config {
   Future<RemoteConfig> setupRemoteConfig() async {
     final RemoteConfig remoteConfig = await RemoteConfig.instance;
     // Enable developer mode to relax fetch throttling
-    remoteConfig.setConfigSettings(RemoteConfigSettings(debugMode: true));
+    remoteConfig.setConfigSettings(RemoteConfigSettings());
 //    remoteConfig.setDefaults(<String, dynamic>{
 //      'welcome': 'default welcome',
 //      'hello': 'default hello',
@@ -14,5 +13,4 @@ class Config  {
     await remoteConfig.activateFetched();
     return remoteConfig;
   }
-
 }

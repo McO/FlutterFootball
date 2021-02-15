@@ -52,10 +52,8 @@ class CompetitionRoundBloc extends Bloc<CompetitionRoundEvent, CompetitionRoundS
   final ApiFootballRepository apiFootballRepository;
 
   CompetitionRoundBloc({@required this.footballDataRepository, @required this.apiFootballRepository})
-      : assert(footballDataRepository != null, apiFootballRepository != null);
-
-  @override
-  CompetitionRoundState get initialState => CompetitionRoundUninitialized();
+      : assert(footballDataRepository != null, apiFootballRepository != null),
+        super(CompetitionRoundUninitialized());
 
   @override
   Stream<CompetitionRoundState> mapEventToState(CompetitionRoundEvent event) async* {
@@ -78,7 +76,6 @@ class CompetitionRoundBloc extends Bloc<CompetitionRoundEvent, CompetitionRoundS
 
         var apiMatches = await apiFootballRepository.roundFixtures(competitionId, year, round);
         apiMatches.sort((a, b) => a.details.date.compareTo(b.details.date));
-
 
         var apiFootball = ApiFootball(apiFootballRepository);
         days = apiFootball.getDays(apiMatches, null).toList();
