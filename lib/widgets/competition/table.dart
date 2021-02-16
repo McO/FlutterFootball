@@ -131,7 +131,7 @@ class CompetitionTable extends StatelessWidget {
   }
 
   List<DataRow> getTableRows(BuildContext context) {
-    var rows = List<DataRow>();
+    var rows = List<DataRow>.empty(growable: true);
     // rows.add(buildTableHead(context));
     var lastDescription = '';
     for (int i = 0; i < standings.positions.length; ++i) {
@@ -319,10 +319,11 @@ class CompetitionTable extends StatelessWidget {
         return Icon(Icons.remove, size: 10);
         break;
     }
+    return null;
   }
 
   Widget buildPositions(BuildContext context) {
-    var rows = List<TableRow>();
+    var rows = List<TableRow>.empty(growable: true);
     rows.add(buildTableHead(context));
     var lastDescription = '';
 

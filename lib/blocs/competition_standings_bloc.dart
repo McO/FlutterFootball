@@ -4,8 +4,8 @@ import 'package:meta/meta.dart';
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
 
-import 'package:FlutterFootball/models/football_data/models.dart' as FootballDataModels;
-import 'package:FlutterFootball/models/api_football/models.dart' as ApiFootballModels;
+//import 'package:FlutterFootball/models/football_data/models.dart' as FootballDataModels;
+//import 'package:FlutterFootball/models/api_football/models.dart' as ApiFootballModels;
 import 'package:FlutterFootball/repositories/repositories.dart';
 import 'package:FlutterFootball/models/models.dart';
 
@@ -58,11 +58,11 @@ class StandingsBloc extends Bloc<StandingsEvent, StandingsState> {
     yield StandingsLoading();
     try {
       if (event is FetchStandings) {
-        var allStandings = List<Standings>();
+        var allStandings = List<Standings>.empty(growable: true);
         final apiStandings = await apiFootballRepository.standings(event.competition.id, event.competition.year);
 
         apiStandings.standings.forEach((s) {
-          var standings = Standings(positions: List<Position>());
+          var standings = Standings(positions: List<Position>.empty(growable: true));
 
           s.positions.forEach((element) {
             standings.description = element.group;
@@ -71,8 +71,8 @@ class StandingsBloc extends Bloc<StandingsEvent, StandingsState> {
                 team: Team(id: element.team.id, name: element.team.name, logoUrl: element.team.logo),
                 played: element.all.played,
                 points: element.points,
-                goalsFor: element.all.goals.for_,
-                goalsAgainst: element.all.goals.against,
+                goalsFor: element.all.goals.goalsFor,
+                goalsAgainst: element.all.goals.goalsAgainst,
                 wins: element.all.win,
                 draws: element.all.draw,
                 losses: element.all.lose,

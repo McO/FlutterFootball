@@ -25,7 +25,7 @@ class MatchesScreen extends StatefulWidget {
 class MatchesScreenState extends State<MatchesScreen> {
   MatchesBloc matchesBloc;
   Completer<void> refreshCompleter;
-  var favouriteCompetitions = List<String>();
+  var favouriteCompetitions = List<String>.empty(growable: true);
   SharedPreferences sharedPreferences;
   var showMatches = ShowMatches.favorites;
 
@@ -37,7 +37,7 @@ class MatchesScreenState extends State<MatchesScreen> {
       sharedPreferences = sp;
 
       favouriteCompetitions = sharedPreferences.getStringList('favouriteCompetitions');
-      if (favouriteCompetitions == null) favouriteCompetitions = List<String>();
+      if (favouriteCompetitions == null) favouriteCompetitions = List<String>.empty(growable: true);
 
       setState(() {});
       matchesBloc = BlocProvider.of<MatchesBloc>(context);
@@ -59,39 +59,44 @@ class MatchesScreenState extends State<MatchesScreen> {
           padding: const EdgeInsets.symmetric(horizontal: 15, vertical: 0),
           child: Row(
             children: [
-              RaisedButton(
-                  onPressed: () {
-                    setState(() {
-                      showMatches = ShowMatches.favorites;
-                    });
-                    fetchMatches();
-                  },
-                  child: Text(
-                    'Favourites',
-                  ),
-                  color: showMatches == ShowMatches.favorites ? Colors.black : Colors.white,
-                  textColor: showMatches == ShowMatches.favorites ? Colors.white : kTextColor,
-                  shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(30.0))),
+              ElevatedButton(
+                onPressed: () {
+                  setState(() {
+                    showMatches = ShowMatches.favorites;
+                  });
+                  fetchMatches();
+                },
+                child: Text(
+                  'Favourites',
+                ),
+                style: ElevatedButton.styleFrom(
+                    primary: showMatches == ShowMatches.favorites ? Colors.black : Colors.white,
+                    onPrimary: showMatches == ShowMatches.favorites ? Colors.white : kTextColor,
+                    shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(30.0))),
+              ),
               Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 5, vertical: 0),
               ),
-              RaisedButton(
-                  onPressed: () {
-                    setState(() {
-                      showMatches = ShowMatches.live;
-                    });
-                    fetchMatches();
-                  },
-                  child: Text(
-                    'Live',
-                  ),
-                  color: showMatches == ShowMatches.live ? Colors.black : Colors.white,
-                  textColor: showMatches == ShowMatches.live ? Colors.white : kTextColor,
-                  shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(30.0))),
+              ElevatedButton(
+                onPressed: () {
+                  setState(() {
+                    showMatches = ShowMatches.live;
+                  });
+                  fetchMatches();
+                },
+                child: Text(
+                  'Live',
+                ),
+                style: ElevatedButton.styleFrom(
+                  primary: showMatches == ShowMatches.live ? Colors.black : Colors.white,
+                  onPrimary: showMatches == ShowMatches.live ? Colors.white : kTextColor,
+                  shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(30.0)),
+                ),
+              ),
               Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 5, vertical: 0),
               ),
-              RaisedButton(
+              ElevatedButton(
                 onPressed: () {
                   setState(() {
                     showMatches = ShowMatches.all;
@@ -101,9 +106,11 @@ class MatchesScreenState extends State<MatchesScreen> {
                 child: Text(
                   'All',
                 ),
-                color: showMatches == ShowMatches.all ? Colors.black : Colors.white,
-                textColor: showMatches == ShowMatches.all ? Colors.white : kTextColor,
-                shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(30.0)),
+                style: ElevatedButton.styleFrom(
+                  primary: showMatches == ShowMatches.all ? Colors.black : Colors.white,
+                  onPrimary: showMatches == ShowMatches.all ? Colors.white : kTextColor,
+                  shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(30.0)),
+                ),
               ),
             ],
           ),

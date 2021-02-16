@@ -11,7 +11,7 @@ class ApiFootball {
   ApiFootball(this.apiFootballRepository);
 
   Future<List<Day>> handleApiFootball(List<String> favouriteCompetitions, bool showLiveMatches) async {
-    var apiFixtures = List<ApiFootballModels.Fixture>();
+    var apiFixtures = List<ApiFootballModels.Fixture>.empty(growable: true);
     var apiLeagues = await apiFootballRepository.leagues();
 
     if (showLiveMatches) {
@@ -43,13 +43,13 @@ class ApiFootball {
   }
 
   List<Day> getDays(List<ApiFootballModels.Fixture> apiFixtures, List<ApiFootballModels.League> apiLeagues) {
-    var days = List<Day>();
+    var days = List<Day>.empty(growable: true);
     //adding match days
     apiFixtures.forEach((ApiFootballModels.Fixture f) {
       var matchDateTime = f.details.date.toLocal();
       var matchDate = DateTime(matchDateTime.year, matchDateTime.month, matchDateTime.day);
       if (days.where((d) => d.date == matchDate).length == 0) {
-        days.add(Day(date: matchDate, dayCompetitionsMatches: List<DayCompetitionMatches>()));
+        days.add(Day(date: matchDate, dayCompetitionsMatches: List<DayCompetitionMatches>.empty(growable: true)));
       }
     });
 
@@ -72,7 +72,7 @@ class ApiFootball {
                   year: m.league.season,
                   type: apiLeagues == null ? CompetitionType.League : getCompetitionType(apiLeagues, m.league.id)),
               matchDayName: m.league.round,
-              matches: List<Match>()));
+              matches: List<Match>.empty(growable: true)));
         }
       });
     });

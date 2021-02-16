@@ -59,9 +59,9 @@ class CompetitionRoundBloc extends Bloc<CompetitionRoundEvent, CompetitionRoundS
   Stream<CompetitionRoundState> mapEventToState(CompetitionRoundEvent event) async* {
     yield CompetitionRoundLoading();
     try {
-      var rounds = List<Round>();
+      var rounds = List<Round>.empty(growable: true);
       // var matches = List<Match>();
-      var days = List<Day>();
+      var days = List<Day>.empty(growable: true);
 
       if (event is FetchCompetitionRound) {
         var round = event.round;

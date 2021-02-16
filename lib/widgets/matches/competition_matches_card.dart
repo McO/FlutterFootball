@@ -96,8 +96,8 @@ Widget buildStandingsLink(BuildContext context, Models.Competition competition) 
     ),
     SizedBox(
       width: double.infinity,
-      child: FlatButton(
-          padding: EdgeInsets.all(0),
+      child: TextButton(
+          style: flatButtonStyle,
           onPressed: () => {
                 Navigator.push(
                   context,
@@ -119,8 +119,8 @@ Widget buildMatchDayLink(BuildContext context, Models.Competition competition) {
     ),
     SizedBox(
       width: double.infinity,
-      child: FlatButton(
-          padding: EdgeInsets.all(0),
+      child: TextButton(
+          style: flatButtonStyle,
           onPressed: () => {
                 Navigator.push(
                   context,
@@ -134,3 +134,10 @@ Widget buildMatchDayLink(BuildContext context, Models.Competition competition) {
     ),
   ]);
 }
+
+final ButtonStyle flatButtonStyle = TextButton.styleFrom(
+  padding: EdgeInsets.all(0),
+  shape: const RoundedRectangleBorder(
+    borderRadius: BorderRadius.all(Radius.circular(2.0)),
+  ),
+);

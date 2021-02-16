@@ -6,7 +6,7 @@ import 'package:meta/meta.dart';
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
 
-import 'package:FlutterFootball/models/football_data/models.dart' as FootballDataModels;
+//import 'package:FlutterFootball/models/football_data/models.dart' as FootballDataModels;
 import 'package:FlutterFootball/models/api_football/models.dart' as ApiFootballModels;
 import 'package:FlutterFootball/repositories/repositories.dart';
 import 'package:FlutterFootball/repositories/dummy_football_repository.dart';
@@ -68,7 +68,7 @@ class MatchStatisticsBloc extends Bloc<MatchStatisticsEvent, MatchStatisticsStat
             matchId: event.match.matchId,
             homeTeam: event.match.homeTeam,
             awayTeam: event.match.awayTeam,
-            details: List<MatchStatisticDetail>());
+            details: List<MatchStatisticDetail>.empty(growable: true));
         if (apiFixtureStatistics.length == 2) {
           statistics.details = getStatistics(apiFixtureStatistics, event.match.homeTeam.id, event.match.awayTeam.id);
         }
@@ -87,7 +87,7 @@ class MatchStatisticsBloc extends Bloc<MatchStatisticsEvent, MatchStatisticsStat
 
   List<MatchStatisticDetail> getStatistics(
       List<ApiFootballModels.FixtureStatistics> apiFixtureStatistics, int homeTeamId, int awayTeamId) {
-    var statistics = List<MatchStatisticDetail>();
+    var statistics = List<MatchStatisticDetail>.empty(growable: true);
     var homeStatistics = apiFixtureStatistics.firstWhere((element) => element.team.id == homeTeamId).statistics;
     var awayStatistics = apiFixtureStatistics.firstWhere((element) => element.team.id == awayTeamId).statistics;
 

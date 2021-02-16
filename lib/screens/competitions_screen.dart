@@ -18,7 +18,7 @@ class CompetitionsScreen extends StatefulWidget {
 class CompetitionsScreenState extends State<CompetitionsScreen> {
   Completer<void> refreshCompleter;
   CompetitionsBloc competitionsBloc;
-  var favouriteCompetitions = List<String>();
+  var favouriteCompetitions = List<String>.empty(growable: true);
   SharedPreferences sharedPreferences;
   final textEditingController = TextEditingController();
 
@@ -32,7 +32,7 @@ class CompetitionsScreenState extends State<CompetitionsScreen> {
       sharedPreferences = sp;
 
       favouriteCompetitions = sharedPreferences.getStringList('favouriteCompetitions');
-      if (favouriteCompetitions == null) favouriteCompetitions = List<String>();
+      if (favouriteCompetitions == null) favouriteCompetitions = List<String>.empty(growable: true);
 
       setState(() {});
     });

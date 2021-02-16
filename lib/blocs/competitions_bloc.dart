@@ -71,7 +71,7 @@ class CompetitionsBloc extends Bloc<CompetitionsEvent, CompetitionsState> {
   Stream<CompetitionsState> mapEventToState(CompetitionsEvent event) async* {
     yield CompetitionsLoading();
     try {
-      var competitions = new List<Competition>();
+      var competitions = new List<Competition>.empty(growable: true);
       var useApiFootball = true;
       if (useApiFootball) {
         final List<ApiFootballModels.League> apiLeagues = await apiFootballRepository.leagues();

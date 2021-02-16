@@ -18,14 +18,15 @@ class FootballData {
     final List<FootballDataModels.Area> apiAreas = await footballDataRepository.areas();
     //      apiMatches.forEach((element) => print('Date: ${element.utcDate.toLocal().toString()}'));
 
-    var areaIds = new List<int>();
+    var areaIds = new List<int>.empty(growable: true);
 
     //adding match days
     apiMatches.forEach((FootballDataModels.Match m) {
       DateTime matchDateTime = m.utcDate.toLocal();
       DateTime matchDate = new DateTime(matchDateTime.year, matchDateTime.month, matchDateTime.day);
       if (days.where((d) => d.date == matchDate).length == 0) {
-        days.add(new Day(date: matchDate, dayCompetitionsMatches: new List<DayCompetitionMatches>()));
+        days.add(
+            new Day(date: matchDate, dayCompetitionsMatches: new List<DayCompetitionMatches>.empty(growable: true)));
       }
 
       var countryCode = m.competition.area.countryCode;
@@ -47,7 +48,7 @@ class FootballData {
               competition:
                   Competition(id: m.competition.id, name: m.competition.name, logoUrl: m.competition.area.ensignUrl),
               matchDayName: getMatchDay(m),
-              matches: List<Match>()));
+              matches: List<Match>.empty(growable: true)));
         }
       });
     });

@@ -93,7 +93,7 @@ class MatchesBloc extends Bloc<MatchesEvent, MatchesState> {
         showLiveMatches = true;
       }
 
-      var days = List<Day>();
+      var days = List<Day>.empty(growable: true);
 
       var useApiFootball = true;
       if (useApiFootball) {

@@ -1,15 +1,15 @@
 import 'package:FlutterFootball/models/api_football/models.dart';
 
 class Goals {
-  final int for_;
-  final int against;
+  final int goalsFor;
+  final int goalsAgainst;
 
-  const Goals({this.for_, this.against});
+  const Goals({this.goalsFor, this.goalsAgainst});
 
   static Goals fromJson(dynamic json) {
     return Goals(
-      for_: json['for'] as int,
-      against: json['against'] as int,
+      goalsFor: json['for'] as int,
+      goalsAgainst: json['against'] as int,
     );
   }
 }

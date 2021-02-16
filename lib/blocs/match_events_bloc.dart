@@ -5,7 +5,7 @@ import 'package:meta/meta.dart';
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
 
-import 'package:FlutterFootball/models/football_data/models.dart' as FootballDataModels;
+//import 'package:FlutterFootball/models/football_data/models.dart' as FootballDataModels;
 import 'package:FlutterFootball/models/api_football/models.dart' as ApiFootballModels;
 import 'package:FlutterFootball/repositories/repositories.dart';
 import 'package:FlutterFootball/repositories/dummy_football_repository.dart';
@@ -65,9 +65,9 @@ class MatchEventsBloc extends Bloc<MatchEventsEvent, MatchEventsState> {
         final apiPlayerStatistics = await apiFootballRepository.fixturePlayerStatistics(int.parse(event.match.matchId));
 
         final apiFixtureEvents = await apiFootballRepository.fixturesEvents(int.parse(event.match.matchId));
-        var matchEvents = MatchEvents(matchId: event.match.matchId, events: List<MatchEvent>());
+        var matchEvents = MatchEvents(matchId: event.match.matchId, events: List<MatchEvent>.empty(growable: true));
 
-        var events = List<MatchEvent>();
+        var events = List<MatchEvent>.empty(growable: true);
         var currentScore = Score(home: 0, away: 0);
         for (var i = 0; i < apiFixtureEvents.length; i++) {
           var element = apiFixtureEvents[i];

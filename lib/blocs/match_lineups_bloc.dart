@@ -4,7 +4,7 @@ import 'package:meta/meta.dart';
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
 
-import 'package:FlutterFootball/models/football_data/models.dart' as FootballDataModels;
+//import 'package:FlutterFootball/models/football_data/models.dart' as FootballDataModels;
 import 'package:FlutterFootball/models/api_football/models.dart' as ApiFootballModels;
 import 'package:FlutterFootball/repositories/repositories.dart';
 import 'package:FlutterFootball/repositories/dummy_football_repository.dart';
@@ -84,7 +84,7 @@ class MatchLineupsBloc extends Bloc<MatchLineupsEvent, MatchLineupsState> {
             shortName: apiLineup.team.name,
             logoUrl: apiLineup.team.logo));
 
-    var startingPlayers = List<Player>();
+    var startingPlayers = List<Player>.empty(growable: true);
     apiLineup.startXI.forEach((p) {
       startingPlayers.add(Player(
           id: p.player.id,
@@ -94,7 +94,7 @@ class MatchLineupsBloc extends Bloc<MatchLineupsEvent, MatchLineupsState> {
           number: p.player.number));
     });
     teamLineup.startingPlayers = startingPlayers;
-    var benchPlayers = List<Player>();
+    var benchPlayers = List<Player>.empty(growable: true);
     apiLineup.substitutes.forEach((p) {
       benchPlayers.add(Player(
           id: p.player.id,
