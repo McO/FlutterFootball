@@ -1,4 +1,4 @@
-package com.rasp.flutterfootball
+package com.rasp.flutter_football
 
 import androidx.annotation.NonNull;
 import io.flutter.embedding.android.FlutterActivity
