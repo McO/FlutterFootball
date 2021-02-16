@@ -1,9 +1,9 @@
 import 'package:intl/intl.dart';
 
-import 'package:FlutterFootball/repositories/api_football_repository.dart';
+import 'package:flutter_football/repositories/api_football_repository.dart';
 
-import 'package:FlutterFootball/models/api_football/models.dart' as ApiFootballModels;
-import 'package:FlutterFootball/models/models.dart';
+import 'package:flutter_football/models/api_football/models.dart' as ApiFootballModels;
+import 'package:flutter_football/models/models.dart';
 
 class ApiFootball {
   final ApiFootballRepository apiFootballRepository;

@@ -1,6 +1,6 @@
 import 'dart:math';
 
-import 'package:FlutterFootball/models/models.dart';
+import 'package:flutter_football/models/models.dart';
 
 class DummyFootballRepository {
   List<Competition> dummyCompetitions = [

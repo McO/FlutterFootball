@@ -1,4 +1,4 @@
-import 'package:FlutterFootball/models/models.dart';
+import 'package:flutter_football/models/models.dart';
 
 class DayCompetitionMatches {
   final DateTime date;

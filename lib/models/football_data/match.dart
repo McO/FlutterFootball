@@ -1,4 +1,4 @@
-import 'package:FlutterFootball/models/football_data/models.dart';
+import 'package:flutter_football/models/football_data/models.dart';
 
 class Match {
   final int id;

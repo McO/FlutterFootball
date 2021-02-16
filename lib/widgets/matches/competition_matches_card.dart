@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
 
-import 'package:FlutterFootball/models/models.dart' as Models;
+import 'package:flutter_football/models/models.dart' as Models;
 import 'match_card_item.dart';
-import 'package:FlutterFootball/screens/competition_screen.dart';
-import 'package:FlutterFootball/widgets/logo_icon.dart';
-import 'package:FlutterFootball/classes/constants.dart' as Constants;
+import 'package:flutter_football/screens/competition_screen.dart';
+import 'package:flutter_football/widgets/logo_icon.dart';
+import 'package:flutter_football/classes/constants.dart' as Constants;
 
 class CompetitionMatchesCard extends StatelessWidget {
   final Models.DayCompetitionMatches dayCompetitionMatches;

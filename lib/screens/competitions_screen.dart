@@ -4,10 +4,10 @@ import 'dart:async';
 
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-import 'package:FlutterFootball/blocs/blocs.dart';
-import 'package:FlutterFootball/models/models.dart' as Models;
-import 'package:FlutterFootball/widgets/message.dart';
-import 'package:FlutterFootball/widgets/logo_icon.dart';
+import 'package:flutter_football/blocs/blocs.dart';
+import 'package:flutter_football/models/models.dart' as Models;
+import 'package:flutter_football/widgets/message.dart';
+import 'package:flutter_football/widgets/logo_icon.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class CompetitionsScreen extends StatefulWidget {

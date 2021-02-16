@@ -2,8 +2,8 @@ import 'dart:async';
 
 import 'package:meta/meta.dart';
 
-import 'package:FlutterFootball/repositories/football_data_client.dart';
-import 'package:FlutterFootball/models/football_data/models.dart';
+import 'package:flutter_football/repositories/football_data_client.dart';
+import 'package:flutter_football/models/football_data/models.dart';
 
 class FootballDataRepository {
   final FootballDataClient footballDataClient;

@@ -3,10 +3,10 @@ import 'package:flutter/material.dart';
 import 'dart:async';
 
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:FlutterFootball/blocs/blocs.dart';
+import 'package:flutter_football/blocs/blocs.dart';
 
-import 'package:FlutterFootball/models/models.dart' as Models;
-import 'package:FlutterFootball/widgets/message.dart';
+import 'package:flutter_football/models/models.dart' as Models;
+import 'package:flutter_football/widgets/message.dart';
 
 import 'match_liveticker_substitution.dart';
 import 'match_liveticker_card.dart';

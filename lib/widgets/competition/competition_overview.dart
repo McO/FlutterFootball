@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import 'package:FlutterFootball/models/models.dart';
+import 'package:flutter_football/models/models.dart';
 
 class CompetitionOverview extends StatelessWidget {
   final Competition competition;

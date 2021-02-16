@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 
-import 'package:FlutterFootball/widgets/logo_icon.dart';
-import 'package:FlutterFootball/classes/constants.dart' as Constants;
-import 'package:FlutterFootball/models/models.dart';
+import 'package:flutter_football/widgets/logo_icon.dart';
+import 'package:flutter_football/classes/constants.dart' as Constants;
+import 'package:flutter_football/models/models.dart';
 
 class TeamHead extends StatelessWidget {
   final Team team;

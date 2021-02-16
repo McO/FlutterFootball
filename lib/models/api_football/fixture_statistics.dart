@@ -1,4 +1,4 @@
-import 'package:FlutterFootball/models/api_football/models.dart';
+import 'package:flutter_football/models/api_football/models.dart';
 
 class StatisticDetail {
   final String type;

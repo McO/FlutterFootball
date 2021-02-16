@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
-import 'package:FlutterFootball/screens/competitions_screen.dart';
-import 'package:FlutterFootball/screens/settings_screen.dart';
+import 'package:flutter_football/screens/competitions_screen.dart';
+import 'package:flutter_football/screens/settings_screen.dart';
 import 'screens/matches_screen.dart';
 
 class FootballHome extends StatefulWidget {

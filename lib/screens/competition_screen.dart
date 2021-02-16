@@ -1,10 +1,10 @@
-import 'package:FlutterFootball/widgets/competition/competition_matchday.dart';
+import 'package:flutter_football/widgets/competition/competition_matchday.dart';
 import 'package:flutter/material.dart';
 
-import 'package:FlutterFootball/widgets/competition/competition_head.dart';
-import 'package:FlutterFootball/widgets/competition/competition_overview.dart';
-import 'package:FlutterFootball/widgets/competition/competition_standings.dart';
-import 'package:FlutterFootball/models/models.dart';
+import 'package:flutter_football/widgets/competition/competition_head.dart';
+import 'package:flutter_football/widgets/competition/competition_overview.dart';
+import 'package:flutter_football/widgets/competition/competition_standings.dart';
+import 'package:flutter_football/models/models.dart';
 
 class CompetitionDetail extends StatefulWidget {
   final Competition competition;

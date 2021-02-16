@@ -1,14 +1,14 @@
 import 'dart:async';
 
-import 'package:FlutterFootball/theme/colors.dart';
+import 'package:flutter_football/theme/colors.dart';
 import 'package:flutter/material.dart';
 
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-import 'package:FlutterFootball/blocs/blocs.dart';
-import 'package:FlutterFootball/models/models.dart';
-import 'package:FlutterFootball/widgets/matches/day_list.dart';
-import 'package:FlutterFootball/widgets/message.dart';
+import 'package:flutter_football/blocs/blocs.dart';
+import 'package:flutter_football/models/models.dart';
+import 'package:flutter_football/widgets/matches/day_list.dart';
+import 'package:flutter_football/widgets/message.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 enum ShowMatches {

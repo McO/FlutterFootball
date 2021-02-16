@@ -1,12 +1,12 @@
 import 'dart:convert';
 import 'dart:async';
 
-import 'package:FlutterFootball/data/api_dao.dart';
+import 'package:flutter_football/data/api_dao.dart';
 import 'package:intl/intl.dart';
 import 'package:meta/meta.dart';
 import 'package:http/http.dart' as http;
 
-import 'package:FlutterFootball/models/api_football/models.dart';
+import 'package:flutter_football/models/api_football/models.dart';
 import 'package:query_params/query_params.dart';
 
 class ApiFootballClient {

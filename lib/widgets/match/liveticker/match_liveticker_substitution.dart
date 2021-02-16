@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 
-import 'package:FlutterFootball/models/models.dart' as Models;
-import 'package:FlutterFootball/theme/colors.dart';
-import 'package:FlutterFootball/widgets/player_picture.dart';
+import 'package:flutter_football/models/models.dart' as Models;
+import 'package:flutter_football/theme/colors.dart';
+import 'package:flutter_football/widgets/player_picture.dart';
 
 class MatchLiveTickerSubstitution extends StatelessWidget {
   final Models.MatchEvent event;

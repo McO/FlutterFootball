@@ -1,10 +1,10 @@
-import 'package:FlutterFootball/screens/team_screen.dart';
+import 'package:flutter_football/screens/team_screen.dart';
 import 'package:flutter/material.dart';
 
-import 'package:FlutterFootball/theme/colors.dart';
-import 'package:FlutterFootball/models/models.dart';
+import 'package:flutter_football/theme/colors.dart';
+import 'package:flutter_football/models/models.dart';
 
-import 'package:FlutterFootball/widgets/logo_icon.dart';
+import 'package:flutter_football/widgets/logo_icon.dart';
 
 class CompetitionTable extends StatelessWidget {
   final Standings standings;

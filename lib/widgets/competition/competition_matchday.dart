@@ -2,12 +2,12 @@ import 'package:flutter/material.dart';
 
 import 'dart:async';
 
-import 'package:FlutterFootball/blocs/blocs.dart';
-import 'package:FlutterFootball/models/models.dart' as Models;
+import 'package:flutter_football/blocs/blocs.dart';
+import 'package:flutter_football/models/models.dart' as Models;
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../message.dart';
-import 'package:FlutterFootball/widgets/matches/day_list.dart';
+import 'package:flutter_football/widgets/matches/day_list.dart';
 
 class CompetitionMatchDay extends StatefulWidget {
   final Models.Competition competition;

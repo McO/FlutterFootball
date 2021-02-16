@@ -6,15 +6,15 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_settings_screens/flutter_settings_screens.dart';
 import 'package:firebase_remote_config/firebase_remote_config.dart';
 
-//import 'package:FlutterFootball/simple_bloc_delegate.dart';
-import 'package:FlutterFootball/classes/config.dart';
+//import 'package:flutter_football/simple_bloc_delegate.dart';
+import 'package:flutter_football/classes/config.dart';
 
-//import 'package:FlutterFootball/classes/routes.dart';
-import 'package:FlutterFootball/football_home.dart';
-import 'package:FlutterFootball/theme/style.dart';
-import 'package:FlutterFootball/blocs/blocs.dart';
-import 'package:FlutterFootball/classes/cache_provider.dart';
-import 'package:FlutterFootball/repositories/repositories.dart';
+//import 'package:flutter_football/classes/routes.dart';
+import 'package:flutter_football/football_home.dart';
+import 'package:flutter_football/theme/style.dart';
+import 'package:flutter_football/blocs/blocs.dart';
+import 'package:flutter_football/classes/cache_provider.dart';
+import 'package:flutter_football/repositories/repositories.dart';
 
 //import 'package:shared_preferences/shared_preferences.dart';
 

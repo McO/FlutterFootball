@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 
-import 'package:FlutterFootball/widgets/logo_icon.dart';
-import 'package:FlutterFootball/widgets/matches/match_status.dart';
+import 'package:flutter_football/widgets/logo_icon.dart';
+import 'package:flutter_football/widgets/matches/match_status.dart';
 
-import 'package:FlutterFootball/screens/match_screen.dart';
-import 'package:FlutterFootball/classes/constants.dart' as Constants;
-import 'package:FlutterFootball/models/models.dart' as Models;
+import 'package:flutter_football/screens/match_screen.dart';
+import 'package:flutter_football/classes/constants.dart' as Constants;
+import 'package:flutter_football/models/models.dart' as Models;
 
 class MatchCardItem extends StatelessWidget {
   final Models.Match match;

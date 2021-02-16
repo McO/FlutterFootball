@@ -1,9 +1,9 @@
 import 'package:intl/intl.dart';
 
-import 'package:FlutterFootball/repositories/football_data_repository.dart';
+import 'package:flutter_football/repositories/football_data_repository.dart';
 
-import 'package:FlutterFootball/models/models.dart';
-import 'package:FlutterFootball/models/football_data/models.dart' as FootballDataModels;
+import 'package:flutter_football/models/models.dart';
+import 'package:flutter_football/models/football_data/models.dart' as FootballDataModels;
 
 class FootballData {
   final FootballDataRepository footballDataRepository;

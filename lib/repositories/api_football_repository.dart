@@ -2,8 +2,8 @@ import 'dart:async';
 
 import 'package:meta/meta.dart';
 
-import 'package:FlutterFootball/repositories/api_football_client.dart';
-import 'package:FlutterFootball/models/api_football/models.dart';
+import 'package:flutter_football/repositories/api_football_client.dart';
+import 'package:flutter_football/models/api_football/models.dart';
 
 class ApiFootballRepository {
   final ApiFootballClient apiFootballClient;

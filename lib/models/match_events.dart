@@ -1,5 +1,5 @@
-import 'package:FlutterFootball/models/api_football/models.dart' as ApiModels;
-import 'package:FlutterFootball/models/models.dart';
+import 'package:flutter_football/models/api_football/models.dart' as ApiModels;
+import 'package:flutter_football/models/models.dart';
 
 enum CardType { Yellow, Red, YellowRed }
 enum EventType { Card, Substitution, Goal, MissedPenalty, Message }

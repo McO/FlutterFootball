@@ -2,13 +2,13 @@ import 'package:flutter/material.dart';
 
 import 'dart:async';
 
-import 'package:FlutterFootball/blocs/blocs.dart';
+import 'package:flutter_football/blocs/blocs.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-import 'package:FlutterFootball/models/models.dart';
-import 'package:FlutterFootball/widgets/message.dart';
+import 'package:flutter_football/models/models.dart';
+import 'package:flutter_football/widgets/message.dart';
 
-import 'package:FlutterFootball/widgets/competition/table.dart';
+import 'package:flutter_football/widgets/competition/table.dart';
 
 class CompetitionStandings extends StatefulWidget {
   final Competition competition;

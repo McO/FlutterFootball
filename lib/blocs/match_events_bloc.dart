@@ -5,11 +5,11 @@ import 'package:meta/meta.dart';
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
 
-//import 'package:FlutterFootball/models/football_data/models.dart' as FootballDataModels;
-import 'package:FlutterFootball/models/api_football/models.dart' as ApiFootballModels;
-import 'package:FlutterFootball/repositories/repositories.dart';
-import 'package:FlutterFootball/repositories/dummy_football_repository.dart';
-import 'package:FlutterFootball/models/models.dart';
+//import 'package:flutter_football/models/football_data/models.dart' as FootballDataModels;
+import 'package:flutter_football/models/api_football/models.dart' as ApiFootballModels;
+import 'package:flutter_football/repositories/repositories.dart';
+import 'package:flutter_football/repositories/dummy_football_repository.dart';
+import 'package:flutter_football/models/models.dart';
 
 abstract class MatchEventsEvent extends Equatable {
   const MatchEventsEvent();

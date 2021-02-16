@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 
-import 'package:FlutterFootball/widgets/team/team_head.dart';
-import 'package:FlutterFootball/widgets/team/team_news.dart';
-import 'package:FlutterFootball/widgets/team/team_season.dart';
-import 'package:FlutterFootball/widgets/team/team_squad.dart';
+import 'package:flutter_football/widgets/team/team_head.dart';
+import 'package:flutter_football/widgets/team/team_news.dart';
+import 'package:flutter_football/widgets/team/team_season.dart';
+import 'package:flutter_football/widgets/team/team_squad.dart';
 import '../models/models.dart';
 
 class TeamDetail extends StatefulWidget {
