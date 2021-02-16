@@ -22,9 +22,6 @@ class ScoreDetail {
   const ScoreDetail({this.home, this.away});
 
   static ScoreDetail fromJson(dynamic json) {
-    return ScoreDetail(
-        home: json['home'] as int,
-        away: json['away'] as int);
-    }
+    return ScoreDetail(home: json['home'] as int, away: json['away'] as int);
+  }
 }
-

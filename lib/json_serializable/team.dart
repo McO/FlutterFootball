@@ -1,10 +1,8 @@
-
 import 'package:json_annotation/json_annotation.dart';
 part 'team.g.dart';
 
 @JsonSerializable(explicitToJson: true)
 class Team {
-
   final int id;
   final String name;
 

@@ -19,10 +19,7 @@ class Venue {
   const Venue({this.id, this.name, this.city});
 
   static Venue fromJson(dynamic json) {
-    return Venue(
-          id: json['id'] as int, 
-          name: json['name'] as String, 
-          city: json['city'] as String);   
+    return Venue(id: json['id'] as int, name: json['name'] as String, city: json['city'] as String);
   }
 }
 
@@ -83,22 +80,15 @@ class Fixture {
   final ScoreDetail goals;
   final Score score;
 
-  const Fixture({
-    this.details,
-    this.league,
-    this.teams,
-    this.goals,
-    this.score
-  });
+  const Fixture({this.details, this.league, this.teams, this.goals, this.score});
 
   static Fixture fromJson(dynamic json) {
     return Fixture(
-      details: FixtureDetails.fromJson(json['fixture']),
-      league: FixtureLeague.fromJson(json['league']),
-      teams: FixtureTeams.fromJson(json['teams']),
-      goals: ScoreDetail.fromJson(json['goals']),
-      score: Score.fromJson(json['score'])
-    );
+        details: FixtureDetails.fromJson(json['fixture']),
+        league: FixtureLeague.fromJson(json['league']),
+        teams: FixtureTeams.fromJson(json['teams']),
+        goals: ScoreDetail.fromJson(json['goals']),
+        score: Score.fromJson(json['score']));
   }
 }
 

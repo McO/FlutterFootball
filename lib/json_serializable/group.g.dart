@@ -9,10 +9,8 @@ part of 'group.dart';
 Group _$GroupFromJson(Map<String, dynamic> json) {
   return Group()
     ..name = json['name'] as String
-    ..matches = (json['matches'] as List)
-        ?.map(
-            (e) => e == null ? null : Match.fromJson(e as Map<String, dynamic>))
-        ?.toList();
+    ..matches =
+        (json['matches'] as List)?.map((e) => e == null ? null : Match.fromJson(e as Map<String, dynamic>))?.toList();
 }
 
 Map<String, dynamic> _$GroupToJson(Group instance) => <String, dynamic>{

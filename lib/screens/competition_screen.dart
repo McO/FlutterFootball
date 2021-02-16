@@ -80,8 +80,7 @@ class _CompetitionDetailState extends State<CompetitionDetail> with SingleTicker
             children: [
               CompetitionOverview(widget.competition),
               CompetitionMatchDay(widget.competition),
-              if (widget.competition.hasStandings)
-                CompetitionStandings(widget.competition),
+              if (widget.competition.hasStandings) CompetitionStandings(widget.competition),
               CompetitionOverview(widget.competition),
               // MatchLiveTicker(match),
               // MatchLineUp(match),

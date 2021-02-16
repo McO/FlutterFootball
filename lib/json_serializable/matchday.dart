@@ -1,4 +1,3 @@
-
 import 'competition.dart';
 import 'group.dart';
 import 'package:json_annotation/json_annotation.dart';
@@ -6,7 +5,6 @@ part 'matchday.g.dart';
 
 @JsonSerializable(explicitToJson: true)
 class MatchDay {
-
   final int id;
   final String name;
   int number;

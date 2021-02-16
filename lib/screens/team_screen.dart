@@ -63,11 +63,7 @@ class _TeamDetailState extends State<TeamDetail> with SingleTickerProviderStateM
               ),
               SliverPersistentHeader(
                 delegate: _SliverAppBarDelegate(
-                  TabBar(
-                      isScrollable: true,
-                      indicatorColor: Colors.white,
-                      controller: _tabController,
-                    tabs: tabs),
+                  TabBar(isScrollable: true, indicatorColor: Colors.white, controller: _tabController, tabs: tabs),
                 ),
                 pinned: true,
               ),

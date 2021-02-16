@@ -14,4 +14,3 @@ class CompetitionArea {
         ensignUrl: json['ensignUrl'] as String);
   }
 }
-

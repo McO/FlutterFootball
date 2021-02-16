@@ -1,10 +1,6 @@
 import 'package:FlutterFootball/models/models.dart';
 
-enum CompetitionType
-{
-  Cup,
-  League
-}
+enum CompetitionType { Cup, League }
 
 class Competition {
   final int id;
@@ -16,7 +12,8 @@ class Competition {
   final int year;
   final CompetitionType type;
 
-  const Competition({this.id, this.name, this.logoUrl, this.country, this.teams, this.hasStandings, this.year, this.type});
+  const Competition(
+      {this.id, this.name, this.logoUrl, this.country, this.teams, this.hasStandings, this.year, this.type});
 
   String toString() {
     return "Competition: $name";

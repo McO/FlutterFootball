@@ -47,7 +47,18 @@ class Position {
   final String description;
   final String group;
 
-  const Position({this.rank, this.team, this.points, this.goalsDiff, this.all, this.away, this.home, this.status, this.form, this.description, this.group});
+  const Position(
+      {this.rank,
+      this.team,
+      this.points,
+      this.goalsDiff,
+      this.all,
+      this.away,
+      this.home,
+      this.status,
+      this.form,
+      this.description,
+      this.group});
 
   static Position fromJson(dynamic json) {
     return Position(
@@ -72,13 +83,9 @@ class PositionContainer {
   const PositionContainer({this.positions});
 
   static PositionContainer fromJson(dynamic json) {
-    return PositionContainer(
-      positions:  (json as List).map((i) =>
-              Position.fromJson(i)).toList()
-    );
+    return PositionContainer(positions: (json as List).map((i) => Position.fromJson(i)).toList());
   }
 }
-
 
 class StandingsLeague {
   final int id;
@@ -99,9 +106,7 @@ class StandingsLeague {
         logo: json['logo'] as String,
         flag: json['flag'] as String,
         season: json['season'] as int,
-        standings: 
-        (json['standings'] as List).map((i) =>
-              PositionContainer.fromJson(i)).toList()
+        standings: (json['standings'] as List).map((i) => PositionContainer.fromJson(i)).toList()
         //List<Position>.from(json['standings'].map((i) => Position.fromJson(i))).toList()
         //List<Position>.from(json['standings']).map((Map model)=> Position.fromJson(model)).toList()
         // (json['standings'] as List<dynamic>)

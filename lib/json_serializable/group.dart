@@ -4,7 +4,6 @@ part 'group.g.dart';
 
 @JsonSerializable(explicitToJson: true)
 class Group {
-
   String name;
   List<Match> matches;
 

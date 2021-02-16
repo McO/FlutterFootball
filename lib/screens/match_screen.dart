@@ -16,8 +16,7 @@ class MatchDetail extends StatefulWidget {
   _MatchDetailState createState() => _MatchDetailState(match);
 }
 
-class _MatchDetailState extends State<MatchDetail>
-    with SingleTickerProviderStateMixin {
+class _MatchDetailState extends State<MatchDetail> with SingleTickerProviderStateMixin {
   final Match match;
   ScrollController _scrollController;
   TabController _tabController;
@@ -38,8 +37,7 @@ class _MatchDetailState extends State<MatchDetail>
     _scrollController = ScrollController();
     _scrollController.addListener(() {
       print(_scrollController.offset);
-      if (_scrollController.offset > 100 &&
-          !_scrollController.position.outOfRange) {
+      if (_scrollController.offset > 100 && !_scrollController.position.outOfRange) {
         if (!silverCollapsed) {
           // do what ever you want when silver is collapsing !
 
@@ -49,8 +47,7 @@ class _MatchDetailState extends State<MatchDetail>
           setState(() {});
         }
       }
-      if (_scrollController.offset <= 100 &&
-          !_scrollController.position.outOfRange) {
+      if (_scrollController.offset <= 100 && !_scrollController.position.outOfRange) {
         if (silverCollapsed) {
           // do what ever you want when silver is expanding !
 
@@ -89,18 +86,10 @@ class _MatchDetailState extends State<MatchDetail>
                     indicatorColor: Colors.white,
                     controller: _tabController,
                     tabs: <Widget>[
-                      Tab(
-                          child: Text("Overview",
-                              style: Theme.of(context).textTheme.headline3)),
-                      Tab(
-                          child: Text("Live Ticker",
-                              style: Theme.of(context).textTheme.headline3)),
-                      Tab(
-                          child: Text("Line-up",
-                              style: Theme.of(context).textTheme.headline3)),
-                      Tab(
-                          child: Text("Stats",
-                              style: Theme.of(context).textTheme.headline3)),
+                      Tab(child: Text("Overview", style: Theme.of(context).textTheme.headline3)),
+                      Tab(child: Text("Live Ticker", style: Theme.of(context).textTheme.headline3)),
+                      Tab(child: Text("Line-up", style: Theme.of(context).textTheme.headline3)),
+                      Tab(child: Text("Stats", style: Theme.of(context).textTheme.headline3)),
                     ],
                   ),
                 ),
@@ -135,8 +124,7 @@ class _SliverAppBarDelegate extends SliverPersistentHeaderDelegate {
   double get maxExtent => _tabBar.preferredSize.height;
 
   @override
-  Widget build(
-      BuildContext context, double shrinkOffset, bool overlapsContent) {
+  Widget build(BuildContext context, double shrinkOffset, bool overlapsContent) {
     return new Container(
       color: Theme.of(context).primaryColor,
       child: _tabBar,

@@ -56,7 +56,10 @@ class DummyFootballRepository {
     List<DayCompetitionMatches> dayCompetitionMatches = [];
 
     dayCompetitionMatches.add(new DayCompetitionMatches(
-        date: date, competition: dummyCompetitions[0], matchDayName: "10. Spieltag", matches: getMatches(1 + random.nextInt(5))));
+        date: date,
+        competition: dummyCompetitions[0],
+        matchDayName: "10. Spieltag",
+        matches: getMatches(1 + random.nextInt(5))));
 
     return dayCompetitionMatches;
   }
@@ -79,9 +82,6 @@ class DummyFootballRepository {
   }
 
   Future<List<Day>> fetchMatches() async {
-
     return getDays(5);
   }
 }
-
-

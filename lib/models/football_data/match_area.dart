@@ -7,9 +7,6 @@ class MatchArea {
 
   static MatchArea fromJson(dynamic json) {
     return MatchArea(
-        name: json['name'] as String,
-        countryCode: json['code'] as String,
-        ensignUrl: json['ensignUrl'] as String);
+        name: json['name'] as String, countryCode: json['code'] as String, ensignUrl: json['ensignUrl'] as String);
   }
 }
-

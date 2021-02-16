@@ -9,10 +9,7 @@ class Competition {
 
   static Competition fromJson(dynamic json) {
     return Competition(
-        id: json['id'] as int,
-        name: json['name'] as String,
-        area: CompetitionArea.fromJson(json['area'])
-    );
+        id: json['id'] as int, name: json['name'] as String, area: CompetitionArea.fromJson(json['area']));
   }
 }
 
@@ -23,10 +20,8 @@ class CompetitionsResult {
 
   static CompetitionsResult fromJson(Map<String, dynamic> json) {
     final items = (json['competitions'] as List<dynamic>)
-        .map((dynamic item) =>
-        Competition.fromJson(item as Map<String, dynamic>))
+        .map((dynamic item) => Competition.fromJson(item as Map<String, dynamic>))
         .toList();
     return CompetitionsResult(competitions: items);
   }
 }
-

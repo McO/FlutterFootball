@@ -15,4 +15,3 @@ class ApiDao {
     return await _apiStore.record(key).get(await _db);
   }
 }
-

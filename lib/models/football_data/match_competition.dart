@@ -9,12 +9,6 @@ class MatchCompetition {
 
   static MatchCompetition fromJson(dynamic json) {
     return MatchCompetition(
-        id: json['id'] as int,
-        name: json['name'] as String,
-        area: MatchArea.fromJson(json['area']
-        )
-    );
+        id: json['id'] as int, name: json['name'] as String, area: MatchArea.fromJson(json['area']));
   }
 }
-
-

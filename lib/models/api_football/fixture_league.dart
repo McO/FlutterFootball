@@ -20,5 +20,3 @@ class FixtureLeague {
         round: json['round'] as String);
   }
 }
-
-

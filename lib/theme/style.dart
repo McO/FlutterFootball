@@ -21,7 +21,6 @@ ThemeData buildThemeData() {
       valueIndicatorTextStyle: TextStyle(),
     ),
     textTheme: TextTheme(
-
       headline1: TextStyle(fontSize: 18.0, color: kTextColorLight),
       headline2: TextStyle(fontSize: 16.0, color: kTextColorLight),
       headline3: TextStyle(fontSize: 14.0, color: kTextColorLight),
@@ -39,7 +38,6 @@ ThemeData buildThemeData() {
         fontWeight: FontWeight.bold,
       ),
       overline: TextStyle(fontSize: 10.0, color: kTextColor),
-
     ),
   );
 }

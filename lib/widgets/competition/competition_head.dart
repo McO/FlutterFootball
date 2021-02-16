@@ -9,7 +9,7 @@ class CompetitionHead extends StatelessWidget {
 
   const CompetitionHead(this.competition);
 
-   @override
+  @override
   Widget build(BuildContext context) {
     return Container(
       padding: const EdgeInsets.only(top: 40, left: Constants.defaultPadding, right: Constants.defaultPadding),
@@ -17,14 +17,14 @@ class CompetitionHead extends StatelessWidget {
         child: Column(
           children: [
             LogoIcon(competition.logoUrl, 50, true),
-           Padding(
-             padding: const EdgeInsets.symmetric(vertical: Constants.defaultPadding, horizontal: 30),
-             child: Text(
-               competition.name,
-               style: TextStyle(fontSize: 12.0, color: Colors.white),
-               textAlign: TextAlign.center,
-             ),
-           )
+            Padding(
+              padding: const EdgeInsets.symmetric(vertical: Constants.defaultPadding, horizontal: 30),
+              child: Text(
+                competition.name,
+                style: TextStyle(fontSize: 12.0, color: Colors.white),
+                textAlign: TextAlign.center,
+              ),
+            )
           ],
         ),
       ),

@@ -7,11 +7,8 @@ class TeamSeason extends StatelessWidget {
 
   const TeamSeason(this.team);
 
-
   @override
   Widget build(BuildContext context) {
-    return Container(
-      child: Center(child: Text("Season"))
-    );
+    return Container(child: Center(child: Text("Season")));
   }
 }

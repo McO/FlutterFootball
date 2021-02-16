@@ -20,7 +20,6 @@ class DayList extends StatefulWidget {
 }
 
 class DayListState extends State<DayList> {
-
   @override
   void initState() {
     super.initState();
@@ -49,8 +48,7 @@ class DayListState extends State<DayList> {
             shrinkWrap: true,
             physics: NeverScrollableScrollPhysics(),
             itemCount: widget.days[i].dayCompetitionsMatches.length,
-            itemBuilder: (context, j) => CompetitionMatchesCard(
-                widget.days[i].dayCompetitionsMatches[j],
+            itemBuilder: (context, j) => CompetitionMatchesCard(widget.days[i].dayCompetitionsMatches[j],
                 showCompetitionHead: widget.showCompetitionHead),
           ),
           NativeAd(),

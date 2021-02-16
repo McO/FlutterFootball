@@ -14,18 +14,14 @@ class Team {
   }
 }
 
-
 class TeamsResult {
   final List<Team> teams;
 
   const TeamsResult({this.teams});
 
   static TeamsResult fromJson(Map<String, dynamic> json) {
-    final items = (json['teams'] as List<dynamic>)
-        .map((dynamic item) =>
-        Team.fromJson(item as Map<String, dynamic>))
-        .toList();
+    final items =
+        (json['teams'] as List<dynamic>).map((dynamic item) => Team.fromJson(item as Map<String, dynamic>)).toList();
     return TeamsResult(teams: items);
   }
 }
-

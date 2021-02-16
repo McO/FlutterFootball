@@ -4,7 +4,6 @@ part 'response.g.dart';
 
 @JsonSerializable(explicitToJson: true)
 class Response {
-
   int code;
   String message;
   String status;

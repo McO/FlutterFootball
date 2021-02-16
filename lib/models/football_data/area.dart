@@ -25,7 +25,8 @@ class AreasResult {
   const AreasResult({this.areas});
 
   static AreasResult fromJson(Map<String, dynamic> json) {
-    final items = (json['areas'] as List<dynamic>).map((dynamic item) => Area.fromJson(item as Map<String, dynamic>)).toList();
+    final items =
+        (json['areas'] as List<dynamic>).map((dynamic item) => Area.fromJson(item as Map<String, dynamic>)).toList();
     return AreasResult(areas: items);
   }
 }

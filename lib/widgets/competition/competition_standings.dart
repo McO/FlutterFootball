@@ -74,7 +74,7 @@ class _CompetitionStandingsState extends State<CompetitionStandings> with Single
         padding: const EdgeInsets.symmetric(vertical: 8),
         itemCount: standings.length,
         itemBuilder: (BuildContext context, int index) {
-          return CompetitionTable(standings[index], standings.length>1);
+          return CompetitionTable(standings[index], standings.length > 1);
         });
   }
 }

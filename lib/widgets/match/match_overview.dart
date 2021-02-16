@@ -7,11 +7,8 @@ class MatchOverview extends StatelessWidget {
 
   const MatchOverview(this.match);
 
-
   @override
   Widget build(BuildContext context) {
-    return Container(
-      child: Center(child: Text("Overview"))
-    );
+    return Container(child: Center(child: Text("Overview")));
   }
 }

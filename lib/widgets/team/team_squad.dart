@@ -7,11 +7,8 @@ class TeamSquad extends StatelessWidget {
 
   const TeamSquad(this.team);
 
-
   @override
   Widget build(BuildContext context) {
-    return Container(
-      child: Center(child: Text("Squad"))
-    );
+    return Container(child: Center(child: Text("Squad")));
   }
 }

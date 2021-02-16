@@ -7,11 +7,8 @@ class TeamNews extends StatelessWidget {
 
   const TeamNews(this.team);
 
-
   @override
   Widget build(BuildContext context) {
-    return Container(
-      child: Center(child: Text("News"))
-    );
+    return Container(child: Center(child: Text("News")));
   }
 }

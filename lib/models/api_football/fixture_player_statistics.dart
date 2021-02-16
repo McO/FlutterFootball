@@ -11,7 +11,7 @@ class PlayerStatistics {
     // int intValue;
     // try {
     //   stringValue = json['value'] as String;
-    // } 
+    // }
     // catch (e) {
     //   intValue = json['value'] as int;
     // }

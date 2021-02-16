@@ -13,8 +13,7 @@ Competition _$CompetitionFromJson(Map<String, dynamic> json) {
   );
 }
 
-Map<String, dynamic> _$CompetitionToJson(Competition instance) =>
-    <String, dynamic>{
+Map<String, dynamic> _$CompetitionToJson(Competition instance) => <String, dynamic>{
       'id': instance.id,
       'name': instance.name,
     };

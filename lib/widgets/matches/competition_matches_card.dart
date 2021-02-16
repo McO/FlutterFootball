@@ -68,14 +68,17 @@ class CompetitionMatchesCard extends StatelessWidget {
                   children: [
                     Divider(
                       height: 10.0,
-                      color: ((showCompetitionHead && k == 0) || k > 0) ? Theme.of(context).dividerColor : Colors.transparent,
+                      color: ((showCompetitionHead && k == 0) || k > 0)
+                          ? Theme.of(context).dividerColor
+                          : Colors.transparent,
                     ),
                     MatchCardItem(dayCompetitionMatches.matches[k])
                   ],
                 ),
               ),
             ),
-            if (dayCompetitionMatches.competition.hasStandings && dayCompetitionMatches.competition.type != Models.CompetitionType.Cup)
+            if (dayCompetitionMatches.competition.hasStandings &&
+                dayCompetitionMatches.competition.type != Models.CompetitionType.Cup)
               buildStandingsLink(context, dayCompetitionMatches.competition),
             if (dayCompetitionMatches.competition.type == Models.CompetitionType.Cup)
               buildMatchDayLink(context, dayCompetitionMatches.competition)

@@ -8,9 +8,7 @@ import 'package:FlutterFootball/models/football_data/models.dart';
 class FootballDataRepository {
   final FootballDataClient footballDataClient;
 
-  FootballDataRepository({@required this.footballDataClient})
-      : assert(footballDataClient != null);
-
+  FootballDataRepository({@required this.footballDataClient}) : assert(footballDataClient != null);
 
   Future<List<Competition>> competitions() async {
     final resultAPI = await footballDataClient.competitions();

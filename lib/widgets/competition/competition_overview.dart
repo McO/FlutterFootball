@@ -7,11 +7,8 @@ class CompetitionOverview extends StatelessWidget {
 
   const CompetitionOverview(this.competition);
 
-
   @override
   Widget build(BuildContext context) {
-    return Container(
-      child: Center(child: Text("Overview"))
-    );
+    return Container(child: Center(child: Text("Overview")));
   }
 }

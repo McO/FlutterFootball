@@ -4,7 +4,6 @@ part 'match.g.dart';
 
 @JsonSerializable(explicitToJson: true)
 class Match {
-
   final int id;
   DateTime kickoff;
   @JsonKey(name: 'score_home')

@@ -39,7 +39,8 @@ class MatchDetailStatus extends StatelessWidget {
             children: [
               Padding(
                 padding: const EdgeInsets.only(top: 10),
-                child: Text(match.score.home.toString() + " : " + match.score.away.toString(), style: TextStyle(fontSize: 30.0, fontWeight: FontWeight.bold, color: Colors.white)),
+                child: Text(match.score.home.toString() + " : " + match.score.away.toString(),
+                    style: TextStyle(fontSize: 30.0, fontWeight: FontWeight.bold, color: Colors.white)),
               ),
             ],
           );

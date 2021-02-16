@@ -4,7 +4,6 @@ part 'matchdays.g.dart';
 
 @JsonSerializable(explicitToJson: true)
 class MatchDays {
-
   List<MatchDay> matchdays;
 
   MatchDays(this.matchdays);

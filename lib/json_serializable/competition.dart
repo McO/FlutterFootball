@@ -3,7 +3,6 @@ part 'competition.g.dart';
 
 @JsonSerializable()
 class Competition {
-
   final int id;
   final String name;
 

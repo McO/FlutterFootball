@@ -12,7 +12,17 @@ class Match {
   final MatchTeam homeTeam;
   final MatchTeam awayTeam;
 
-  const Match({this.id, this.competition, this.utcDate, this.status, this.matchDay, this.stage, this.group, this.score, this.homeTeam, this.awayTeam});
+  const Match(
+      {this.id,
+      this.competition,
+      this.utcDate,
+      this.status,
+      this.matchDay,
+      this.stage,
+      this.group,
+      this.score,
+      this.homeTeam,
+      this.awayTeam});
 
   static Match fromJson(dynamic json) {
     return Match(
@@ -37,7 +47,9 @@ class MatchesResult {
   static MatchesResult fromJson(Map<String, dynamic> json) {
     List<Match> items;
     try {
-      items = (json['matches'] as List<dynamic>).map((dynamic item) => Match.fromJson(item as Map<String, dynamic>)).toList();
+      items = (json['matches'] as List<dynamic>)
+          .map((dynamic item) => Match.fromJson(item as Map<String, dynamic>))
+          .toList();
     } catch (e) {
       print(e);
     }

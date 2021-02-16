@@ -15,7 +15,8 @@ class FootballDataClient {
   final String authToken;
   final ApiDao apiDao;
 
-  FootballDataClient({@required this.httpClient, @required this.authToken, @required this.apiDao}) : assert(httpClient != null);
+  FootballDataClient({@required this.httpClient, @required this.authToken, @required this.apiDao})
+      : assert(httpClient != null);
 
   Future<Competition> competition(int competitionId) async {
     final url = '${baseUrl}competitions/$competitionId';
