@@ -38,7 +38,7 @@ jobs:
         --output $HOME/secrets/secrets.tar secrets.tar.gpg
         tar xvf $HOME/secrets/secrets.tar
         flutter build appbundle
-        flutter build apk
+        flutter build apk --build-number=$GITHUB_RUN_NUMBER
       env:
         SECRET_PASSPHRASE: ${{ secrets.SECRET_PASSPHRASE }}
 
