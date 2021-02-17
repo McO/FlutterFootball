@@ -30,6 +30,21 @@ jobs:
     
     # Run widget tests for our flutter project.
     #- run: flutter test
+
+    - name: Build
+      run: |
+        mkdir $HOME/secrets
+        gpg --quiet --batch --yes --decrypt --passphrase="$SECRET_PASSPHRASE" \
+        --output $HOME/secrets/secrets.tar secrets.tar.gpg
+        tar xvf $HOME/secrets/secrets.tar
+        flutter build appbundle
+        flutter build apk
+      env:
+        SECRET_PASSPHRASE: ${{ secrets.SECRET_PASSPHRASE }}
+
+    - name: Upload
+      uses: actions/upload-artifact@master
+      with:
+        name: apk-build
+        path: build/app/outputs/bundle/release
     
-    # Build apk.
-    - run: flutter build apk
