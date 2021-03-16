@@ -40,7 +40,7 @@ class ApiFootballClient {
     // }
 
     final response = await httpClient.get(
-      url,
+      Uri.parse(url),
       headers: getHeaders(),
     );
     final responseBody = json.decode(response.body);
@@ -74,7 +74,7 @@ class ApiFootballClient {
     // }
 
     final response = await httpClient.get(
-      url,
+      Uri.parse(url),
       headers: getHeaders(),
     );
     final results = json.decode(response.body);
@@ -101,7 +101,7 @@ class ApiFootballClient {
     // }
 
     final response = await httpClient.get(
-      url,
+      Uri.parse(url),
       headers: getHeaders(),
     );
     final results = json.decode(response.body);
@@ -131,7 +131,7 @@ class ApiFootballClient {
     // }
 
     final response = await httpClient.get(
-      url,
+      Uri.parse(url),
       headers: getHeaders(),
     );
     final results = json.decode(response.body);
@@ -158,7 +158,7 @@ class ApiFootballClient {
     // }
 
     final response = await httpClient.get(
-      url,
+      Uri.parse(url),
       headers: getHeaders(),
     );
     final results = json.decode(response.body);
@@ -185,7 +185,7 @@ class ApiFootballClient {
     // }
 
     final response = await httpClient.get(
-      url,
+      Uri.parse(url),
       headers: getHeaders(),
     );
     final results = json.decode(response.body);
@@ -212,7 +212,7 @@ class ApiFootballClient {
     // }
 
     final response = await httpClient.get(
-      url,
+      Uri.parse(url),
       headers: getHeaders(),
     );
     final results = json.decode(response.body);
@@ -239,7 +239,7 @@ class ApiFootballClient {
     // }
 
     final response = await httpClient.get(
-      url,
+      Uri.parse(url),
       headers: getHeaders(),
     );
     final results = json.decode(response.body);
@@ -267,7 +267,7 @@ class ApiFootballClient {
     // }
 
     final response = await httpClient.get(
-      url,
+      Uri.parse(url),
       headers: getHeaders(),
     );
     final results = json.decode(response.body);
@@ -289,7 +289,7 @@ class ApiFootballClient {
     print('rounds: $url');
 
     final response = await httpClient.get(
-      url,
+      Uri.parse(url),
       headers: getHeaders(),
     );
     final results = json.decode(response.body);
@@ -312,7 +312,7 @@ class ApiFootballClient {
     print('current round: $url');
 
     final response = await httpClient.get(
-      url,
+      Uri.parse(url),
       headers: getHeaders(),
     );
     final results = json.decode(response.body);

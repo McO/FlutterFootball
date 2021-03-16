@@ -21,7 +21,7 @@ class FootballDataClient {
   Future<Competition> competition(int competitionId) async {
     final url = '${baseUrl}competitions/$competitionId';
     final response = await httpClient.get(
-      url,
+      Uri.parse(url),
       headers: {'X-Auth-Token': authToken},
     );
 
@@ -36,7 +36,7 @@ class FootballDataClient {
   Future<List<Competition>> competitions() async {
     final url = '${baseUrl}competitions';
     final response = await httpClient.get(
-      url,
+      Uri.parse(url),
       headers: {'X-Auth-Token': authToken},
     );
     final results = json.decode(response.body);
@@ -57,7 +57,7 @@ class FootballDataClient {
     final url = '${baseUrl}matches?$queryParams';
     print('matches: $url');
     final response = await httpClient.get(
-      url,
+      Uri.parse(url),
       headers: {'X-Auth-Token': authToken},
     );
     final results = json.decode(response.body);
@@ -83,7 +83,7 @@ class FootballDataClient {
     }
 
     final response = await httpClient.get(
-      url,
+      Uri.parse(url),
       headers: {'X-Auth-Token': authToken},
     );
     final results = json.decode(response.body);
@@ -107,7 +107,7 @@ class FootballDataClient {
     }
 
     final response = await httpClient.get(
-      url,
+      Uri.parse(url),
       headers: {'X-Auth-Token': authToken},
     );
     final results = json.decode(response.body);
