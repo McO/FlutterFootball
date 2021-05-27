@@ -12,10 +12,4 @@ class SimpleBlocDelegate extends BlocObserver {
     super.onTransition(bloc, transition);
     print('onTransition $transition');
   }
-
-  @override
-  void onError(Bloc bloc, Object error, StackTrace stackTrace) {
-    super.onError(bloc, error, stackTrace);
-    print('onError $error');
-  }
 }
