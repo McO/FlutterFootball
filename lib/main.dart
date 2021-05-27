@@ -5,6 +5,8 @@ import 'package:provider/provider.dart' as provider;
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_settings_screens/flutter_settings_screens.dart';
 import 'package:firebase_remote_config/firebase_remote_config.dart';
+import 'package:firebase_core/firebase_core.dart';
+// import 'package:google_mobile_ads/google_mobile_ads.dart';
 
 //import 'package:flutter_football/simple_bloc_delegate.dart';
 import 'package:flutter_football/classes/config.dart';
@@ -23,10 +25,11 @@ import 'data/api_dao.dart';
 Future<Null> main() async {
   await initSettings();
   WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp();
+  // MobileAds.instance.initialize();
 
-  final RemoteConfig remoteConfig = await RemoteConfig.instance;
-  await remoteConfig.fetch(expiration: const Duration(hours: 5));
-  await remoteConfig.activateFetched();
+  RemoteConfig remoteConfig = RemoteConfig.instance;
+  await remoteConfig.fetchAndActivate();
   //final SharedPreferences preferences = await SharedPreferences.getInstance();
 
   final String authTokenFootballDat = remoteConfig?.getString('football_data_api_token');

@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
 
 import 'package:shared_preferences/shared_preferences.dart';
@@ -13,12 +15,47 @@ class NativeAd extends StatefulWidget {
 }
 
 class _NativeAdState extends State<NativeAd> {
-  NativeAdmobController _controller = NativeAdmobController();
+  final NativeAdmobController _controller = NativeAdmobController();
+  double _height = 0;
 
   Future<bool> getData() async {
     final SharedPreferences prefs = await SharedPreferences.getInstance();
 
     return prefs.getBool('showAds') ?? true;
+  }
+
+  StreamSubscription _subscription;
+
+  @override
+  void initState() {
+    _subscription = _controller.stateChanged.listen(_onStateChanged);
+    super.initState();
+  }
+
+  @override
+  void dispose() {
+    _subscription.cancel();
+    _controller.dispose();
+    super.dispose();
+  }
+
+  void _onStateChanged(AdLoadState state) {
+    switch (state) {
+      case AdLoadState.loading:
+        setState(() {
+          _height = 0;
+        });
+        break;
+
+      case AdLoadState.loadCompleted:
+        setState(() {
+          _height = 330;
+        });
+        break;
+
+      default:
+        break;
+    }
   }
 
   @override
@@ -31,7 +68,7 @@ class _NativeAdState extends State<NativeAd> {
 
         if (_showAd) //state.showAds)
           return Container(
-            height: 250,
+            height: _height,
             child: NativeAdmob(
               adUnitID: AdsConfiguration.getNativeAdUnitId(),
               loading: Center(child: CircularProgressIndicator()),
