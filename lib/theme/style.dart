@@ -11,9 +11,9 @@ ThemeData buildThemeData() {
     primaryColor: kPrimaryColor,
     primaryColorDark: kPrimaryDark,
     primaryColorLight: kPrimaryLight,
-    accentColor: kSecondaryColor,
+    // accentColor: kSecondaryColor,
     bottomAppBarColor: kSecondaryDark,
-    buttonColor: kSecondaryColor,
+    // buttonColor: kSecondaryColor,
     sliderTheme: SliderThemeData.fromPrimaryColors(
       primaryColor: kPrimaryColor,
       primaryColorDark: kPrimaryDark,
