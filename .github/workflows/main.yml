@@ -2,57 +2,54 @@ name: CI
 on:
   push:
     branches:
-    - master
+      - master
 
 jobs:
-
   build:
     runs-on: ubuntu-latest
     steps:
-    - uses: actions/checkout@v1
-    - uses: actions/setup-java@v1
-      with:
-        java-version: '12.x'
-    - uses: subosito/flutter-action@v1
-      with:
+      - uses: actions/checkout@v3
+      - uses: actions/setup-java@v2
+        with:
+          java-version: "17.x"
+      - uses: subosito/flutter-action@v2
+        with:
           #channel: 'beta'
-          channel: 'stable'
+          channel: "stable"
           #flutter-version: '1.22.6'
-    # Get flutter dependencies.
-    - run: flutter pub get
-    
-    # Check for any formatting issues in the code.
-    - run: flutter format --set-exit-if-changed . -l 120
-    
-    
-    # Statically analyze the Dart code for any errors.
-    - run: flutter analyze .
-    
-    # Run widget tests for our flutter project.
-    #- run: flutter test
+      # Get flutter dependencies.
+      - run: flutter pub get
 
-    - name: Build
-      run: |
-        mkdir $HOME/secrets
-        gpg --quiet --batch --yes --decrypt --passphrase="$SECRET_PASSPHRASE" \
-        --output $HOME/secrets/secrets.tar secrets.tar.gpg
-        tar xvf $HOME/secrets/secrets.tar
-        flutter build appbundle
-        flutter build apk --build-number=$GITHUB_RUN_NUMBER
-      env:
-        SECRET_PASSPHRASE: ${{ secrets.SECRET_PASSPHRASE }}
+      # Check for any formatting issues in the code.
+      - run: flutter format --set-exit-if-changed . -l 120
 
-    - name: Upload
-      uses: actions/upload-artifact@master
-      with:
-        name: app
-        path: build/app/outputs/apk/release/app-release.apk
+      # Statically analyze the Dart code for any errors.
+      - run: flutter analyze .
 
-    - name: Deploy
-      uses: wzieba/Firebase-Distribution-Github-Action@v1.3.2
-      with:
-        appId: ${{secrets.FIREBASE_ANDROID_APPID}}
-        token: ${{secrets.FIREBASE_TOKEN}}
-        groups: testers
-        file: build/app/outputs/apk/release/app-release.apk
-    
+      # Run widget tests for our flutter project.
+      #- run: flutter test
+
+      - name: Build
+        run: |
+          mkdir $HOME/secrets
+          gpg --quiet --batch --yes --decrypt --passphrase="$SECRET_PASSPHRASE" \
+          --output $HOME/secrets/secrets.tar secrets.tar.gpg
+          tar xvf $HOME/secrets/secrets.tar
+          flutter build appbundle
+          flutter build apk --build-number=$GITHUB_RUN_NUMBER
+        env:
+          SECRET_PASSPHRASE: ${{ secrets.SECRET_PASSPHRASE }}
+
+      - name: Upload
+        uses: actions/upload-artifact@master
+        with:
+          name: app
+          path: build/app/outputs/apk/release/app-release.apk
+
+      - name: Deploy
+        uses: wzieba/Firebase-Distribution-Github-Action@v1.3.3
+        with:
+          appId: ${{secrets.FIREBASE_ANDROID_APPID}}
+          token: ${{secrets.FIREBASE_TOKEN}}
+          groups: testers
+          file: build/app/outputs/apk/release/app-release.apk
