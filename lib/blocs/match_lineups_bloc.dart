@@ -7,7 +7,7 @@ import 'package:equatable/equatable.dart';
 //import 'package:flutter_football/models/football_data/models.dart' as FootballDataModels;
 import 'package:flutter_football/models/api_football/models.dart' as ApiFootballModels;
 import 'package:flutter_football/repositories/repositories.dart';
-import 'package:flutter_football/repositories/dummy_football_repository.dart';
+//import 'package:flutter_football/repositories/dummy_football_repository.dart';
 import 'package:flutter_football/models/models.dart';
 
 abstract class MatchLineupsEvent extends Equatable {

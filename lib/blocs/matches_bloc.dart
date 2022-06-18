@@ -9,7 +9,7 @@ import 'package:flutter_football/classes/api_football.dart';
 import 'package:flutter_football/classes/football_data.dart';
 
 import 'package:flutter_football/repositories/repositories.dart';
-import 'package:flutter_football/repositories/dummy_football_repository.dart';
+//import 'package:flutter_football/repositories/dummy_football_repository.dart';
 import 'package:flutter_football/models/models.dart';
 
 abstract class MatchesEvent extends Equatable {
