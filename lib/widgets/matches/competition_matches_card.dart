@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/cupertino.dart';
 
 import 'package:flutter_football/models/models.dart' as Models;
 import 'match_card_item.dart';

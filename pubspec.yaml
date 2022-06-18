@@ -33,7 +33,7 @@ dependencies:
   json_annotation: ^4.0.1
   #firebase_admob: ^0.11.0+1
   #google_mobile_ads: 0.13.0
-  flutter_native_admob: ^2.1.0
+  #flutter_native_admob: ^2.1.0
   shared_preferences: ^2.0.8
   # flutter_settings_screens: # Will revert to pub.dev version once they release a null safety update
   #   git:

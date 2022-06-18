@@ -22,58 +22,42 @@ class HiveCache extends CacheProvider {
   Set get keys => getKeys();
 
   @override
-  bool getBool(String key) {
-    return _preferences.get(key);
-  }
-
-  @override
-  double getDouble(String key) {
-    return _preferences.get(key);
-  }
-
-  @override
-  int getInt(String key) {
-    return _preferences.get(key);
-  }
-
-  @override
-  String getString(String key) {
-    return _preferences.get(key);
-  }
-
-  @override
-  Future<void> setBool(String key, bool value, {bool defaultValue}) {
-    return _preferences.put(key, value);
-  }
-
-  @override
-  Future<void> setDouble(String key, double value, {double defaultValue}) {
-    return _preferences.put(key, value);
-  }
-
-  @override
-  Future<void> setInt(String key, int value, {int defaultValue}) {
-    return _preferences.put(key, value);
-  }
-
-  @override
-  Future<void> setString(String key, String value, {String defaultValue}) {
-    return _preferences.put(key, value);
-  }
-
-  @override
-  Future<void> setObject<T>(String key, T value) {
-    return _preferences.put(key, value);
-  }
-
-  @override
   bool containsKey(String key) {
     return _preferences.containsKey(key);
   }
 
   @override
+  bool getBool(String key, {bool defaultValue}) {
+    return _preferences.get(key);
+  }
+
+  @override
+  double getDouble(String key, {double defaultValue}) {
+    return _preferences.get(key);
+  }
+
+  @override
+  int getInt(String key, {int defaultValue}) {
+    return _preferences.get(key);
+  }
+
+  @override
   Set getKeys() {
     return _preferences.keys.toSet();
+  }
+
+  @override
+  String getString(String key, {String defaultValue}) {
+    return _preferences.get(key);
+  }
+
+  @override
+  T getValue<T>(String key, {T defaultValue}) {
+    var value = _preferences.get(key);
+    if (value is T) {
+      return value;
+    }
+    return defaultValue;
   }
 
   @override
@@ -90,11 +74,27 @@ class HiveCache extends CacheProvider {
   }
 
   @override
-  T getValue<T>(String key, T defaultValue) {
-    var value = _preferences.get(key);
-    if (value is T) {
-      return value;
-    }
-    return defaultValue;
+  Future<void> setBool(String key, bool value) {
+    return _preferences.put(key, value);
+  }
+
+  @override
+  Future<void> setDouble(String key, double value) {
+    return _preferences.put(key, value);
+  }
+
+  @override
+  Future<void> setInt(String key, int value) {
+    return _preferences.put(key, value);
+  }
+
+  @override
+  Future<void> setObject<T>(String key, T value) {
+    return _preferences.put(key, value);
+  }
+
+  @override
+  Future<void> setString(String key, String value) {
+    return _preferences.put(key, value);
   }
 }

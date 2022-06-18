@@ -4,7 +4,7 @@ import 'package:intl/intl.dart';
 
 import 'package:flutter_football/models/day.dart';
 
-import 'package:flutter_football/widgets/native_ad.dart';
+// import 'package:flutter_football/widgets/native_ad.dart';
 import 'package:flutter_football/widgets/matches/competition_matches_card.dart';
 
 class DayList extends StatefulWidget {
@@ -51,7 +51,7 @@ class DayListState extends State<DayList> {
             itemBuilder: (context, j) => CompetitionMatchesCard(widget.days[i].dayCompetitionsMatches[j],
                 showCompetitionHead: widget.showCompetitionHead),
           ),
-          NativeAd(),
+          // NativeAd(),
         ],
       ),
     );
