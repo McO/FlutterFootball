@@ -30,16 +30,19 @@ jobs:
       # Run widget tests for our flutter project.
       #- run: flutter test
 
-      - name: Build
-        run: #|
-          #          mkdir $HOME/secrets
-          #          gpg --quiet --batch --yes --decrypt --passphrase="$SECRET_PASSPHRASE" \
-          #          --output $HOME/secrets/secrets.tar secrets.tar.gpg
-          #         tar xvf $HOME/secrets/secrets.tar
-          flutter build appbundle
-          flutter build apk --build-number=$GITHUB_RUN_NUMBER
-        env:
-          SECRET_PASSPHRASE: ${{ secrets.SECRET_PASSPHRASE }}
+      - run: flutter build appbundle
+      - run: flutter build apk --build-number=$GITHUB_RUN_NUMBER
+
+      # - name: Build
+      #   run: |
+      #     mkdir $HOME/secrets
+      #       gpg --quiet --batch --yes --decrypt --passphrase="$SECRET_PASSPHRASE" \
+      #       --output $HOME/secrets/secrets.tar secrets.tar.gpg
+      #     tar xvf $HOME/secrets/secrets.tar
+      #     flutter build appbundle
+      #     flutter build apk --build-number=$GITHUB_RUN_NUMBER
+      #   env:
+      #     SECRET_PASSPHRASE: ${{ secrets.SECRET_PASSPHRASE }}
 
       - name: Upload
         uses: actions/upload-artifact@master
