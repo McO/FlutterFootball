@@ -30,16 +30,16 @@ jobs:
       # Run widget tests for our flutter project.
       #- run: flutter test
 
-      - name: Build
-        run: |
-          mkdir $HOME/secrets
-          gpg --quiet --batch --yes --decrypt --passphrase="$SECRET_PASSPHRASE" \
-          --output $HOME/secrets/secrets.tar secrets.tar.gpg
-          tar xvf $HOME/secrets/secrets.tar
-          flutter build appbundle
-          flutter build apk --build-number=$GITHUB_RUN_NUMBER
-        env:
-          SECRET_PASSPHRASE: ${{ secrets.SECRET_PASSPHRASE }}
+      # - name: Build
+      #   run: |
+      #     mkdir $HOME/secrets
+      #     gpg --quiet --batch --yes --decrypt --passphrase="$SECRET_PASSPHRASE" \
+      #     --output $HOME/secrets/secrets.tar secrets.tar.gpg
+      #     tar xvf $HOME/secrets/secrets.tar
+      #     flutter build appbundle
+      #     flutter build apk --build-number=$GITHUB_RUN_NUMBER
+      #   env:
+      #     SECRET_PASSPHRASE: ${{ secrets.SECRET_PASSPHRASE }}
 
       - name: Upload
         uses: actions/upload-artifact@master
@@ -48,7 +48,7 @@ jobs:
           path: build/app/outputs/apk/release/app-release.apk
 
       - name: Deploy
-        uses: wzieba/Firebase-Distribution-Github-Action@v1.3.3
+        uses: wzieba/Firebase-Distribution-Github-Action@v1.3.4
         with:
           appId: ${{secrets.FIREBASE_ANDROID_APPID}}
           token: ${{secrets.FIREBASE_TOKEN}}
